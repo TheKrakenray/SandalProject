@@ -64,18 +64,19 @@ namespace SandalProject.Models
             {
                 i = db.Update($"Insert into Sandali" +
                              $"Nome, Marca, Descrizione, Prezzo, SKU, Categoria, Genere, Sconto, Quantita, Taglie, Colore, Immagine" +
-                             $"Value" +
-                             $"'{(s.Nome == null ? "null" : s.Nome.Replace("'", "''"))}'," +
-                             $"'{s.Marca.Replace("'", "''")}'),'{s.Descrizione.Replace("'", "''")}'," +
+                             $"Values" +
+                             $"('{(s.Nome == null ? "null" : s.Nome.Replace("'", "''"))}'," +
+                             $"'{(s.Marca == null ? "null" : s.Marca.Replace("'", "''"))}')," +
+                             $"'{(s.Descrizione == null ? "null" : s.Descrizione.Replace("'", "''"))}'," +
                              $"{s.Prezzo}," +
-                             $"'{s.SKU.Replace("'", "''")}'," +
-                             $"'{s.Categoria.Replace("'", "''")}'," +
-                             $"'{s.Genere.Replace("'", "''")}'," +
+                             $"'{(s.SKU == null ? "null" : s.SKU.Replace("'", "''"))}'," +
+                             $"'{(s.Categoria == null ? "null" : s.Categoria.Replace("'", "''"))}'," +
+                             $"'{(s.Genere == null ? "null" : s.Genere.Replace("'", "''"))}'," +
                              $"{s.Sconto}," +
                              $"{s.Quantita}," +
                              $"{s.Taglia}," +
-                             $"'{s.Colore.Replace("'", "''")}'," +
-                             $"{s.Immagini};");
+                             $"'{(s.Colore == null ? "null" : s.Colore.Replace("'", "''"))}'," +
+                             $"{s.Immagini});");
             }
             catch
             {
@@ -116,16 +117,17 @@ namespace SandalProject.Models
         {
             Sandali s = new();
            return db.Update($"Update Sandali set"+
-                $"'{s.Nome.Replace("'", "''")}'," +
-                $"'{s.Marca.Replace("'", "''")}')," +
-                $"'{s.Descrizione.Replace("'", "''")}'," +
-                $"{s.Prezzo},'{s.SKU.Replace("'", "''")}'," +
-                $"'{s.Categoria.Replace("'", "''")}'," +
-                $"'{s.Genere.Replace("'", "''")}'," +
+                $"'{(s.Nome == null ? "null" : s.Nome.Replace("'", "''"))}'," +
+                $"'{(s.Marca == null ? "null" : s.Marca.Replace("'", "''"))}')," +
+                $"'{(s.Descrizione == null ? "null" : s.Descrizione.Replace("'", "''"))}'," +
+                $"{s.Prezzo}," +
+                $"'{(s.SKU == null ? "null" : s.SKU.Replace("'", "''"))}'," +
+                $"'{(s.Categoria == null ? "null" : s.Categoria.Replace("'", "''"))}'," +
+                $"'{(s.Genere == null ? "null" : s.Genere.Replace("'", "''"))}'," +
                 $"{s.Sconto}," +
                 $"{s.Quantita}," +
                 $"{s.Taglia}," +
-                $"'{s.Colore.Replace("'", "''")}'," +
+                $"'{(s.Colore == null ? "null" : s.Colore.Replace("'", "''"))}'," +
                 $"{s.Immagini};");
         }
     }

@@ -88,7 +88,8 @@ namespace SandalProject.Models
                              $"'{(a.Username == null ? "null" : a.Username.Replace("'", "''"))}'," +
                              $"'{(a.Email == null ? "null" : a.Email.Replace("'", "''"))}'," +
                              $"'{(a.Password == null ? "null" : a.Password.Replace("'", "''"))}'," +
-                             $"'{(a.Ruolo == null ? "null" : a.Ruolo.Replace("'", "''"))},{a.PFeledelta}')");
+                             $"'{(a.Ruolo == null ? "null" : a.Ruolo.Replace("'", "''"))}," +
+                             $"{a.PFeledelta});");
             }
             catch
             {
