@@ -77,10 +77,12 @@ namespace SandalProject.Models
 
             Account account = new Account();
             StampaProprietà<Account>(account);
-            account.Id = null;
+
             if(riga != null)
                 account.FromDictionary(riga);
 
+            Console.WriteLine("\n---POST FromDictionary---\n");
+            StampaProprietà<Account>(account);
 
             return account;
         }
@@ -191,5 +193,10 @@ namespace SandalProject.Models
             else
                 return false;
         }
+
+        //public byte[] GetImg(int id)
+        //{
+        //    return db.GetImage(id);
+        //}
     }
 }

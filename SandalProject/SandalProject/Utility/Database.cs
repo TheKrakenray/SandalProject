@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
 
 namespace SandalProject.Utility
 {
@@ -65,6 +66,34 @@ namespace SandalProject.Utility
             return instance;
         }
 
+        //private string connectionString = $"Server=localhost;Database=ProjectSandal;Integrated security=true;";
+
+        //public byte[] GetImage(int id)
+        //{
+        //    byte[] imageData = null;
+
+        //    using (SqlConnection conn = new SqlConnection(connectionString))
+        //    {
+        //        string sql = "SELECT Propic FROM Account WHERE Id = @id";
+        //        SqlCommand cmd = new SqlCommand(sql, conn);
+        //        cmd.Parameters.AddWithValue("@id", id);
+        //        conn.Open();
+
+        //        SqlDataReader reader = cmd.ExecuteReader();
+        //        if (reader.Read())
+        //        {
+        //            imageData = (byte[])reader["Propic"];
+        //        }
+        //    }
+        //    if (imageData == null || imageData.Length == 0)
+        //    {
+        //        Console.WriteLine("Errore: Immagine non trovata o vuota per l'ID specificato.");
+        //    }
+        //    // Return the image as a byte array (for display in frontend)
+        //    Connection.Close();//precauzione
+
+        //    return imageData;
+        //}
 
         public List<Dictionary<string, string>> Read(string query)
         {

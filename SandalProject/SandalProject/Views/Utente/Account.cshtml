@@ -1,6 +1,6 @@
 ﻿@using SandalProject.Models;
 @using SandalProject.Utility;
-@model Entity
+@model Dictionary<Entity, FileContentResult>
 
 <!DOCTYPE html>
 <html>
@@ -14,15 +14,7 @@
         <input type="file" name="file" id="file" accept="image/png" />
         <button type="submit">Carica</button>
     </form>
-    <form method="post" enctype="multipart/form-data" action="/Utente/GetImage(@((Account)Model))">
-        <button type="submit">Carica</button>
-    </form>
-    @(((Account)Model).Id)
-    <br>
-    <a href="/Utente/GetImage(@((Account)Model))">Vedi immagine</a>
 
-    
-
-    <h1>@(((Account)Model).Propic)</h1>
+    @* <img src ="@ViewBag.Image" alt = "immagine si spera"/> *@
 </body>
 </html>

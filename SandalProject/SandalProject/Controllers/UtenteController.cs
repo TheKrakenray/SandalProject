@@ -20,16 +20,30 @@ namespace SandalProject.Controllers
 
         public IActionResult Account(int id)
         {
-            Console.WriteLine("Dentro a Account View");
-            Console.WriteLine(id);
+            //byte[] image = DAOAccount.GetInstance().GetImg(id); // Usa il tuo metodo per ottenere l'immagine
+
+            //if (image == null || image.Length == 0)
+            //{
+            //    return NotFound(); // Restituisci 404 se non trovata
+            //}
+
+            //FileContentResult img = File(image, "image/png"); // Restituisci l'immagine
+
+            //Entity e = DAOAccount.GetInstance().Find(id);
+
+            //Dictionary<Entity, FileContentResult> dic = new ();
+
+            //dic.Add(e, img);
+            Entity e = DAOAccount.GetInstance().Find(id);
+            var image = ((Account)e).Propic;
+
+            ViewBag.Image = $"data:image/png;base64,{image}";
             return View(DAOAccount.GetInstance().Find(id));
         }
 
         [HttpPost]
         public IActionResult UploadImageToDatabase(IFormFile file)
         {
-            Console.WriteLine("Dentro il metodo");
-            Console.WriteLine(file);
             if (file != null && file.Length > 0)
             {
                 // Verifica che sia un PNG
@@ -37,7 +51,6 @@ namespace SandalProject.Controllers
                 {
                     using (var memoryStream = new MemoryStream())
                     {
-                        Console.WriteLine("Dentro using");
                         file.CopyTo(memoryStream);
                         var imageBytes = memoryStream.ToArray();
 
@@ -68,24 +81,36 @@ namespace SandalProject.Controllers
             {
                 ViewBag.Message = "Nessun file selezionato!";
             }
-            Console.WriteLine("Prima del return");
             return Redirect("Account");
         }
 
 
-        public IActionResult GetImage(Entity e)
-        {
-            Console.WriteLine("Dento metodo GetImage con Entity");
-            var image = ((Account)e).Propic;
+        //public IActionResult GetImage(Entity e)
+        //{
+        //    Console.WriteLine("Dento metodo GetImage con Entity");
+        //    var image = ((Account)e).Propic;
 
-            Console.WriteLine(((Account)e).Propic);
+        //    Console.WriteLine(((Account)e).Propic);
 
-            if (image != null)
-            {
-                return File(image, "image/png");
-            }
+        //    if (image != null)
+        //    {
+        //        return File(image, "image/png");
+        //    }
 
-            return NotFound();
-        }
+        //    return NotFound();
+        //}
+
+        //[HttpGet("GetImage/{id}")]
+        //public IActionResult GetImage(int id)
+        //{
+        //    byte[] image = DAOAccount.GetInstance().GetImg(id); // Usa il tuo metodo per ottenere l'immagine
+
+        //    if (image == null || image.Length == 0)
+        //    {
+        //        return NotFound(); // Restituisci 404 se non trovata
+        //    }
+
+        //    return File(image, "image/png"); // Restituisci l'immagine
+        //}
     }
 }
