@@ -62,29 +62,44 @@ namespace SandalProject.Utility
         {
             foreach (PropertyInfo property in this.GetType().GetProperties())
             {
-                if (riga.ContainsKey(property?.Name.ToLower()))
+                if (riga.ContainsKey(property.Name.ToLower()))
                 {
-                    object? valore = riga[property?.Name.ToLower()];
+                    object? valore = null;
 
-                    switch (property?.PropertyType.Name.ToLower())
+                    switch (property.PropertyType.Name.ToLower())
                     {
                         case "int32":
-                            valore = int.TryParse(riga[property.Name.ToLower()], out _) ? int.Parse(riga[property.Name.ToLower()]) : null;
+                            if (int.TryParse(riga[property.Name.ToLower()], out int intVal))
+                            {
+                                valore = (int?)intVal; 
+                            }
                             break;
 
                         case "double":
-                            riga[property.Name.ToLower()].Replace(",", ".");
-                            valore = double.TryParse(riga[property.Name.ToLower()], out _) ? double.Parse(riga[property.Name.ToLower()]) : null;
+                            string doubleString = riga[property.Name.ToLower()].Replace(",", ".");
+                            if (double.TryParse(doubleString, out double doubleVal))
+                            {
+                                valore = (double?)doubleVal; 
+                            }
                             break;
 
                         case "bool":
-                            valore = bool.TryParse(riga[property.Name.ToLower()], out _) ? bool.Parse(riga[property.Name.ToLower()]) : null;
+                            if (bool.TryParse(riga[property.Name.ToLower()], out bool boolVal))
+                            {
+                                valore = boolVal;
+                            }
                             break;
+
                         case "datetime":
-                            valore = DateTime.TryParse(riga[property.Name.ToLower()], out _) ? DateTime.Parse(riga[property.Name.ToLower()]) : null;
+                            if (DateTime.TryParse(riga[property.Name.ToLower()], out DateTime dateVal))
+                            {
+                                valore = (DateTime?)dateVal; 
+                            }
                             break;
+
                         case "system.byte[]":
-                            valore = (byte[])valore;
+                            var byteString = riga[property.Name.ToLower()];
+                            valore = Convert.FromBase64String(byteString); 
                             break;
                     }
 
@@ -92,5 +107,6 @@ namespace SandalProject.Utility
                 }
             }
         }
+
     }
 }

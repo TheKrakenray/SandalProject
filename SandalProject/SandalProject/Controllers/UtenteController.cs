@@ -72,19 +72,6 @@ namespace SandalProject.Controllers
             return Redirect("Account");
         }
 
-        public IActionResult GetImage(int id)
-        {
-            Entity account = DAOAccount.GetInstance().Find(id);
-
-            var image = ((Account)account).Propic;
-
-            if (image != null)
-            {
-                return File(image, ".png");
-            }
-
-            return NotFound();
-        }
 
         public IActionResult GetImage(Entity e)
         {
@@ -95,7 +82,7 @@ namespace SandalProject.Controllers
 
             if (image != null)
             {
-                return File(image, ".png");
+                return File(image, "image/png");
             }
 
             return NotFound();
