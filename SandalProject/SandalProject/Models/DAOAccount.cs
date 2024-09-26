@@ -1,6 +1,6 @@
 ﻿using SandalProject.Utility;
 using System.Runtime.CompilerServices;
-
+using SandalProject.Controllers;
 namespace SandalProject.Models
 {
     public class DAOAccount : IDAO
@@ -40,7 +40,7 @@ namespace SandalProject.Models
 
         public Entity Find(string username)
         {
-            Dictionary<string, string> riga=null;
+            Dictionary<string, string> riga = null;
             try
             {
                 riga = db.ReadOne($"select * from account where username = {username}");
@@ -51,7 +51,7 @@ namespace SandalProject.Models
             }
 
             Account a = new();
-            if(riga != null)
+            if (riga != null)
             {
                 a.FromDictionary(riga);
             }
@@ -70,7 +70,7 @@ namespace SandalProject.Models
                 throw new ArgumentException("Errore account non esistente");
             }
             Account account = new();
-            if(riga != null)
+            if (riga != null)
                 account.FromDictionary(riga);
             return account;
         }
@@ -81,9 +81,9 @@ namespace SandalProject.Models
             bool ins = false;
             try
             {
-                ins = db.Update($"Insert into Account" +
-                             $"Propic, Username, Email, Psw, Ruolo, PFedelta" +
-                             $"Values" +
+                ins = db.Update($"Insert into Account " +
+                             $"(Propic, Username, Email, Psw, Ruolo, PFedelta) " +
+                             $"Values " +
                              $"('{a.Propic}'," +
                              $"'{(a.Username == null ? "null" : a.Username.Replace("'", "''"))}'," +
                              $"'{(a.Email == null ? "null" : a.Email.Replace("'", "''"))}'," +
@@ -99,7 +99,7 @@ namespace SandalProject.Models
             return ins;
         }
 
-        public List<Entity> ReadAll() 
+        public List<Entity> ReadAll()
         {
             throw new ArgumentException("funzione deprecata");
         }
@@ -107,10 +107,10 @@ namespace SandalProject.Models
         {
             List<Entity> lista = new();
 
-            List<Dictionary<string,string>> righe = null;
+            List<Dictionary<string, string>> righe = null;
             try
             {
-                if(Valida("admin",AdminPsw))
+                if (Valida("admin", AdminPsw))
                     righe = db.Read("Select Account.username,Account.email,Account.ruolo,Account.Pfedelta from Account");
             }
             catch
@@ -118,13 +118,13 @@ namespace SandalProject.Models
                 throw new ArgumentException("errore nella lettura");
             }
 
-            if(righe!=null)
-            foreach(var r in righe)
-            {
-                Account a = new();
-                a.FromDictionary(r);
-                lista.Add(a);
-            }
+            if (righe != null)
+                foreach (var r in righe)
+                {
+                    Account a = new();
+                    a.FromDictionary(r);
+                    lista.Add(a);
+                }
 
             return lista;
         }
@@ -136,8 +136,8 @@ namespace SandalProject.Models
             try
             {
                 upd = db.Update($"UPDATE account SET " +
-                                 $"Username = '{(a.Username == null ? "null" : a.Username.Replace("'", "''"))}' " +
-                                 $"Email = '{(a.Email == null ? "null" : a.Email.Replace("'","''"))}'," +
+                                 $"Username = '{(a.Username == null ? "null" : a.Username.Replace("'", "''"))}'," +
+                                 $"Email = '{(a.Email == null ? "null" : a.Email.Replace("'", "''"))}'," +
                                  $"Password = 'HASHBYTES('SHA2_512','{(a.Password == null ? "null" : a.Password.Replace("'", "''"))}')," +
                                  $"Ruolo = '{(a.Ruolo == null ? "null" : a.Ruolo.Replace("'", "''"))}'," +
                                  $"PFedelta = {a.PFeledelta}," +
@@ -167,5 +167,137 @@ namespace SandalProject.Models
             else
                 return false;
         }
+
+        #region Carrello
+        public List<Sandali> GetCarrello(Account utente)
+        {
+            List<Sandali> san = new();
+            List<Dictionary<string, string>> righe = new();
+            try
+            {
+                righe = db.Read($"select Sandali.* from Carrello join Sandali on IdSandali = Sandali.Id where IdAccount = {utente.Id}");
+            }
+            catch
+            {
+                Console.WriteLine("Errore nel riempimento in tabella di utente id " + utente.Id);
+            }
+            foreach (var r in righe)
+            {
+                Sandali s = new();
+                s.FromDictionary(r);
+                san.Add(s);
+            }
+
+            return san;
+        }
+
+        public bool ResetCarrello(Account utente)
+        {
+            try
+            {
+                return db.Update($"Delete from Carrello where IdAccount = {utente.Id} ");
+            }
+            catch
+            {
+                Console.WriteLine("Errore nel reset in tabella di utente id " + utente.Id);
+                return false;
+            }
+        }
+
+        public bool RemoveCarrello(Account utente, Sandali s)
+        {
+            try
+            {
+                return db.Update($"Delete from Carrello where IdAccount = {utente.Id} AND IdSandali = {s.Id} ");
+            }
+            catch
+            {
+                Console.WriteLine("Errore nell'eliminazione in tabella di prodotto " + s.Id + "  di utente id " + utente.Id);
+                return false;
+            }
+        }
+
+        public bool AddCarrello(Account utente, Sandali s)
+        {
+            try
+            {
+                return db.Update($"Insert into Carrello " +
+                                $"(IdAccount, IdSandali) " +
+                                $"Values " +
+                                $"({utente.Id}, {s.Id});");
+            }
+            catch
+            {
+                Console.WriteLine("Errore nell'inserimento in tabella di prodotto " + s.Id + "  di utente id " + utente.Id);
+                return false;
+            }
+        }
+        #endregion
+
+        #region WList
+        public List<Sandali> GetWList(Account utente)
+        {
+            List<Sandali> san = new();
+            List<Dictionary<string, string>> righe = new();
+            try
+            {
+                righe = db.Read($"select Sandali.* from Wishlist join Sandali on IdSandali = Sandali.Id where IdAccount = {utente.Id}");
+            }
+            catch
+            {
+                Console.WriteLine("Errore nel riempimento in tabella di utente id " + utente.Id);
+            }
+            foreach (var r in righe)
+            {
+                Sandali s = new();
+                s.FromDictionary(r);
+                san.Add(s);
+            }
+
+            return san;
+        }
+
+        public bool ResetWList(Account utente)
+        {
+            try
+            {
+                return db.Update($"Delete from Wishlist where IdAccount = {utente.Id} ");
+            }
+            catch
+            {
+                Console.WriteLine("Errore nel reset in tabella di utente id " + utente.Id);
+                return false;
+            }
+        }
+
+        public bool RemoveWList(Account utente, Sandali s)
+        {
+            try
+            {
+                return db.Update($"Delete from Wishlist where IdAccount = {utente.Id} AND IdSandali = {s.Id} ");
+            }
+            catch
+            {
+                Console.WriteLine("Errore nell'eliminazione in tabella di prodotto " + s.Id + "  di utente id " + utente.Id);
+                return false;
+            }
+        }
+
+        public bool AddWList(Account utente, Sandali s)
+        {
+            try
+            {
+                return db.Update($"Insert into Wishlist " +
+                                $"(IdAccount, IdSandali) " +
+                                $"Values " +
+                                $"({utente.Id}, {s.Id});");
+            }
+            catch
+            {
+                Console.WriteLine("Errore nell'inserimento in tabella di prodotto " + s.Id + "  di utente id " + utente.Id);
+                return false;
+            }
+        }
+        #endregion
     }
 }

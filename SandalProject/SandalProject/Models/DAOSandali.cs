@@ -62,9 +62,9 @@ namespace SandalProject.Models
             bool i = false;
             try
             {
-                i = db.Update($"Insert into Sandali" +
-                             $"Nome, Marca, Descrizione, Prezzo, SKU, Categoria, Genere, Sconto, Quantita, Taglie, Colore, Immagine" +
-                             $"Values" +
+                i = db.Update($"Insert into Sandali " +
+                             $"(Nome, Marca, Descrizione, Prezzo, SKU, Categoria, Genere, Sconto, Quantita, Taglie, Colore, Immagine) " +
+                             $"Values " +
                              $"('{(s.Nome == null ? "null" : s.Nome.Replace("'", "''"))}'," +
                              $"'{(s.Marca == null ? "null" : s.Marca.Replace("'", "''"))}')," +
                              $"'{(s.Descrizione == null ? "null" : s.Descrizione.Replace("'", "''"))}'," +
@@ -129,6 +129,16 @@ namespace SandalProject.Models
                 $"{s.Taglia}," +
                 $"'{(s.Colore == null ? "null" : s.Colore.Replace("'", "''"))}'," +
                 $"{s.Immagini};");
+        }
+
+        public Sandali SandaloDelMese(string stagione)
+        {
+            var riga = db.ReadOne($"SELECT * FROM Sandali WHERE SKU = (     SELECT TOP 1 s.SKU     FROM Sandali s     JOIN Wishlist w ON s.id = w.idSandali     WHERE s.categoria = '{stagione}'     GROUP BY s.SKU     ORDER BY COUNT(w.idSandali) DESC );");
+
+            Sandali s = new();
+            s.FromDictionary(riga);
+
+            return s;
         }
     }
 }
