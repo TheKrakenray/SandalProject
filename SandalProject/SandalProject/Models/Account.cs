@@ -6,25 +6,25 @@ namespace SandalProject.Models
     public class Account : Entity
     {
         public Account() { }
-        public Account(int id, string username, string email, string password, string ruolo, int pFeledelta): base(id)
+
+        //public Account(int id, string username, string email, string psw, string ruolo, int pFedelta): base(id)
+        //{
+        //    Username = username;
+        //    Email = email;
+        //    Psw = psw;
+        //    Ruolo = ruolo;
+        //    PFedelta = pFedelta;
+        //}
+
+        public Account(int id, string username, string email, string psw, string ruolo, int pFedelta, byte[] propic) : base(id)
         {
             Username = username;
             Email = email;
-            Password = password;
+            Psw = psw;
             Ruolo = ruolo;
-            PFeledelta = pFeledelta;
-            
-        }
-        public Account(int id, string username, string email, string password, string ruolo, int pFeledelta, byte[] propic) : base(id)
-        {
-            Username = username;
-            Email = email;
-            Password = password;
-            Ruolo = ruolo;
-            PFeledelta = pFeledelta;
+            PFedelta = pFedelta;
             Propic = propic;
         }
-
 
         #region Properties
         private string? _username;
@@ -55,36 +55,36 @@ namespace SandalProject.Models
             get => _email;
             set
             {
-                if(value!=null)
+                if (value != null)
                 {
                     Regex emailRGX = new Regex(@"^([\w\.\-]+)@([\w\-]+)((\.(\w){2,3})+)$");
-                    //Regex per l'email: deve contenere un "@" può contenere per forza e massimo 2 punti uno all'inizio e uno dopo la chiocciola
+                    //Regex per l'email: deve contenere una "@" e può contenere massimo 2 punti uno prima e uno dopo la "@"
                     //quindi abc.bla@email.com
                     if (emailRGX.Match(value).Success)
                         _email = value;
                     else
-                        throw new ArgumentException("Invalid email format");
-                }
+                    throw new ArgumentException("Invalid email format");
+            }
                 else
                 {
-                    _email = "null";
-                }
+                _email = "null";
             }
         }
+        }
 
-        private string? _password;
-        public string? Password 
+        private string? _psw;
+        public string? Psw
         {
-            get => _password;
+            get => _psw;
             set
             {
                 if(value == null)
                 {
-                    _password = "null";
+                    _psw = "null";
                 }
                 else
                 {
-                    _password = value;
+                    _psw = value;
                 }
             }
         }
@@ -103,7 +103,7 @@ namespace SandalProject.Models
         }
 
         private int? _pFedelta; 
-        public int? PFeledelta 
+        public int? PFedelta 
         {   get => _pFedelta; 
             set
             {

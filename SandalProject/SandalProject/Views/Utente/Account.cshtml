@@ -1,10 +1,28 @@
-﻿<!DOCTYPE html>
+﻿@using SandalProject.Models;
+@using SandalProject.Utility;
+@model Entity
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <title></title>
 </head>
 <body>
+    <form method="post" enctype="multipart/form-data" action="/Utente/UploadImageToDatabase">
+        <label for="file">Seleziona immagine PNG:</label>
+        <input type="file" name="file" id="file" accept="image/png" />
+        <button type="submit">Carica</button>
+    </form>
+    <form method="post" enctype="multipart/form-data" action="/Utente/GetImage(@((Account)Model))">
+        <button type="submit">Carica</button>
+    </form>
+    @(((Account)Model).Id)
+    <br>
+    <a href="/Utente/GetImage(@((Account)Model))">Vedi immagine</a>
 
+    
+
+    <h1>@(((Account)Model).Propic)</h1>
 </body>
 </html>

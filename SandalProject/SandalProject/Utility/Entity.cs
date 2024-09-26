@@ -1,10 +1,12 @@
 ﻿using System.Reflection;
+using System.Data.SqlClient;
+using System.Text;
 
 namespace SandalProject.Utility
 {
     public abstract class Entity
     {
-        public int Id { get; set; }
+        public int? Id { get; set; }
 
         public Entity()
         {
@@ -62,9 +64,7 @@ namespace SandalProject.Utility
             {
                 if (riga.ContainsKey(property?.Name.ToLower()))
                 {
-
                     object? valore = riga[property?.Name.ToLower()];
-
 
                     switch (property?.PropertyType.Name.ToLower())
                     {
@@ -83,16 +83,14 @@ namespace SandalProject.Utility
                         case "datetime":
                             valore = DateTime.TryParse(riga[property.Name.ToLower()], out _) ? DateTime.Parse(riga[property.Name.ToLower()]) : null;
                             break;
-
-
+                        case "system.byte[]":
+                            valore = (byte[])valore;
+                            break;
                     }
 
                     property.SetValue(this, valore);
                 }
             }
         }
-
-
-
     }
 }
