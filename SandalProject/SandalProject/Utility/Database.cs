@@ -1,4 +1,5 @@
-﻿using System.Data.SqlClient;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Data.SqlClient;
 
 namespace SandalProject.Utility
 {
@@ -60,11 +61,39 @@ namespace SandalProject.Utility
         public static Database GetInstance()
         {
             if (instance == null)
-                instance = new Database("Libreria_Diego_Scampia");
+                instance = new Database("ProjectSandal");
 
             return instance;
         }
 
+        //private string connectionString = $"Server=localhost;Database=ProjectSandal;Integrated security=true;";
+
+        //public byte[] GetImage(int id)
+        //{
+        //    byte[] imageData = null;
+
+        //    using (SqlConnection conn = new SqlConnection(connectionString))
+        //    {
+        //        string sql = "SELECT Propic FROM Account WHERE Id = @id";
+        //        SqlCommand cmd = new SqlCommand(sql, conn);
+        //        cmd.Parameters.AddWithValue("@id", id);
+        //        conn.Open();
+
+        //        SqlDataReader reader = cmd.ExecuteReader();
+        //        if (reader.Read())
+        //        {
+        //            imageData = (byte[])reader["Propic"];
+        //        }
+        //    }
+        //    if (imageData == null || imageData.Length == 0)
+        //    {
+        //        Console.WriteLine("Errore: Immagine non trovata o vuota per l'ID specificato.");
+        //    }
+        //    // Return the image as a byte array (for display in frontend)
+        //    Connection.Close();//precauzione
+
+        //    return imageData;
+        //}
 
         public List<Dictionary<string, string>> Read(string query)
         {
@@ -81,7 +110,22 @@ namespace SandalProject.Utility
                 Dictionary<string, string> riga = new Dictionary<string, string>();
 
                 for (int i = 0; i < dr.FieldCount; i++)
-                    riga.Add(dr.GetName(i).ToLower(), dr.GetValue(i).ToString());
+                {
+                    var columnName = dr.GetName(i).ToLower();
+                    object columnValue = dr.GetValue(i);
+
+                    if (columnValue is byte[] byteArray)
+                    {
+                        // Stampa i valori dell'array di byte
+                        string byteValues = BitConverter.ToString(byteArray);
+                        riga.Add(columnName, byteValues); // Puoi anche decidere di salvare come stringa
+                    }
+                    else
+                    {
+                        // Altri tipi di valore
+                        riga.Add(columnName, columnValue.ToString());
+                    }
+                }
 
                 ris.Add(riga);
             }
@@ -91,6 +135,7 @@ namespace SandalProject.Utility
 
             return ris;
         }
+
 
         public Dictionary<string, string> ReadOne(string query)
         {
@@ -179,18 +224,13 @@ namespace SandalProject.Utility
         private void CreaTabelle()
         {
             //query creazione tabelle
-            Update("create table Utenti ( id int primary key identity (1,1), Username varchar (100), constraint AK_USERNAME UNIQUE(Username), Email varchar (100), constraint AK_EMAIL UNIQUE(Email), Passw varchar (100), Ruolo varchar (100) );");
-            Update("create table Libro\r\n(\r\n\tid int primary key identity (1,1),\r\n\tTitolo varchar (100),\r\n\tAutore varchar (100),\r\n\tGenere varchar (100),\r\n\tDescrizione varchar (500),\r\n\tPrezzo decimal (5,2),\r\n\tCopertina varchar (200),\r\n\tQuantita int \r\n);");
-            Update("create table Carrello\r\n(\r\n\tUtentiid int,\r\n\tforeign key (Utentiid) references Utenti(id)\r\n\ton update cascade on delete set null,\r\n\tLibroid int,\r\n\tforeign key (Libroid) references Libro(id)\r\n\ton update cascade on delete set null,\r\n\tDataOrdine DATETIME\r\n);");
+            Update("create table Account\r\n(\r\n\tid int primary key identity(1,1),\r\n\tpropic varbinary(max),\r\n\tusername varchar(50),\r\n\temail varchar(50),\r\n\tpsw varchar(200),\r\n\truolo varchar(20),\r\n\tpfedelta int\r\n);");
+            Update("create table Sandali\r\n(\r\n\tid int primary key identity(1,1),\r\n\tnome varchar(50),\r\n\tmarca varchar(50),\r\n\tdescrizione varchar(1000),\r\n\tprezzo decimal,\r\n\tSKU varchar(10),\r\n\tCONSTRAINT UQ_Sandali_SKU UNIQUE (SKU),\r\n\tcategoria varchar(20),\r\n\tgenere varchar(10),\r\n\tsconto decimal,\r\n\tquantita int,\r\n\ttaglia int,\r\n\tcolore varchar(10)\r\n);");
+            Update("create table Carrello\r\n(\r\n\tid int primary key identity(1,1),\r\n\tidAccount int,\r\n\tFOREIGN KEY(idAccount) REFERENCES Account(id) \r\n\tON UPDATE CASCADE ON DELETE SET NULL,\r\n\tidSandali int,\r\n\tFOREIGN KEY(idSandali) REFERENCES Sandali(id) \r\n\tON UPDATE CASCADE ON DELETE SET NULL\r\n);\r\n");
+            Update("create table Wishlist\r\n(\r\n\tid int primary key identity(1,1),\r\n\tidAccount int,\r\n\tFOREIGN KEY(idAccount) REFERENCES Account(id) \r\n\tON UPDATE CASCADE ON DELETE SET NULL,\r\n\tidSandali int,\r\n\tFOREIGN KEY(idSandali) REFERENCES Sandali(id) \r\n\tON UPDATE CASCADE ON DELETE SET NULL\r\n);\r\n");
+            Update("create table Immagini\r\n(\r\n\tid int primary key identity(1,1),\r\n\timmagine varbinary(max),\r\n\tSKU varchar(10),\r\n\tFOREIGN KEY(SKU) REFERENCES Sandali(SKU) \r\n\tON UPDATE CASCADE ON DELETE SET NULL,\r\n);\r\n");
 
             //query inserimento in tabella
-            Update("insert into Utenti (Username, Email, Passw, Ruolo) Values ('DiegoAdmin', 'diegoprova@email.com', HASHBYTES('SHA2_512','diego123'), 'admin')");
-            Update("insert into Libro " +
-                "(Titolo, Autore, Genere, Descrizione, Prezzo, Copertina, Quantita) Values " +
-                "('Libro rosso', 'Mario Rossi', 'Romantico', 'Libro molto bello', 21.50, 'MOCKUP-POESIA-ROSSO.jpg', 30), " +
-                "('Libro blu', 'J.Kenn.', 'Fantasy', 'Libro molto molto bello', 25, 'MOCKUP-POESIA-BLU.jpg', 24), " +
-                "('Libro verde', 'Mario Ciro', 'Fantasy-Thriller', 'Libro molto brutto bello', 30, 'MOCKUP-POESIA-VERDE.jpg', 10), " +
-                "('Libro giallo', 'Antonio L.', 'Horror', 'Libro molto ', 26.89, 'MOCKUP-POESIA-GIALLO.jpg', 15); ");
         }
     }
 }
