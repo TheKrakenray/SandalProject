@@ -99,7 +99,10 @@ namespace SandalProject.Models
                 {
                     if (value < 1)
                         _prezzo = 1;
+                    else
+                        _prezzo = value;
                 }
+                _prezzo = 1;
                
             } 
         }
@@ -123,103 +126,141 @@ namespace SandalProject.Models
             }
         }
          
-        private string _categoria;
-        public string Categoria 
+        private string? _categoria;
+        public string? Categoria 
         {
             get => _categoria;
 
             set
             {
-                string stagione = "inverno estate primavera autunno winter summer spring autumn fall";
-                if(!stagione.Contains(_categoria))
+                if (value != null)
                 {
-                    _categoria = "inverno";
+                    string stagione = "inverno estate primavera autunno winter summer spring autumn fall";
+                    if (!stagione.Contains(_categoria))
+                    {
+                        _categoria = "inverno";
+                    }
+                    else
+                    {
+                        _categoria = value;
+                        _categoria.Replace("'", "''");
+                    }
                 }
                 else
-                {
-                    _categoria = value;
-                    _categoria.Replace("'", "''");
-                }
+                    _categoria = "null";
             } 
         }
 
-        private string _genere;
-        public string Genere
+        private string? _genere;
+        public string? Genere
         {
             get => _genere;
             set
             {
                 string generi = "uomo donna bambino kid woman man";
-                if (!generi.Contains(_genere))
-                    _genere = "uomo";
-                else
+                if(value != null)
                 {
-                    _genere = value;
-                    _genere.Replace("'", "''");
+                    if (!generi.Contains(_genere))
+                        _genere = "uomo";
+                    else
+                    {
+                        _genere = value;
+                        _genere.Replace("'", "''");
+                    }
                 }
+                else
+                    _genere = "null";
 
             }
         }
 
-        private double _sconto;
-        public double Sconto 
+        private double? _sconto;
+        public double? Sconto 
         {
             get => _sconto;
             set
             {
-                if(_sconto < 0)
+                if(value != null)
                 {
-                    _sconto = 0;
-                }
-                else if(_sconto > 100)
-                {
-                    _sconto = 100;
+                    if (_sconto < 0)
+                    {
+                        _sconto = 0;
+                    }
+                    else if (_sconto > 100)
+                    {
+                        _sconto = 100;
+                    }
+                    else
+                    {
+                        _sconto = value;
+                    }
                 }
                 else
-                {
-                    _sconto = value;
-                }
+                    _sconto = 0;
             }
         }
 
-        private int _quantita;
-        public int Quantita 
+        private int? _quantita;
+        public int? Quantita 
         { 
             get => _quantita;
             set
             {
-                if( value < 0)
+                if(value != null)
                 {
-                    throw new ArgumentException("Object should not exist, quantity less than 0");
+                    if (value < 0)
+                    {
+                        throw new ArgumentException("Object should not exist, quantity less than 0");
+                    }
+                    else
+                    {
+                        _quantita = value;
+                    }
                 }
+                else
+                    _quantita = 1;
             } 
         }
 
-        private int _taglia;
-        public int Taglia
+        private int? _taglia;
+        public int? Taglia
         {
             get => _taglia;
             set
             {
-                if(value < 1)
-                {
+               if(value != null)
+               {
+                    if (value < 1)
+                    {
+                        _taglia = 1;
+                    }
+                    else
+                    {
+                        _taglia = value;
+                    }
+               }
+               else 
                     _taglia = 1;
-                }
             } 
         }
 
-        private string _colore;
-        public string Colore
+        private string? _colore;
+        public string? Colore
         {
             get => _colore;
             set
             {
-                Regex colorRGX = new Regex(@"^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3}|[a-fA-F0-9]{8}|[a-fA-F0-9]{4})$");
-                //regex per i colori (con trasparenza) esadecimali es #ffffffff (bianco senza trasparenza) o #000 (nero)
-                if (colorRGX.Match(value).Success)
-                    _colore = value;
+                if (value != null)
+                {
+                    Regex colorRGX = new Regex(@"^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3}|[a-fA-F0-9]{8}|[a-fA-F0-9]{4})$");
+                    //regex per i colori (con trasparenza) esadecimali es #ffffffff (bianco senza trasparenza) o #000 (nero)
+                    if (colorRGX.Match(value).Success)
+                        _colore = value;
+                    else
+                        _colore = "#ffffff";
+                }
                 else
-                    throw new ArgumentException("Invalid color format");
+                    _colore = "#ffffff";
             }
         }
 

@@ -62,20 +62,21 @@ namespace SandalProject.Models
             bool i = false;
             try
             {
-                i = db.Update($"Insert into Sandali" +
-                             $"Nome, Marca, Descrizione, Prezzo, SKU, Categoria, Genere, Sconto, Quantita, Taglie, Colore, Immagine" +
-                             $"Value" +
-                             $"'{(s.Nome == null ? "null" : s.Nome.Replace("'", "''"))}'," +
-                             $"'{s.Marca.Replace("'", "''")}'),'{s.Descrizione.Replace("'", "''")}'," +
+                i = db.Update($"Insert into Sandali " +
+                             $"(Nome, Marca, Descrizione, Prezzo, SKU, Categoria, Genere, Sconto, Quantita, Taglie, Colore, Immagine) " +
+                             $"Values " +
+                             $"('{(s.Nome == null ? "null" : s.Nome.Replace("'", "''"))}'," +
+                             $"'{(s.Marca == null ? "null" : s.Marca.Replace("'", "''"))}')," +
+                             $"'{(s.Descrizione == null ? "null" : s.Descrizione.Replace("'", "''"))}'," +
                              $"{s.Prezzo}," +
-                             $"'{s.SKU.Replace("'", "''")}'," +
-                             $"'{s.Categoria.Replace("'", "''")}'," +
-                             $"'{s.Genere.Replace("'", "''")}'," +
+                             $"'{(s.SKU == null ? "null" : s.SKU.Replace("'", "''"))}'," +
+                             $"'{(s.Categoria == null ? "null" : s.Categoria.Replace("'", "''"))}'," +
+                             $"'{(s.Genere == null ? "null" : s.Genere.Replace("'", "''"))}'," +
                              $"{s.Sconto}," +
                              $"{s.Quantita}," +
                              $"{s.Taglia}," +
-                             $"'{s.Colore.Replace("'", "''")}'," +
-                             $"{s.Immagini};");
+                             $"'{(s.Colore == null ? "null" : s.Colore.Replace("'", "''"))}'," +
+                             $"{s.Immagini});");
             }
             catch
             {
@@ -116,17 +117,28 @@ namespace SandalProject.Models
         {
             Sandali s = new();
            return db.Update($"Update Sandali set"+
-                $"'{s.Nome.Replace("'", "''")}'," +
-                $"'{s.Marca.Replace("'", "''")}')," +
-                $"'{s.Descrizione.Replace("'", "''")}'," +
-                $"{s.Prezzo},'{s.SKU.Replace("'", "''")}'," +
-                $"'{s.Categoria.Replace("'", "''")}'," +
-                $"'{s.Genere.Replace("'", "''")}'," +
+                $"'{(s.Nome == null ? "null" : s.Nome.Replace("'", "''"))}'," +
+                $"'{(s.Marca == null ? "null" : s.Marca.Replace("'", "''"))}')," +
+                $"'{(s.Descrizione == null ? "null" : s.Descrizione.Replace("'", "''"))}'," +
+                $"{s.Prezzo}," +
+                $"'{(s.SKU == null ? "null" : s.SKU.Replace("'", "''"))}'," +
+                $"'{(s.Categoria == null ? "null" : s.Categoria.Replace("'", "''"))}'," +
+                $"'{(s.Genere == null ? "null" : s.Genere.Replace("'", "''"))}'," +
                 $"{s.Sconto}," +
                 $"{s.Quantita}," +
                 $"{s.Taglia}," +
-                $"'{s.Colore.Replace("'", "''")}'," +
+                $"'{(s.Colore == null ? "null" : s.Colore.Replace("'", "''"))}'," +
                 $"{s.Immagini};");
+        }
+
+        public Sandali SandaloDelMese(string stagione)
+        {
+            var riga = db.ReadOne($"SELECT * FROM Sandali WHERE SKU = (     SELECT TOP 1 s.SKU     FROM Sandali s     JOIN Wishlist w ON s.id = w.idSandali     WHERE s.categoria = '{stagione}'     GROUP BY s.SKU     ORDER BY COUNT(w.idSandali) DESC );");
+
+            Sandali s = new();
+            s.FromDictionary(riga);
+
+            return s;
         }
     }
 }
