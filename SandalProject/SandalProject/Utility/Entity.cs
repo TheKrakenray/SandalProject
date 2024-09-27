@@ -79,7 +79,6 @@ namespace SandalProject.Utility
                             break;
 
                         case "nullable`1":
-                            Console.WriteLine(riga[property.Name.ToLower()] + "Sono io");
                             if (int.TryParse(riga[property.Name.ToLower()], out int intValNull))
                             {
                                 valore = (int?)intValNull;
@@ -108,7 +107,7 @@ namespace SandalProject.Utility
                                 valore = (DateTime?)dateVal;
                             }
                             break;
-                        case "byte[]":
+                        case "byte[]":  
                             // Converti la stringa in un array di byte
                             var byteString = riga[property.Name.ToLower()];
 

@@ -65,10 +65,7 @@ namespace SandalProject.Models
             try
             {
                 riga = db.ReadOne($"select * from account where id = {id};");
-                foreach (KeyValuePair<string, string> accoppiata in riga)
-                {
-                    Console.WriteLine($"Chiave: {accoppiata.Key} --- Valore: {accoppiata.Value}");
-                }
+                
             }
             catch
             {
@@ -76,27 +73,12 @@ namespace SandalProject.Models
             }
 
             Account account = new Account();
-            StampaProprietà<Account>(account);
 
             if(riga != null)
                 account.FromDictionary(riga);
 
-            Console.WriteLine("\n---POST FromDictionary---\n");
-            StampaProprietà<Account>(account);
 
             return account;
-        }
-
-        static void StampaProprietà<T>(T obj)
-        {
-            Type tipo = obj.GetType();
-            PropertyInfo[] proprietà = tipo.GetProperties();
-
-            foreach (var prop in proprietà)
-            {
-                var valore = prop.GetValue(obj);
-                Console.WriteLine($"{prop.Name}: {valore}");
-            }
         }
 
         public bool Insert(Entity e)
