@@ -34,11 +34,9 @@ namespace SandalProject.Controllers
             //Dictionary<Entity, FileContentResult> dic = new ();
 
             //dic.Add(e, img);
-            Entity e = DAOAccount.GetInstance().Find(id);
-            var image = ((Account)e).Propic;
-            Console.WriteLine(image);
-            ViewBag.Image = $"data:image/png;base64,{image}";
-            return View(DAOAccount.GetInstance().Find(id));
+            Console.WriteLine(id);
+            id = 1;
+            return View(DAOAccount.GetInstance().Find(1));
         }
 
         [HttpPost]
@@ -70,6 +68,7 @@ namespace SandalProject.Controllers
                         DAOAccount.GetInstance().Insert(e);
 
                         ViewBag.Message = "Immagine caricata e salvata nel database!";
+                        return RedirectToAction("Account", new { id = e.Id }); // Reindirizza all'account creato
                     }
                 }
                 else
@@ -81,7 +80,19 @@ namespace SandalProject.Controllers
             {
                 ViewBag.Message = "Nessun file selezionato!";
             }
-            return Redirect("Account");
+            return RedirectToAction("Account");
+        }
+
+        [HttpGet]
+        public IActionResult GetImage(int id)
+        {
+            var account = DAOAccount.GetInstance().Find(1);
+            var image = (Account)account;
+            if (image != null && image.Propic != null)
+            {
+                return File(image.Propic, "image/png");
+            }
+            return NotFound();
         }
 
 

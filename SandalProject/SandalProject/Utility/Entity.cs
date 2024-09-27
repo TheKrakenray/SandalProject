@@ -109,9 +109,28 @@ namespace SandalProject.Utility
                             }
                             break;
                         case "byte[]":
-                            var bytes = riga[property.Name.ToLower()];
-                            Console.WriteLine(bytes);
+                            // Converti la stringa in un array di byte
+                            var byteString = riga[property.Name.ToLower()];
 
+                            // Assicurati che la stringa non sia nulla o vuota
+                            if (!string.IsNullOrEmpty(byteString))
+                            {
+                                // Divide la stringa in base al carattere '-'
+                                string[] byteValues = byteString.Split('-');
+
+                                // Crea un array di byte della lunghezza necessaria
+                                byte[] bytes = new byte[byteValues.Length];
+
+                                // Converte ogni parte in byte
+                                for (int i = 0; i < byteValues.Length; i++)
+                                {
+                                    bytes[i] = Convert.ToByte(byteValues[i], 16); // Converti da esadecimale a byte
+                                }
+
+                                valore = bytes; // Imposta il valore dell'array di byte
+
+                                // Mostra i byte in un formato leggibile
+                            }
                             break;
 
                         case "string":

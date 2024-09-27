@@ -118,14 +118,12 @@ namespace SandalProject.Utility
                     {
                         // Stampa i valori dell'array di byte
                         string byteValues = BitConverter.ToString(byteArray);
-                        Console.WriteLine($"Chiave: {columnName}, Valore: {byteValues}");
                         riga.Add(columnName, byteValues); // Puoi anche decidere di salvare come stringa
                     }
                     else
                     {
                         // Altri tipi di valore
                         riga.Add(columnName, columnValue.ToString());
-                        Console.WriteLine($"Chiave: {columnName}, Valore: {columnValue}");
                     }
                 }
 
