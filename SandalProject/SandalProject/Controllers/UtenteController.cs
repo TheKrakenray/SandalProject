@@ -36,7 +36,7 @@ namespace SandalProject.Controllers
             //dic.Add(e, img);
             Entity e = DAOAccount.GetInstance().Find(id);
             var image = ((Account)e).Propic;
-
+            Console.WriteLine(image);
             ViewBag.Image = $"data:image/png;base64,{image}";
             return View(DAOAccount.GetInstance().Find(id));
         }

@@ -110,7 +110,24 @@ namespace SandalProject.Utility
                 Dictionary<string, string> riga = new Dictionary<string, string>();
 
                 for (int i = 0; i < dr.FieldCount; i++)
-                    riga.Add(dr.GetName(i).ToLower(), dr.GetValue(i).ToString());
+                {
+                    var columnName = dr.GetName(i).ToLower();
+                    object columnValue = dr.GetValue(i);
+
+                    if (columnValue is byte[] byteArray)
+                    {
+                        // Stampa i valori dell'array di byte
+                        string byteValues = BitConverter.ToString(byteArray);
+                        Console.WriteLine($"Chiave: {columnName}, Valore: {byteValues}");
+                        riga.Add(columnName, byteValues); // Puoi anche decidere di salvare come stringa
+                    }
+                    else
+                    {
+                        // Altri tipi di valore
+                        riga.Add(columnName, columnValue.ToString());
+                        Console.WriteLine($"Chiave: {columnName}, Valore: {columnValue}");
+                    }
+                }
 
                 ris.Add(riga);
             }
@@ -120,6 +137,7 @@ namespace SandalProject.Utility
 
             return ris;
         }
+
 
         public Dictionary<string, string> ReadOne(string query)
         {

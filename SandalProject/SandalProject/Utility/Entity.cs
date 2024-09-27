@@ -66,7 +66,6 @@ namespace SandalProject.Utility
             {
                 if (riga.ContainsKey(property.Name.ToLower()))
                 {
-                    Console.WriteLine(property.PropertyType.Name.ToLower());
 
                     object? valore = null;
 
@@ -80,6 +79,7 @@ namespace SandalProject.Utility
                             break;
 
                         case "nullable`1":
+                            Console.WriteLine(riga[property.Name.ToLower()] + "Sono io");
                             if (int.TryParse(riga[property.Name.ToLower()], out int intValNull))
                             {
                                 valore = (int?)intValNull;
@@ -90,7 +90,7 @@ namespace SandalProject.Utility
                             string doubleString = riga[property.Name.ToLower()].Replace(",", ".");
                             if (double.TryParse(doubleString, out double doubleVal))
                             {
-                                valore = (double?)doubleVal; 
+                                valore = (double?)doubleVal;
                             }
                             break;
 
@@ -102,56 +102,29 @@ namespace SandalProject.Utility
                             break;
 
                         case "datetime":
+                            
                             if (DateTime.TryParse(riga[property.Name.ToLower()], out DateTime dateVal))
                             {
-                                valore = (DateTime?)dateVal; 
+                                valore = (DateTime?)dateVal;
                             }
                             break;
-
                         case "byte[]":
-                            var val = riga[property.Name.ToLower()];
-                            byte[] b = File.ReadAllBytes(val);
-                            valore = "data:image/png;base64," + Convert.ToBase64String(b);
-                            var byteString = riga[property.Name.ToLower()];
+                            var bytes = riga[property.Name.ToLower()];
+                            Console.WriteLine(bytes);
 
-                            Console.WriteLine($"byteString: {byteString}"); // Stampa il contenuto di byteString
-
-                            try
-                            {
-                                valore = Convert.FromBase64String(byteString);
-                                Console.WriteLine($"Converted from Base64: {BitConverter.ToString((byte[])valore)}");
-                            }
-                            catch (FormatException e)
-                            {
-                                Console.WriteLine(e);
-                                valore = System.Text.Encoding.UTF8.GetBytes(byteString);
-                                Console.WriteLine($"Converted from UTF-8: {BitConverter.ToString((byte[])valore)}");
-                            }
                             break;
-                            //var byteString = riga[property.Name.ToLower()];
 
-                            //// Verifica se la stringa è già in Base64
-                            //try
-                            //{
-                            //    // Prova a convertire da Base64 a byte[]
-                            //    valore = Convert.FromBase64String(byteString);
-                            //    Console.WriteLine($"Converted from Base64: {BitConverter.ToString((byte[])valore)}");
-                            //}
-                            //catch (FormatException e)
-                            //{
-                            //    Console.WriteLine(e);
-                            //    // Se la conversione fallisce, i dati non sono in Base64, considera una gestione diversa o un fallback
-                            //    Console.WriteLine("I dati non sono in formato Base64 e non possono essere convertiti.");
-                            //
                         case "string":
                                 valore = riga[property.Name.ToLower()];
                                 break;
                            
                     }
-                    Console.WriteLine(valore);
                     property.SetValue(this, valore);
                 }
             }
+
         }
+
+
     }
 }
