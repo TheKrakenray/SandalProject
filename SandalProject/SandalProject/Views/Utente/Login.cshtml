@@ -5,6 +5,17 @@
     <title></title>
 </head>
 <body>
-
+    <div class="login-container">
+        <h2><strong>Login</strong></h2>
+        <form action="/Utente/Valida" onsubmit="return controllo_login()" method="post">
+            <input type="email" name="mail" id="mail" placeholder="Email" required>
+            <input type="password" name="psw" id="passw" placeholder="Password" required>
+            <a href="#" class="forgot-password"><strong>Password Dimenticata</strong></a>
+            <button type="submit">Accedi</button>
+        </form>
+        <div class="login-options">
+            <p>Non hai un account? <a href="@Url.Action("Registrazione","Utente")" class="register">Registrati</a></p>
+        </div>
+    </div>
 </body>
 </html>

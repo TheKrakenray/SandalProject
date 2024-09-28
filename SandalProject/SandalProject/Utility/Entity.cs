@@ -8,7 +8,7 @@ namespace SandalProject.Utility
 {
     public abstract class Entity
     {
-        public int? Id { get; set; }
+        public int Id { get; set; }
 
         public Entity()
         {
@@ -43,7 +43,6 @@ namespace SandalProject.Utility
 
             foreach (PropertyInfo property in this.GetType().GetProperties())
             {
-
                 if (property?.Name == null)
                     ris += "";
                 else if (property?.GetValue(this) == null)
@@ -66,7 +65,6 @@ namespace SandalProject.Utility
             {
                 if (riga.ContainsKey(property.Name.ToLower()))
                 {
-
                     object? valore = null;
 
                     switch (property.PropertyType.Name.ToLower())
@@ -101,13 +99,13 @@ namespace SandalProject.Utility
                             break;
 
                         case "datetime":
-                            
                             if (DateTime.TryParse(riga[property.Name.ToLower()], out DateTime dateVal))
                             {
                                 valore = (DateTime?)dateVal;
                             }
                             break;
-                        case "byte[]":  
+
+                        case "byte[]":
                             // Converti la stringa in un array di byte
                             var byteString = riga[property.Name.ToLower()];
 
@@ -127,7 +125,6 @@ namespace SandalProject.Utility
                                 }
 
                                 valore = bytes; // Imposta il valore dell'array di byte
-
                                 // Mostra i byte in un formato leggibile
                             }
                             break;
@@ -135,14 +132,11 @@ namespace SandalProject.Utility
                         case "string":
                                 valore = riga[property.Name.ToLower()];
                                 break;
-                           
                     }
                     property.SetValue(this, valore);
                 }
             }
 
         }
-
-
     }
 }

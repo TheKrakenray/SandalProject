@@ -38,13 +38,12 @@ namespace SandalProject.Models
             return del;
         }
 
-
-        public Entity Find(string username)
+        public Entity Find(string email)
         {
             Dictionary<string, string> riga = null;
             try
             {
-                riga = db.ReadOne($"select * from account where username = {username}");
+                riga = db.ReadOne($"select * from account where email = '{email}'");
             }
             catch
             {
@@ -55,8 +54,12 @@ namespace SandalProject.Models
             if (riga != null)
             {
                 a.FromDictionary(riga);
+                return a;
             }
-            return a;
+            else
+            {
+                return null;
+            }
         }
 
         public Entity Find(int id)
@@ -65,7 +68,6 @@ namespace SandalProject.Models
             try
             {
                 riga = db.ReadOne($"select * from account where id = {id};");
-                
             }
             catch
             {
@@ -77,7 +79,6 @@ namespace SandalProject.Models
             if(riga != null)
                 account.FromDictionary(riga);
 
-
             return account;
         }
 
@@ -85,17 +86,19 @@ namespace SandalProject.Models
         {
             Account a = (Account)e;
             bool ins = false;
+            string propic = $"0x{BitConverter.ToString(a.Propic).Replace("-", "")}";
+
             try
             {
-                ins = db.Update($"Insert into Account " +
-                             $"(Propic, Username, Email, Psw, Ruolo, PFedelta) " +
-                             $"Values " +
-                             $"((SELECT CONVERT(varbinary, '{a.Propic}'))," +
-                             $"'{(a.Username == null ? "null" : a.Username.Replace("'", "''"))}'," +
-                             $"'{(a.Email == null ? "null" : a.Email.Replace("'", "''"))}'," +
-                             $"HASHBYTES('SHA2_512','{(a.Psw == null ? "null" : a.Psw.Replace("'", "''"))}')," +
-                             $"'{(a.Ruolo == null ? "null" : a.Ruolo.Replace("'", "''"))}'," +
-                             $"{a.PFedelta});");
+                ins = db.Update($"INSERT INTO Account " +
+                                $"(Propic, Username, Email, Psw, Ruolo, PFedelta) " +
+                                $"VALUES " +
+                                $"({propic}, " +  // Assicurati che 'propic' sia corretto
+                                $"{(a.Username == null ? "NULL" : $"'{a.Username.Replace("'", "''")}'")}, " +
+                                $"{(a.Email == null ? "NULL" : $"'{a.Email.Replace("'", "''")}'")}, " +
+                                $"HASHBYTES('SHA2_512', {(a.Psw == null ? "NULL" : $"'{a.Psw.Replace("'", "''")}'")}), " +
+                                $"{(a.Ruolo == null ? "NULL" : $"'{a.Ruolo.Replace("'", "''")}'")}, " +
+                                $"{a.PFedelta});");
             }
             catch
             {
@@ -138,24 +141,27 @@ namespace SandalProject.Models
 
         public bool Update(Entity e)
         {
-            Account a = new();
-            bool upd = false;
+            Account a = (Account)e;
+            bool updated = false;
+            string propicHex = "0x" + BitConverter.ToString(a.Propic).Replace("-", "");
+
             try
             {
-                upd = db.Update($"UPDATE account SET " +
-                                 $"Propic = ((SELECT CONVERT(varbinary, '{a.Propic}'))," +
-                                 $"Username = '{(a.Username == null ? "null" : a.Username.Replace("'", "''"))}' " +
-                                 $"Email = '{(a.Email == null ? "null" : a.Email.Replace("'","''"))}'," +
-                                 $"Password = HASHBYTES('SHA2_512','{(a.Psw == null ? "null" : a.Psw.Replace("'", "''"))}')," +
-                                 $"Ruolo = '{(a.Ruolo == null ? "null" : a.Ruolo.Replace("'", "''"))}'," +
-                                 $"PFedelta = {a.PFedelta}," +
-                                 $"WHERE id = {a.Id}");
+                updated = db.Update($"UPDATE Account SET " +
+                                    $"Propic = {propicHex}, " +
+                                    $"Username = '{(a.Username == null ? "null" : a.Username.Replace("'", "''"))}', " +
+                                    $"Email = '{(a.Email == null ? "null" : a.Email.Replace("'", "''"))}', " +
+                                    $"Psw = HASHBYTES('SHA2_512','{(a.Psw == null ? "null" : a.Psw.Replace("'", "''"))}'), " +
+                                    $"Ruolo = '{(a.Ruolo == null ? "null" : a.Ruolo.Replace("'", "''"))}', " +
+                                    $"PFedelta = {a.PFedelta} " +
+                                    $"WHERE Id = {a.Id};");
             }
             catch
             {
-                throw new ArgumentException("Errore modifica account");
+                throw new ArgumentException("Errore nell'aggiornamento");
             }
-            return upd;
+
+            return updated;
         }
 
         public bool Valida(string username_email, string password)
@@ -163,7 +169,7 @@ namespace SandalProject.Models
             Dictionary<string, string> riga = null;
             try
             {
-                riga = db.ReadOne($"SELECT account.username FROM account WHERE (username = '{(username_email.Replace("'", "''"))}' OR email = '{(username_email.Replace("'", "''"))}') AND passw = HASHBYTES('SHA2_512','{(password.Replace("'", "''"))}');");
+                riga = db.ReadOne($"SELECT account.email FROM account WHERE (email = '{(username_email.Replace("'", "''"))}' OR email = '{(username_email.Replace("'", "''"))}') AND passw = HASHBYTES('SHA2_512','{(password.Replace("'", "''"))}');");
             }
             catch
             {
@@ -174,6 +180,27 @@ namespace SandalProject.Models
                 return true;
             else
                 return false;
+        }
+
+        public Entity MaxId()
+        {
+            Dictionary<string, string> riga = null;
+
+            try
+            {
+                riga = db.ReadOne("SELECT * FROM Account WHERE Id IN(SELECT MAX(Id) FROM Account);");
+            }
+            catch
+            {
+                throw new ArgumentException("errore id non trovato");
+            }
+
+            Account account = new Account();
+
+            if (riga != null)
+                account.FromDictionary(riga);
+
+            return account;
         }
 
         #region Carrello
@@ -307,10 +334,5 @@ namespace SandalProject.Models
             }
         }
         #endregion
-
-        //public byte[] GetImg(int id)
-        //{
-        //    return db.GetImage(id);
-        //}
     }
 }
