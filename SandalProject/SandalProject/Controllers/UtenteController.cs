@@ -29,10 +29,10 @@ namespace SandalProject.Controllers
         }
 
         public IActionResult Valida(Dictionary<string,string> parametri)
-        {
+        {        
             if (DAOAccount.GetInstance().Valida(parametri["mail"], parametri["psw"]))
             {
-                il.LogInformation($"UTENTE LOGGATO: {parametri["Username"]}");
+                il.LogInformation($"UTENTE LOGGATO: {parametri["mail"]}");
 
                 utenteLoggato = (Account)DAOAccount.GetInstance().Find(parametri["mail"]);
 
@@ -101,17 +101,11 @@ namespace SandalProject.Controllers
                     {
                         file.CopyTo(memoryStream);
                         var imageBytes = memoryStream.ToArray();
-
-                        // Trova l'oggetto account da salvare nel DB
-                        Entity a = DAOAccount.GetInstance().Find(id);
-                        Console.WriteLine(((Account)a).Id);
-
-                        ((Account)a).Propic = imageBytes;
-                        // Salva l'account nel DB
-                        DAOAccount.GetInstance().Update(a);
+                        Console.WriteLine(id);
+                        DAOAccount.GetInstance().ChangeImgDb(id,imageBytes);
 
                         ViewBag.Message = "Immagine caricata e salvata nel database!";
-                        return RedirectToAction("Account", new { id = a.Id }); // Reindirizza all'account aggiornato
+                        return RedirectToAction("Account",new { id }); // Reindirizza all'account aggiornato
                     }
                 }
                 else

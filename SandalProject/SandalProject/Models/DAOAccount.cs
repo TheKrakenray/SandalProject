@@ -163,19 +163,36 @@ namespace SandalProject.Models
 
             return updated;
         }
+        public bool ChangeImgDb(int id, byte[] Img)
+        {
+            bool updated = false;
+            string propicHex = "0x" + BitConverter.ToString(Img).Replace("-", "");
+
+            try
+            {
+                updated = db.Update($"UPDATE Account SET " +
+                                    $"Propic = {propicHex} " +
+                                    $"Where id = {id}");
+            }
+            catch
+            {
+                throw new ArgumentException("Errore nell'aggiornamento");
+            }
+
+            return updated;
+        }
 
         public bool Valida(string username_email, string password)
         {
             Dictionary<string, string> riga = null;
             try
             {
-                riga = db.ReadOne($"SELECT account.email FROM account WHERE (email = '{(username_email.Replace("'", "''"))}' OR email = '{(username_email.Replace("'", "''"))}') AND passw = HASHBYTES('SHA2_512','{(password.Replace("'", "''"))}');");
+                riga = db.ReadOne($"SELECT account.email FROM account WHERE email = '{(username_email.Replace("'", "''"))}' AND psw = HASHBYTES('SHA2_512','{(password.Replace("'", "''"))}');");
             }
             catch
             {
                 throw new ArgumentException("errore nella validazione");
             }
-
             if (riga != null)
                 return true;
             else
