@@ -11,7 +11,7 @@ namespace SandalProject.Controllers
     public class UtenteController : Controller 
     {
         private ILogger<UtenteController> il;
-        private static Account utenteLoggato = null;
+        public static Account utenteLoggato = null;
 
         public UtenteController(ILogger<UtenteController> l)
         {

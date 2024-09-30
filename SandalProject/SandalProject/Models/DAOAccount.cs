@@ -149,10 +149,10 @@ namespace SandalProject.Models
             {
                 updated = db.Update($"UPDATE Account SET " +
                                     $"Propic = {propicHex}, " +
-                                    $"Username = '{(a.Username == null ? "null" : a.Username.Replace("'", "''"))}', " +
-                                    $"Email = '{(a.Email == null ? "null" : a.Email.Replace("'", "''"))}', " +
-                                    $"Psw = HASHBYTES('SHA2_512','{(a.Psw == null ? "null" : a.Psw.Replace("'", "''"))}'), " +
-                                    $"Ruolo = '{(a.Ruolo == null ? "null" : a.Ruolo.Replace("'", "''"))}', " +
+                                    $"Username = {(a.Username == null ? "NULL" : $"'{a.Username.Replace("'", "''")}'")}, " +
+                                    $"Email = {(a.Email == null ? "NULL" : $"'{a.Email.Replace("'", "''")}'")}, " +
+                                    $"Psw = HASHBYTES('SHA2_512', {(a.Psw == null ? "NULL" : $"'{a.Psw.Replace("'", "''")}'")}), " +
+                                    $"Ruolo = {(a.Ruolo == null ? "NULL" : $"'{a.Ruolo.Replace("'", "''")}'")}, " +
                                     $"PFedelta = {a.PFedelta} " +
                                     $"WHERE Id = {a.Id};");
             }
