@@ -77,15 +77,28 @@ namespace SandalProject.Controllers
         public IActionResult Logout()
         {
             chiamata = 0;
-            il.LogInformation($"LOGOUT: {utenteLoggato.Username}");
+            il.LogInformation($"LOGOUT: {utenteLoggato.Username} alle ore {DateTime.Now.Hour}");
             utenteLoggato = null;
+
             return Redirect("Login");
         }
 
-        public IActionResult Account(int id)
+        //public IActionResult Account(int id)
+        //{
+        //    Console.WriteLine(id + " Sono nel UtenteController/Account");
+        //    return View(DAOAccount.GetInstance().Find(id));
+        //}
+
+        public IActionResult Account() // PROBLEMA -> Se utente loggato, può vedere anche altri account
         {
-            Console.WriteLine(id + "Sono nel UtenteController/Account");
-            return View(DAOAccount.GetInstance().Find(id));
+            if(utenteLoggato == null)
+            {
+                return Redirect("/Utente/Login"); // Se utente NON loggato
+            }
+            else
+            {
+                return View(DAOAccount.GetInstance().Find(utenteLoggato.Id)); // Se utente loggato
+            }
         }
 
         [HttpPost]
@@ -152,7 +165,7 @@ namespace SandalProject.Controllers
         [HttpGet]
         public IActionResult GetImage(int id)
         {
-            Console.WriteLine(id + "Sono nel UtenteController/GetImage");
+            Console.WriteLine(id + " Sono nel UtenteController/GetImage");
             var account = DAOAccount.GetInstance().Find(id);
             var image = (Account)account;
             if (image != null && image.Propic != null)
