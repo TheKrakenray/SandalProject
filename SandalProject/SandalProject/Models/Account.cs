@@ -35,8 +35,8 @@ namespace SandalProject.Models
             {
                 if(value != null)
                 {
-                    Regex userRGX = new Regex(@"^[a-zA-Z0-9_-]{1,15}$");
-                    //regex per l'user name può contenere caratteri normali e "-" o "_" , deve essere lungo fra 1 e 15 caratteri 
+                    Regex userRGX = new Regex(@"^[a-zA-Z0-9_-]{4,15}$");
+                    //regex per l'user name può contenere caratteri normali e "-" o "_" , deve essere lungo fra 4 e 15 caratteri 
                     if (userRGX.Match(value).Success)
                         _username = value;
                     else
@@ -63,7 +63,7 @@ namespace SandalProject.Models
                     if (emailRGX.Match(value).Success)
                         _email = value;
                     else
-                    throw new ArgumentException("Invalid email format");
+                        throw new ArgumentException("Invalid email format");
             }
                 else
                 {
@@ -95,7 +95,7 @@ namespace SandalProject.Models
             get => _ruolo;
             set
             {
-                if (value==null || value.ToLower() != "admin")
+                if (value == null || value.ToLower() != "admin")
                     _ruolo = "user";
                 else
                     _ruolo = value;

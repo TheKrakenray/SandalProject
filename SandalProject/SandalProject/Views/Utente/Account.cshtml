@@ -9,7 +9,7 @@
     <title></title>
 </head>
 <body>
-    <form method="post" enctype="multipart/form-data" action="/Utente/UploadImageToDatabase">
+    <form method="post" enctype="multipart/form-data" action="/Utente/UploadImageToDatabase/@(((Account)Model).Id)">
         <label for="file">Seleziona immagine PNG:</label>
         <input type="file" name="file" id="file" accept="image/png" />
         <button type="submit">Carica</button>
@@ -17,5 +17,6 @@
 
     <img src="/Utente/GetImage/@(((Account)Model).Id)" alt="immagine" />
 
+    <a href="/Utente/Logout">Logout</a>
 </body>
 </html>

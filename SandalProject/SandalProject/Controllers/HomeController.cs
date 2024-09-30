@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using SandalProject.Models;
+using SandalProject.Utility;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace SandalProject.Controllers
 {
@@ -7,6 +8,7 @@ namespace SandalProject.Controllers
     {
         public IActionResult Index()
         {
+            Database database = Database.GetInstance();
             return View();
         }
 

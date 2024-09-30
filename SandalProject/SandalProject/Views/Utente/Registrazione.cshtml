@@ -5,6 +5,15 @@
     <title></title>
 </head>
 <body>
-
+    <div class="registration-container">
+        <h2><strong>Registrazione</strong></h2>
+        <form action="/Utente/FormRegistrazione" onsubmit="return controllo_registrazione()" method="post">
+            <input type="text" name="username" id="user" placeholder="Nome utente" required>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <input type="password" name="psw" id="passw" placeholder="Password" required>
+            <input type="password" name="validapassw" id="validapassw" placeholder="Conferma Password" required>
+            <button type="submit">Registrati</button>
+        </form>
+    </div>
 </body>
 </html>
