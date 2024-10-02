@@ -51,8 +51,15 @@ namespace SandalProject.Controllers
         {
             Account utenteLoggato = new(); //UtenteController.UtenteLoggato
             if(utenteLoggato != null)
+            {
                 carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
-            return Redirect("Utente/Login");
+                return Redirect("Carrello/Carrello/");
+            }
+            else
+            {
+
+                return Redirect("Utente/Login/");
+            }
         }
 
         public IActionResult SvuotaCarrello()

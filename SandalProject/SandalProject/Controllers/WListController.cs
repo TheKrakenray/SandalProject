@@ -56,7 +56,10 @@ namespace SandalProject.Controllers
         {
             Account utenteLoggato = new(); //UtenteController.UtenteLoggato
             if (utenteLoggato != null)
+            {
                 wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
+                return Redirect("WList/WList");
+            }
             return Redirect("Utente/Login/");
         }
 

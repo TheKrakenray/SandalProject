@@ -1,10 +1,77 @@
-﻿<!DOCTYPE html>
+﻿
+
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweaty Sandals - Product Page</title>
+    <link rel="stylesheet" href="~/css/Dettagli.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 </head>
 <body>
+
+    <main>
+        <div class="product-container">
+            <div class="image-grid">
+                <img src="" alt="Image 4">
+                <img src="" alt="Image 1">
+                <img src="" alt="Image 2">
+                <img src="" alt="Image 3">
+            </div>
+            <div class="product-details">
+                <div class="titolo">
+                    <h2>Loryol - €99,99</h2>
+                    <p href="/WList/AggiungiWList/id" class="far fa-heart" id="heart-icon" onclick="toggleHeart()"></p>
+                </div>
+
+                <div class="color-selection">
+                    <p>Colore: </p>
+                    <div class="colori">
+
+                        <span class="colore" id="selected" style="--coloreSandalo:#000000"></span>
+                        <span class="colore" id="2" style="--coloreSandalo:#00ff00"></span>
+                        <span class="colore" id="3" style="--coloreSandalo:#0000ff"></span>
+                    </div>
+                </div>
+
+                <div class="size-selection">
+                    <p>Taglia:</p>
+                    <div class="sizes">
+                        <span class="selected">36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span>
+                    </div>
+                </div>
+
+                <button href="/Carrello/AggiungiCarrello/id" class="add-to-cart">Aggiungi al carrello</button>
+                
+
+                <div class="description">
+                    <h3>Descrizione</h3>
+                    <p>Il comfort perfetto abbinato all'eleganza. Realizzato con materiali di alta qualità per durare a lungo, le nostre scarpe sono progettate per essere indossate in ogni occasione.</p>
+                </div>
+
+                <div class="details">
+                    <h3>Dettagli</h3>
+                    <ul>
+                        <li>Peso: 1.5kg</li>
+                        <li>Materiali: Cotone, nylon, lattice</li>
+                    </ul>
+                </div>
+
+                <div class="specifications">
+                    <h3>Caratteristiche</h3>
+                    <ul>
+                        <li>Resistente all'acqua</li>
+                        <li>Anti-scivolo</li>
+                        <li>Leggero</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="~/js/Dettagli.js"></script>
 
 </body>
 </html>
