@@ -5,7 +5,7 @@ namespace SandalProject.Models
     public class Sandali : Entity
     {
         public Sandali() { }
-        public Sandali(int id, string nome, string marca, string descrizione, int prezzo, string sKU, string categoria, string genere, double sconto, int quantita, int taglia, string colore, List<byte[]> immagini): base(id)
+        public Sandali(int id, string nome, string marca, string descrizione, int prezzo, string sKU, string categoria, string genere, double sconto, int quantita, int taglia): base(id)
         {
             Nome = nome;
             Marca = marca;
@@ -17,8 +17,6 @@ namespace SandalProject.Models
             Sconto = sconto;
             Quantita = quantita;
             Taglia = taglia;
-            Colore = colore;
-            Immagini = immagini;
         }
 
         #region Properties
@@ -32,7 +30,7 @@ namespace SandalProject.Models
                 {
                     if (value.Length == 0 || value.Length > 99)
                     {
-                        _nome = "default";
+                        _nome = "#";
                     }
                     else
                     {
@@ -41,7 +39,7 @@ namespace SandalProject.Models
                     }
                 }
                 else
-                    _nome = "null";
+                    _nome = "0";
             }
         }
 
@@ -55,7 +53,7 @@ namespace SandalProject.Models
                 {
                     if (value.Length == 0 || value.Length > 99)
                     {
-                        _marca = "default";
+                        _marca = "#";
                     }
                     else
                     {
@@ -64,7 +62,7 @@ namespace SandalProject.Models
                     }
                 }
                 else
-                    _marca = "null";
+                    _marca = "0";
             }
         }
         
@@ -77,7 +75,7 @@ namespace SandalProject.Models
                 if(value != null)
                 {
                     if (value.Length == 0 || value.Length > 3999)
-                        _descrizione = "default";
+                        _descrizione = "#";
                     else
                     {
                         _descrizione = value;
@@ -85,7 +83,7 @@ namespace SandalProject.Models
                     }
                 }
                 else
-                    _descrizione = "null";
+                    _descrizione = "0";
             }
         }
 
@@ -115,12 +113,12 @@ namespace SandalProject.Models
             {
                 if(value != null)
                 {
-                    Regex skuRGX = new Regex(@"^([A-Z0-9]{8})$");
-                    //regex per gli SKU es: A12ZQ23X  può contenere 35^8 valori quindi penso basti
-                    if (skuRGX.Match(value).Success)
+                    //Regex skuRGX = new Regex(@"^([A-Z0-9]{8})$");
+                    ////regex per gli SKU es: A12ZQ23X  può contenere 35^8 valori quindi penso basti
+                    //if (skuRGX.Match(value).Success)
                         _sku = value;
-                    else
-                        throw new ArgumentException("Invalid SKU format");
+                    //else
+                    //    throw new ArgumentException("Invalid SKU format");
                 }
                 else _sku = "null";
             }
@@ -130,15 +128,15 @@ namespace SandalProject.Models
         public string? Categoria 
         {
             get => _categoria;
-
             set
             {
                 if (value != null)
                 {
                     string stagione = "inverno estate primavera autunno winter summer spring autumn fall";
-                    if (!stagione.Contains(_categoria))
+
+                    if (!stagione.Contains(value.ToLowerInvariant()))
                     {
-                        _categoria = "inverno";
+                        _categoria = "#";
                     }
                     else
                     {
@@ -147,7 +145,7 @@ namespace SandalProject.Models
                     }
                 }
                 else
-                    _categoria = "null";
+                    _categoria = "0";
             } 
         }
 
@@ -160,8 +158,8 @@ namespace SandalProject.Models
                 string generi = "uomo donna bambino kid woman man";
                 if(value != null)
                 {
-                    if (!generi.Contains(_genere))
-                        _genere = "uomo";
+                    if (!generi.Contains(value.ToLowerInvariant()))
+                        _genere = "#";
                     else
                     {
                         _genere = value;
@@ -169,7 +167,7 @@ namespace SandalProject.Models
                     }
                 }
                 else
-                    _genere = "null";
+                    _genere = "0";
 
             }
         }
@@ -243,28 +241,6 @@ namespace SandalProject.Models
                     _taglia = 1;
             } 
         }
-
-        private string? _colore;
-        public string? Colore
-        {
-            get => _colore;
-            set
-            {
-                if (value != null)
-                {
-                    Regex colorRGX = new Regex(@"^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3}|[a-fA-F0-9]{8}|[a-fA-F0-9]{4})$");
-                    //regex per i colori (con trasparenza) esadecimali es #ffffffff (bianco senza trasparenza) o #000 (nero)
-                    if (colorRGX.Match(value).Success)
-                        _colore = value;
-                    else
-                        _colore = "#ffffff";
-                }
-                else
-                    _colore = "#ffffff";
-            }
-        }
-
-        public List<byte[]> Immagini { get; set; }
         #endregion
     }
 }

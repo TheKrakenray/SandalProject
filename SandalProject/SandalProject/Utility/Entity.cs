@@ -136,7 +136,6 @@ namespace SandalProject.Utility
                     property.SetValue(this, valore);
                 }
             }
-
         }
     }
 }

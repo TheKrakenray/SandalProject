@@ -5,20 +5,25 @@ using System.Data;
 using static System.Net.Mime.MediaTypeNames;
 using System.Runtime.CompilerServices;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
+using System.Reflection.Metadata;
+using OfficeOpenXml;
+using OfficeOpenXml.Drawing;
+using System.Drawing;
+using System.Text.RegularExpressions;
 
 namespace SandalProject.Controllers
 {
-    public class UtenteController : Controller 
+    public class UtenteController : Controller
     {
         private ILogger<UtenteController> il;
-        public static Account utenteLoggato = null;
+        public static Account utenteLoggato = (Account)DAOAccount.GetInstance().Find(1);
+        private static int chiamata = 0;
 
         public UtenteController(ILogger<UtenteController> l)
         {
             il = l;
         }
 
-        private static int chiamata = 0;
         public IActionResult Login()
         {
             chiamata++;
@@ -28,8 +33,8 @@ namespace SandalProject.Controllers
             return View(chiamata);
         }
 
-        public IActionResult Valida(Dictionary<string,string> parametri)
-        {        
+        public IActionResult Valida(Dictionary<string, string> parametri)
+        {
             if (DAOAccount.GetInstance().Valida(parametri["mail"], parametri["psw"]))
             {
                 il.LogInformation($"UTENTE LOGGATO: {parametri["mail"]}");
@@ -49,7 +54,7 @@ namespace SandalProject.Controllers
             return View();
         }
 
-        public IActionResult FormRegistrazione(Dictionary<string,string> parametri)
+        public IActionResult FormRegistrazione(Dictionary<string, string> parametri)
         {
             if (DAOAccount.GetInstance().Find(parametri["email"]) != null)
             {
@@ -78,26 +83,20 @@ namespace SandalProject.Controllers
         {
             chiamata = 0;
             il.LogInformation($"LOGOUT: {utenteLoggato.Username} alle ore {DateTime.Now.Hour}");
-            utenteLoggato = null;
+            utenteLoggato = (Account)DAOAccount.GetInstance().Find(1);
 
             return Redirect("Login");
         }
 
-        //public IActionResult Account(int id)
-        //{
-        //    Console.WriteLine(id + " Sono nel UtenteController/Account");
-        //    return View(DAOAccount.GetInstance().Find(id));
-        //}
-
-        public IActionResult Account() // PROBLEMA -> Se utente loggato, può vedere anche altri account
+        public IActionResult Account(int id)
         {
-            if(utenteLoggato == null)
+            if (utenteLoggato == (Account)DAOAccount.GetInstance().Find(1) || id != utenteLoggato.Id || id == 1)
             {
                 return Redirect("/Utente/Login"); // Se utente NON loggato
             }
             else
             {
-                return View(DAOAccount.GetInstance().Find(utenteLoggato.Id)); // Se utente loggato
+                return View(DAOAccount.GetInstance().Find(id)); // Se utente loggato
             }
         }
 
@@ -115,10 +114,10 @@ namespace SandalProject.Controllers
                         file.CopyTo(memoryStream);
                         var imageBytes = memoryStream.ToArray();
                         Console.WriteLine(id);
-                        DAOAccount.GetInstance().ChangeImgDb(id,imageBytes);
+                        DAOAccount.GetInstance().ChangeImgDb(id, imageBytes);
 
                         ViewBag.Message = "Immagine caricata e salvata nel database!";
-                        return RedirectToAction("Account",new { id }); // Reindirizza all'account aggiornato
+                        return RedirectToAction("Account", new { id }); // Reindirizza all'account aggiornato
                     }
                 }
                 else
@@ -173,6 +172,11 @@ namespace SandalProject.Controllers
                 return File(image.Propic, "image/png");
             }
             return NotFound();
+        }
+
+        public IActionResult Admin()
+        {
+            return View();
         }
     }
 }

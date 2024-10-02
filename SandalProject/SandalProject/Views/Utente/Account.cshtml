@@ -15,8 +15,14 @@
         <button type="submit">Carica</button>
     </form>
 
-    <img src="/Utente/GetImage/@(((Account)Model).Id)" alt="immagine" />
+    <img src="/Utente/GetImage/@(((Account)Model).Id)" alt="immagine" style="width: 100px; height:100px;"/>
 
     <a href="/Utente/Logout">Logout</a>
+
+    @if (((Account)Model).Ruolo == "admin")
+    {
+        <a href="/Utente/Admin">Vai alla pagina Admin</a>
+    }
+
 </body>
 </html>

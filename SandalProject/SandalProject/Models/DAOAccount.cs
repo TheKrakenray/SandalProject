@@ -163,6 +163,7 @@ namespace SandalProject.Models
 
             return updated;
         }
+
         public bool ChangeImgDb(int id, byte[] Img)
         {
             bool updated = false;
