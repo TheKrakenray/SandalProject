@@ -5,7 +5,7 @@ namespace SandalProject.Models
     public class Sandali : Entity
     {
         public Sandali() { }
-        public Sandali(int id, string nome, string marca, string descrizione, int prezzo, string sKU, string categoria, string genere, double sconto, int quantita, int taglia): base(id)
+        public Sandali(int id, string nome, string marca, string descrizione, double prezzo, string sKU, string categoria, string genere, double sconto, int quantita, int taglia): base(id)
         {
             Nome = nome;
             Marca = marca;
@@ -87,8 +87,8 @@ namespace SandalProject.Models
             }
         }
 
-        private int? _prezzo;
-        public int? Prezzo 
+        private double? _prezzo;
+        public double? Prezzo 
         {
             get => _prezzo;
             set
@@ -101,7 +101,6 @@ namespace SandalProject.Models
                         _prezzo = value;
                 }
                 _prezzo = 1;
-               
             } 
         }
 
@@ -198,8 +197,8 @@ namespace SandalProject.Models
             }
         }
 
-        private int? _quantita;
-        public int? Quantita 
+        private int _quantita;
+        public int Quantita 
         { 
             get => _quantita;
             set

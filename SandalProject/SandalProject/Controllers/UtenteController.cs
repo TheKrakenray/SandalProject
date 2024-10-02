@@ -178,5 +178,137 @@ namespace SandalProject.Controllers
         {
             return View();
         }
+
+        public IActionResult CaricaFileImgSandali(IFormFile filexlsx)
+        {
+            Console.WriteLine("Dentro al metodo CaricaFileImgSandali");
+            List<Entity> e = new List<Entity>();
+            List<Entity> isc = new List<Entity>();
+            int skuId = DAOSandali.GetInstance().GetId();
+            string nome = "";
+            List<Entity> sandali = DAOSandali.GetInstance().ReadAll();
+
+            if (filexlsx != null && filexlsx.Length > 0 && filexlsx.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
+            {
+                // Utilizza EPPlus per caricare il file Excel
+                using (var stream = new MemoryStream())
+                {
+                    // Copia il file in un MemoryStream
+                    filexlsx.CopyTo(stream);
+                    stream.Position = 0; // Riporta il puntatore all'inizio
+
+                    using (var package = new ExcelPackage(stream))
+                    {
+                        // Seleziona il primo foglio di lavoro
+                        var worksheet = package.Workbook.Worksheets[0];
+
+                        // Inizia dalla riga 2 per saltare l'intestazione
+                        for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
+                        {
+                            Entity ent = new Sandali
+                            {
+                                Nome = worksheet.Cells[row, 1].Text,
+                                Marca = worksheet.Cells[row, 2].Text,
+                                Descrizione = worksheet.Cells[row, 3].Text,
+                                Prezzo = double.Parse(worksheet.Cells[row, 4].Text),
+                                SKU = "",
+                                Categoria = worksheet.Cells[row, 5].Text,
+                                Genere = worksheet.Cells[row, 6].Text,
+                                Sconto = int.Parse(worksheet.Cells[row, 7].Text),
+                                Quantita = int.Parse(worksheet.Cells[row, 8].Text),
+                                Taglia = int.Parse(worksheet.Cells[row, 9].Text)
+                            };
+
+                            e.Add(ent);
+
+                            // Estrazione delle immagini dal foglio
+                            byte[] img1 = null, img2 = null, img3 = null, img4 = null;
+
+                            foreach (var drawing in worksheet.Drawings)
+                            {
+                                if (drawing is ExcelPicture picture && picture.From.Row + 1 == row)  // picture.From.Row è 0-indexed
+                                {
+                                    // Verifica la colonna dell'immagine e assegna correttamente la posizione
+                                    switch (picture.From.Column + 1) // picture.From.Column è 0-indexed
+                                    {
+                                        case 11:
+                                            img1 = picture.Image.ImageBytes;
+                                            break;
+                                        case 12:
+                                            img2 = picture.Image.ImageBytes;
+                                            break;
+                                        case 13:
+                                            img3 = picture.Image.ImageBytes;
+                                            break;
+                                        case 14:
+                                            img4 = picture.Image.ImageBytes;
+                                            break;
+                                        default:
+                                            Console.WriteLine("Colonna dell'immagine non prevista");
+                                            break;
+                                    }
+                                }
+                            }
+
+                            string colore = worksheet.Cells[row, 10].Text;
+                            Console.WriteLine($"{row} perchè dovrebbe essere il codice sku");
+                            string sku = $"{row}" + $"{((Sandali)ent).Nome[0]}" + $"{((Sandali)ent).Marca[0]}" + $"{((Sandali)ent).Categoria[0]}" + $"{((Sandali)ent).Genere[0]}" + ((Sandali)ent).Taglia + $"{colore[0]}";
+                            Console.WriteLine($"{sku}");
+
+                            if (!DAOSandali.GetInstance().FindSku(((Sandali)ent).SKU))
+                            {
+                                if (nome != ((Sandali)ent).Nome)
+                                {
+                                    sku += skuId++;
+                                }
+                                else
+                                {
+                                    sku += skuId;
+                                }
+                            }
+                            else
+                            {
+                                string skuIdEsistente = ((Sandali)ent).SKU.Substring(7, ((Sandali)ent).SKU.Length - 4);
+
+                                sku += skuIdEsistente;
+                            }
+
+                            nome = ((Sandali)ent).Nome;
+
+                            ISC_Sandali iscSandalo = new()
+                            {
+                                Immagine1 = img1,
+                                Immagine2 = img2,
+                                Immagine3 = img3,
+                                Immagine4 = img4,
+                                Sku = sku.ToUpper(),
+                                Colore = colore
+                            };
+                            Console.WriteLine("Sono alla fine del metodo principale prima di caricare le liste");
+                            ((Sandali)ent).SKU = iscSandalo.Sku;
+                            isc.Add(iscSandalo);
+                        }
+                    }
+                }
+
+                DAOSandali.GetInstance().AggiornaTabella();
+                DAOISC_Sandali.GetInstance().AggiornaTabella();
+
+                foreach (Entity ents in e)
+                {
+                    Console.WriteLine("Carico sandalo");
+                    DAOSandali.GetInstance().Insert(ents);
+                }
+
+                foreach (Entity entz in isc)
+                {
+                    Console.WriteLine("Carico isc");
+
+                    DAOISC_Sandali.GetInstance().Insert(entz);
+                }
+            }
+
+            return Redirect("/Utente/Admin");
+        }
     }
 }

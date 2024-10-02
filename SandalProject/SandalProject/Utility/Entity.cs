@@ -77,10 +77,23 @@ namespace SandalProject.Utility
                             break;
 
                         case "nullable`1":
-                            if (int.TryParse(riga[property.Name.ToLower()], out int intValNull))
+                            // Check the underlying type of the nullable
+                            var underlyingType = Nullable.GetUnderlyingType(property.PropertyType);
+                            if (underlyingType == typeof(int))
                             {
-                                valore = (int?)intValNull;
+                                if (int.TryParse(riga[property.Name.ToLower()], out int intValNull))
+                                {
+                                    valore = (int?)intValNull;
+                                }
                             }
+                            else if (underlyingType == typeof(double))
+                            {
+                                if (double.TryParse(riga[property.Name.ToLower()], out double doubleVala))
+                                {
+                                    valore = doubleVala; // Or store it in a double variable
+                                }
+                            }
+                            // Add other cases as needed for different nullable types
                             break;
 
                         case "double":
@@ -130,9 +143,10 @@ namespace SandalProject.Utility
                             break;
 
                         case "string":
-                                valore = riga[property.Name.ToLower()];
+                            valore = riga[property.Name.ToLower()];
                                 break;
                     }
+
                     property.SetValue(this, valore);
                 }
             }

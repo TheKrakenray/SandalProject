@@ -143,7 +143,7 @@ namespace SandalProject.Models
             if (righe != null)
                 foreach (var r in righe)
                 {
-                    Account a = new();
+                    Sandali a = new();
                     a.FromDictionary(r);
                     lista.Add(a);
                 }
@@ -153,23 +153,23 @@ namespace SandalProject.Models
 
         public bool Update(Entity e)
         {
-            Sandali s = new();
+            Sandali s = (Sandali)e;
             bool updated = false;
 
             try
             {
-                updated = db.Update($"Update Sandali set " +
-                                    $"{(s.Nome == null ? "NULL" : $"'{s.Nome.Replace("'", "''")}'")}," +
-                                    $"{(s.Marca == null ? "NULL" : $"'{s.Marca.Replace("'", "''")}'")}," +
-                                    $"{(s.Descrizione == null ? "NULL" : $"'{s.Descrizione.Replace("'", "''")}'")}," +
-                                    $"{s.Prezzo}," +
-                                    $"{(s.SKU == null ? "NULL" : $"'{s.SKU.Replace("'", "''")}'")}," +
-                                    $"{(s.Categoria == null ? "NULL" : $"'{s.Categoria.Replace("'", "''")}'")}," +
-                                    $"{(s.Genere == null ? "NULL" : $"'{s.Genere.Replace("'", "''")}'")}," +
-                                    $"{s.Sconto}," +
-                                    $"{s.Quantita}," +
-                                    $"{s.Taglia} " +
-                                    $"WHERE id = {s.Id};");
+                updated = db.Update($"UPDATE Sandali SET " +
+                                     $"Nome = {(s.Nome == null ? "NULL" : $"'{s.Nome.Replace("'", "''")}'")}, " +
+                                     $"Marca = {(s.Marca == null ? "NULL" : $"'{s.Marca.Replace("'", "''")}'")}, " +
+                                     $"Descrizione = {(s.Descrizione == null ? "NULL" : $"'{s.Descrizione.Replace("'", "''")}'")}, " +
+                                     $"Prezzo = {(s.Prezzo == 0 ? 0 : s.Prezzo)}, " +
+                                     $"SKU = {(s.SKU == null ? "NULL" : $"'{s.SKU.Replace("'", "''")}'")}, " +
+                                     $"Categoria = {(s.Categoria == null ? "NULL" : $"'{s.Categoria.Replace("'", "''")}'")}, " +
+                                     $"Genere = {(s.Genere == null ? "NULL" : $"'{s.Genere.Replace("'", "''")}'")}, " +
+                                     $"Sconto = {(s.Sconto == 0 ? 0 : s.Sconto)}, " +
+                                     $"Quantita = {s.Quantita}, " +
+                                     $"Taglia = {(s.Taglia == 0 ? 0 : s.Taglia)} " +
+                                     $"WHERE id = {s.Id};");
             }
             catch
             {
@@ -181,23 +181,24 @@ namespace SandalProject.Models
 
         public bool UpdateFromSku(Entity e, int sku_Excel)
         {
-            Sandali s = new();
+            Sandali s = (Sandali)e;
             bool updated = false;
 
             try
             {
-                updated = db.Update($"Update Sandali set " +
-                                    $"{(s.Nome == null ? "NULL" : $"'{s.Nome.Replace("'", "''")}'")}," +
-                                    $"{(s.Marca == null ? "NULL" : $"'{s.Marca.Replace("'", "''")}'")}," +
-                                    $"{(s.Descrizione == null ? "NULL" : $"'{s.Descrizione.Replace("'", "''")}'")}," +
-                                    $"{s.Prezzo}," +
-                                    $"{(s.SKU == null ? "NULL" : $"'{s.SKU.Replace("'", "''")}'")}," +
-                                    $"{(s.Categoria == null ? "NULL" : $"'{s.Categoria.Replace("'", "''")}'")}," +
-                                    $"{(s.Genere == null ? "NULL" : $"'{s.Genere.Replace("'", "''")}'")}," +
-                                    $"{s.Sconto}," +
-                                    $"{s.Quantita}," +
-                                    $"{s.Taglia} " +
-                                    $"WHERE sku = LIKE '{sku_Excel}[^0-9]%';");
+                updated = db.Update($"UPDATE Sandali SET " +
+                                     $"Nome = {(s.Nome == null ? "NULL" : $"'{s.Nome.Replace("'", "''")}'")}, " +
+                                     $"Marca = {(s.Marca == null ? "NULL" : $"'{s.Marca.Replace("'", "''")}'")}, " +
+                                     $"Descrizione = {(s.Descrizione == null ? "NULL" : $"'{s.Descrizione.Replace("'", "''")}'")}, " +
+                                     $"Prezzo = {(s.Prezzo == 0 ? 0 : s.Prezzo)}, " +
+                                     $"SKU = {(s.SKU == null ? "NULL" : $"'{s.SKU.Replace("'", "''")}'")}, " +
+                                     $"Categoria = {(s.Categoria == null ? "NULL" : $"'{s.Categoria.Replace("'", "''")}'")}, " +
+                                     $"Genere = {(s.Genere == null ? "NULL" : $"'{s.Genere.Replace("'", "''")}'")}, " +
+                                     $"Sconto = {(s.Sconto == 0 ? 0 : s.Sconto)}, " +
+                                     $"Quantita = {s.Quantita}, " +
+                                     $"Taglia = {(s.Taglia == 0 ? 0 : s.Taglia)} " +
+                                     $"WHERE SKU LIKE '{sku_Excel}[^0-9]%';");
+
             }
             catch
             {
@@ -236,6 +237,23 @@ namespace SandalProject.Models
                 account.FromDictionary(riga);
 
             return account.Id;
+        }
+
+        public bool AggiornaTabella()
+        {
+            bool updated = false;
+            bool updated2 = false;
+
+            try
+            {
+                updated = db.Update($"Delete from Sandali;");
+            }
+            catch
+            {
+                throw new ArgumentException("Errore nell'aggiornamento");
+            }
+
+            return updated;
         }
     }
 }

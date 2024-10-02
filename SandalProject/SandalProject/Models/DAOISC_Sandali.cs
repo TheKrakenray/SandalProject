@@ -170,5 +170,22 @@ namespace SandalProject.Models
 
             return updated;
         }
+
+        public bool AggiornaTabella()
+        {
+            bool updated = false;
+            bool updated2 = false;
+
+            try
+            {
+                updated = db.Update($"Delete from ISC_Sandali;");
+            }
+            catch
+            {
+                throw new ArgumentException("Errore nell'aggiornamento");
+            }
+
+            return updated;
+        }
     }
 }

@@ -72,37 +72,36 @@ namespace SandalProject.Utility
         {
             List<Dictionary<string, string>> ris = new List<Dictionary<string, string>>();
 
-            Connection.Open();
-
-            SqlCommand cmd = new SqlCommand(query, Connection);
-            SqlDataReader dr = cmd.ExecuteReader();
-            while (dr.Read())
+            using (SqlConnection conn = new SqlConnection(Connection.ConnectionString))
             {
-                Dictionary<string, string> riga = new Dictionary<string, string>();
-
-                for (int i = 0; i < dr.FieldCount; i++)
+                conn.Open();
+                SqlCommand cmd = new SqlCommand(query, conn);
+                using (SqlDataReader dr = cmd.ExecuteReader())
                 {
-                    var columnName = dr.GetName(i).ToLower();
-                    object columnValue = dr.GetValue(i);
+                    while (dr.Read())
+                    {
+                        Dictionary<string, string> riga = new Dictionary<string, string>();
 
-                    if (columnValue is byte[] byteArray)
-                    {
-                        // Stampa i valori dell'array di byte
-                        string byteValues = BitConverter.ToString(byteArray);
-                        riga.Add(columnName, byteValues); // Puoi anche decidere di salvare come stringa
-                    }
-                    else
-                    {
-                        // Altri tipi di valore
-                        riga.Add(columnName, columnValue.ToString());
+                        for (int i = 0; i < dr.FieldCount; i++)
+                        {
+                            var columnName = dr.GetName(i).ToLower();
+                            object columnValue = dr.GetValue(i);
+
+                            if (columnValue is byte[] byteArray)
+                            {
+                                string byteValues = BitConverter.ToString(byteArray);
+                                riga.Add(columnName, byteValues);
+                            }
+                            else
+                            {
+                                riga.Add(columnName, columnValue.ToString());
+                            }
+                        }
+
+                        ris.Add(riga);
                     }
                 }
-
-                ris.Add(riga);
             }
-
-            dr.Close();
-            Connection.Close();
 
             return ris;
         }
@@ -131,6 +130,8 @@ namespace SandalProject.Utility
 
                 int affette = cmd.ExecuteNonQuery();
 
+                //Console.WriteLine("Righe affette: " + affette);
+
                 return affette > 0;
             }
             catch (SqlException e)
@@ -153,8 +154,8 @@ namespace SandalProject.Utility
 
         public void Statistiche(SqlConnection connection, string query = "")
         {
-            Console.WriteLine($"{connection.State}\t {connection.Database}\t {connection.DataSource}\t{(query = query == "" ? "query non trovata" : query)}");
-            Console.ReadKey();
+            Console.WriteLine($"{connection.State}\t {connection.Database}\t {connection.DataSource}"); //\t{(query = query == "" ? "query non trovata" : query)}
+            //Console.ReadKey();
         }
 
         public void DropDB(string query, string server = "localhost")
