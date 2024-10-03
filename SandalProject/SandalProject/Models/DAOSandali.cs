@@ -22,7 +22,6 @@ namespace SandalProject.Models
         }
         #endregion
 
-
         public bool Delete(int id)
         {
             bool d = false;
@@ -73,7 +72,7 @@ namespace SandalProject.Models
             return s;
         }
 
-        public bool FindSku(string sku)
+        public bool FindSkuBool(string sku)
         {
             Dictionary<string, string> riga = null;
 
@@ -103,21 +102,57 @@ namespace SandalProject.Models
         {
             Sandali s = (Sandali)e;
             bool i = false;
+
+            byte[]? immagineHex1 = s.Immagine1 != null && s.Immagine1.Length > 0
+                ? s.Immagine1
+                : null; // Lasciamo null se l'immagine è vuota o non esiste
+
+            System.Data.SqlTypes.SqlBinary immagineSqlBinary1 = immagineHex1 != null
+                ? new System.Data.SqlTypes.SqlBinary(immagineHex1)
+                : System.Data.SqlTypes.SqlBinary.Null;
+
+            byte[]? immagineHex2 = s.Immagine2 != null && s.Immagine2.Length > 0
+                ? s.Immagine2
+                : null; // Lasciamo null se l'immagine è vuota o non esiste
+
+            System.Data.SqlTypes.SqlBinary immagineSqlBinary2 = immagineHex2 != null
+                ? new System.Data.SqlTypes.SqlBinary(immagineHex2)
+                : System.Data.SqlTypes.SqlBinary.Null;
+
+            byte[]? immagineHex3 = s.Immagine3 != null && s.Immagine3.Length > 0
+                ? s.Immagine3
+                : null; // Lasciamo null se l'immagine è vuota o non esiste
+
+            System.Data.SqlTypes.SqlBinary immagineSqlBinary3 = immagineHex3 != null
+                ? new System.Data.SqlTypes.SqlBinary(immagineHex3)
+                : System.Data.SqlTypes.SqlBinary.Null;
+
+            byte[]? immagineHex4 = s.Immagine4 != null && s.Immagine4.Length > 0
+                ? s.Immagine4
+                : null; // Lasciamo null se l'immagine è vuota o non esiste
+
+            System.Data.SqlTypes.SqlBinary immagineSqlBinary4 = immagineHex4 != null
+                ? new System.Data.SqlTypes.SqlBinary(immagineHex4)
+                : System.Data.SqlTypes.SqlBinary.Null;
+
+            string? colore = s.Colore;
+            string nome = s.Nome == null ? "NULL" : $"'{s.Nome.Replace("'", "''")}'";
+            string marca = s.Marca == null ? "NULL" : $"'{s.Marca.Replace("'", "''")}'";
+            string descrizione = s.Descrizione == null ? "NULL" : $"'{s.Descrizione.Replace("'", "''")}'";
+            double? prezzo = s.Prezzo;
+            string? sku = s.Sku;
+            string categoria = s.Categoria == null ? "NULL" : $"'{s.Categoria.Replace("'", "''")}'";
+            string genere = s.Genere == null ? "NULL" : $"'{s.Genere.Replace("'", "''")}'";
+            double? sconto = s.Sconto;
+            int? quantita = s.Quantita;
+            int? taglia = s.Taglia;
+
             try
             {
-                i = db.Update($"Insert into Sandali " +
-                             $"(Nome, Marca, Descrizione, Prezzo, SKU, Categoria, Genere, Sconto, Quantita, Taglia) " +
-                             $"Values " +
-                             $"({(s.Nome == null ? "NULL" : $"'{s.Nome.Replace("'", "''")}'")}," +
-                             $"{(s.Marca == null ? "NULL" : $"'{s.Marca.Replace("'", "''")}'")}," +
-                             $"{(s.Descrizione == null ? "NULL" : $"'{s.Descrizione.Replace("'", "''")}'")}," +
-                             $"{s.Prezzo}," +
-                             $"{(s.SKU == null ? "NULL" : $"'{s.SKU.Replace("'", "''")}'")}," +
-                             $"{(s.Categoria == null ? "NULL" : $"'{s.Categoria.Replace("'", "''")}'")}," +
-                             $"{(s.Genere == null ? "NULL" : $"'{s.Genere.Replace("'", "''")}'")}," +
-                             $"{s.Sconto}," +
-                             $"{s.Quantita}," +
-                             $"{s.Taglia});");
+                string query = "INSERT INTO Sandali (Nome, Marca, Descrizione, Prezzo, SKU, Categoria, Genere, Sconto, Quantita, Taglia, immagine1, immagine2, immagine3, immagine4, Colore) " +
+                                    "VALUES (@nome, @marca, @descrizione, @prezzo, @Sku, @categoria, @genere, @sconto, @quantita, @taglia, @Immagine1, @Immagine2, @Immagine3, @Immagine4, @Colore)";
+
+                db.InsertSandalo(nome, marca, query, descrizione, prezzo, categoria, genere, sconto, quantita, taglia, immagineSqlBinary1, immagineSqlBinary2, immagineSqlBinary3, immagineSqlBinary4, sku, colore);
             }
             catch
             {
@@ -155,6 +190,11 @@ namespace SandalProject.Models
         {
             Sandali s = (Sandali)e;
             bool updated = false;
+            // Conversione dell'immagine in esadecimale
+            string immagineHex1 = "0x" + BitConverter.ToString(s.Immagine1).Replace("-", "");
+            string immagineHex2 = "0x" + BitConverter.ToString(s.Immagine2).Replace("-", "");
+            string immagineHex3 = "0x" + BitConverter.ToString(s.Immagine3).Replace("-", "");
+            string immagineHex4 = "0x" + BitConverter.ToString(s.Immagine4).Replace("-", "");
 
             try
             {
@@ -163,12 +203,17 @@ namespace SandalProject.Models
                                      $"Marca = {(s.Marca == null ? "NULL" : $"'{s.Marca.Replace("'", "''")}'")}, " +
                                      $"Descrizione = {(s.Descrizione == null ? "NULL" : $"'{s.Descrizione.Replace("'", "''")}'")}, " +
                                      $"Prezzo = {(s.Prezzo == 0 ? 0 : s.Prezzo)}, " +
-                                     $"SKU = {(s.SKU == null ? "NULL" : $"'{s.SKU.Replace("'", "''")}'")}, " +
+                                     $"SKU = {(s.Sku == null ? "NULL" : $"'{s.Sku.Replace("'", "''")}'")}, " +
                                      $"Categoria = {(s.Categoria == null ? "NULL" : $"'{s.Categoria.Replace("'", "''")}'")}, " +
                                      $"Genere = {(s.Genere == null ? "NULL" : $"'{s.Genere.Replace("'", "''")}'")}, " +
                                      $"Sconto = {(s.Sconto == 0 ? 0 : s.Sconto)}, " +
                                      $"Quantita = {s.Quantita}, " +
                                      $"Taglia = {(s.Taglia == 0 ? 0 : s.Taglia)} " +
+                                     $"Immagine1 = {immagineHex1}, " +
+                                     $"Immagine2 = {immagineHex2}, " +
+                                     $"Immagine3 = {immagineHex3}, " +
+                                     $"Immagine4 = {immagineHex4}, " +
+                                     $"Colore = {(s.Colore == null ? "NULL" : $"'{s.Colore.Replace("'", "''")}'")} " +
                                      $"WHERE id = {s.Id};");
             }
             catch
@@ -183,20 +228,29 @@ namespace SandalProject.Models
         {
             Sandali s = (Sandali)e;
             bool updated = false;
-
+            string immagineHex1 = "0x" + BitConverter.ToString(s.Immagine1).Replace("-", "");
+            string immagineHex2 = "0x" + BitConverter.ToString(s.Immagine2).Replace("-", "");
+            string immagineHex3 = "0x" + BitConverter.ToString(s.Immagine3).Replace("-", "");
+            string immagineHex4 = "0x" + BitConverter.ToString(s.Immagine4).Replace("-", "");
             try
+
             {
                 updated = db.Update($"UPDATE Sandali SET " +
                                      $"Nome = {(s.Nome == null ? "NULL" : $"'{s.Nome.Replace("'", "''")}'")}, " +
                                      $"Marca = {(s.Marca == null ? "NULL" : $"'{s.Marca.Replace("'", "''")}'")}, " +
                                      $"Descrizione = {(s.Descrizione == null ? "NULL" : $"'{s.Descrizione.Replace("'", "''")}'")}, " +
                                      $"Prezzo = {(s.Prezzo == 0 ? 0 : s.Prezzo)}, " +
-                                     $"SKU = {(s.SKU == null ? "NULL" : $"'{s.SKU.Replace("'", "''")}'")}, " +
+                                     $"SKU = {(s.Sku == null ? "NULL" : $"'{s.Sku.Replace("'", "''")}'")}, " +
                                      $"Categoria = {(s.Categoria == null ? "NULL" : $"'{s.Categoria.Replace("'", "''")}'")}, " +
                                      $"Genere = {(s.Genere == null ? "NULL" : $"'{s.Genere.Replace("'", "''")}'")}, " +
                                      $"Sconto = {(s.Sconto == 0 ? 0 : s.Sconto)}, " +
                                      $"Quantita = {s.Quantita}, " +
                                      $"Taglia = {(s.Taglia == 0 ? 0 : s.Taglia)} " +
+                                     $"Immagine1 = {immagineHex1}, " +
+                                     $"Immagine2 = {immagineHex2}, " +
+                                     $"Immagine3 = {immagineHex3}, " +
+                                     $"Immagine4 = {immagineHex4}, " +
+                                     $"Colore = {(s.Colore == null ? "NULL" : $"'{s.Colore.Replace("'", "''")}'")} " +
                                      $"WHERE SKU LIKE '{sku_Excel}[^0-9]%';");
 
             }
@@ -246,7 +300,8 @@ namespace SandalProject.Models
 
             try
             {
-                updated = db.Update($"Delete from Sandali;");
+                updated = db.Update($"DELETE FROM Sandali;");
+                updated2 = db.Update("DBCC CHECKIDENT ('Sandali', RESEED, 0);");
             }
             catch
             {

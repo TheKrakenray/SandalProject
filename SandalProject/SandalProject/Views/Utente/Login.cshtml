@@ -29,10 +29,10 @@
             <h2>Accedi al tuo profilo</h2>
         </div>
         <div class="login-content">
-            <form>
-                <input type="email" placeholder="Indirizzo e-mail*" required>
+            <form action="/Utente/Valida" method="post">
+                <input type="email" name="mail" placeholder="Indirizzo e-mail*" required>
                 <div class="password-container">
-                    <input type="password" id="password" placeholder="Password*" required autocomplete="new-password">
+                    <input type="password" name="psw" id="password" placeholder="Password*" required autocomplete="new-password">
                     <i class="far fa-eye toggle-password" id="togglePassword"></i>
                 </div>
                 <div class="required-forgot-container">

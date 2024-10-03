@@ -5,21 +5,99 @@ namespace SandalProject.Models
     public class Sandali : Entity
     {
         public Sandali() { }
-        public Sandali(int id, string nome, string marca, string descrizione, double prezzo, string sKU, string categoria, string genere, double sconto, int quantita, int taglia): base(id)
+        public Sandali(int id, string nome, string marca, string descrizione, double? prezzo, string sku, string categoria, string genere, double? sconto, int? quantita, int? taglia, byte[] immagine1, byte[] immagine2, byte[] immagine3, byte[] immagine4, string colore) : base(id)
         {
             Nome = nome;
             Marca = marca;
             Descrizione = descrizione;
             Prezzo = prezzo;
-            SKU = sKU;
             Categoria = categoria;
             Genere = genere;
             Sconto = sconto;
             Quantita = quantita;
             Taglia = taglia;
+            Immagine1 = immagine1;
+            Immagine2 = immagine2;
+            Immagine3 = immagine3;
+            Immagine4 = immagine4;
+            Colore = colore;
+            Sku = sku;
         }
 
         #region Properties
+        private byte[] _immagine1;
+        private byte[] _immagine2;
+        private byte[] _immagine3;
+        private byte[] _immagine4;
+        private string? _sku;
+        private string _colore;
+
+        public byte[] Immagine1 { get => _immagine1; set => _immagine1 = value; }
+        public byte[] Immagine2 { get => _immagine2; set => _immagine2 = value; }
+        public byte[] Immagine3 { get => _immagine3; set => _immagine3 = value; }
+        public byte[] Immagine4 { get => _immagine4; set => _immagine4 = value; }
+
+        public string? Colore
+        {
+            get => _colore;
+            set
+            {
+                if (value != null)
+                {
+                    Regex colorRGX = new Regex(@"^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3}|[a-fA-F0-9]{8}|[a-fA-F0-9]{4})$");
+                    //regex per i colori (con trasparenza) esadecimali es #ffffffff (bianco senza trasparenza) o #000 (nero)
+                    if (colorRGX.Match(value).Success)
+                        _colore = value;
+                    else
+                        _colore = "#ffffff";
+                }
+                else
+                    _colore = "0";
+            }
+        }
+
+        public string? Sku
+        {
+            get => _sku;
+            set
+            {
+                _sku = value;
+
+                if (Immagine1 != null)
+                {
+                    _sku += "1";
+                }
+                else
+                {
+                    _sku += "0";
+                }
+                if (Immagine2 != null)
+                {
+                    _sku += "1";
+                }
+                else
+                {
+                    _sku += "0";
+                }
+                if (Immagine3 != null)
+                {
+                    _sku += "1";
+                }
+                else
+                {
+                    _sku += "0";
+                }
+                if (Immagine4 != null)
+                {
+                    _sku += "1";
+                }
+                else
+                {
+                    _sku += "0";
+                }
+            }
+        }
+
         private string? _nome;
         public string? Nome  
         {
@@ -103,25 +181,6 @@ namespace SandalProject.Models
                 _prezzo = 1;
             } 
         }
-
-        private string? _sku;
-        public string? SKU 
-        {
-            get => _sku;
-            set
-            {
-                if(value != null)
-                {
-                    //Regex skuRGX = new Regex(@"^([A-Z0-9]{8})$");
-                    ////regex per gli SKU es: A12ZQ23X  può contenere 35^8 valori quindi penso basti
-                    //if (skuRGX.Match(value).Success)
-                        _sku = value;
-                    //else
-                    //    throw new ArgumentException("Invalid SKU format");
-                }
-                else _sku = "null";
-            }
-        }
          
         private string? _categoria;
         public string? Categoria 
@@ -197,8 +256,8 @@ namespace SandalProject.Models
             }
         }
 
-        private int _quantita;
-        public int Quantita 
+        private int? _quantita;
+        public int? Quantita 
         { 
             get => _quantita;
             set
