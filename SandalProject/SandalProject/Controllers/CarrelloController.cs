@@ -8,7 +8,7 @@ namespace SandalProject.Controllers
         static Account utenteLoggato = UtenteController.utenteLoggato;
         public static List<Sandali> carrello = new(); 
 
-        public IActionResult Carrello(List<Sandali> carrello)
+        public IActionResult Carrello()
         {
             if(utenteLoggato != null)
             {
@@ -52,7 +52,7 @@ namespace SandalProject.Controllers
             }
             else
             {
-                return Redirect($"/Carrello/Carrello/{carrello}");
+                return Redirect($"/Carrello");
             }
         }
 
@@ -62,7 +62,7 @@ namespace SandalProject.Controllers
             {
                 carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
 
-                return Redirect($"/Carrello/Carrello/{carrello}");
+                return Redirect($"/Carrello");
             }
             else
             {
@@ -76,7 +76,7 @@ namespace SandalProject.Controllers
                 DAOAccount.GetInstance().ResetCarrello(utenteLoggato);
 
             carrello.Clear();
-            return Redirect($"/Carrello/Carrello/{carrello}");
+            return Redirect($"/Carrello");
         }
     }
 }
