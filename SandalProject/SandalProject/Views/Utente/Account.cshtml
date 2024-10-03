@@ -1,30 +1,97 @@
 ﻿@using SandalProject.Models;
 @using SandalProject.Utility;
 @model Entity;
-@{
-    Layout = "MainLayout";
-}
+
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Utente</title>
+    <link rel="stylesheet" href="~/css/Account.css">
 </head>
+
 <body>
-    <form method="post" enctype="multipart/form-data" action="/Utente/UploadImageToDatabase/@(((Account)Model).Id)">
-        <label for="file">Seleziona immagine PNG:</label>
-        <input type="file" name="file" id="file" accept="image/png" />
-        <button type="submit">Carica</button>
-    </form>
-
-    <img src="/Utente/GetImage/@(((Account)Model).Id)" alt="immagine" style="width: 100px; height:100px;"/>
-
-    <a href="/Utente/Logout">Logout</a>
-
-    @if (((Account)Model).Ruolo == "admin")
-    {
-        <a href="/Utente/Admin/@(((Account)Model).Id)">Vai alla pagina Admin</a>
-    }
-
+    <header>
+        <div class="capocchia">
+            <div onclick="window.location.href='/Home/Index/'" class="logo">Solo Sandali</div>
+            <div class="user-menu">
+                <img src="~/img/Extra/user.png" alt="Profile Picture" class="profile-pic">
+                <div class="dropdown">
+                    <button class="dropbtn">Benvenuto,[Nome Utente]</button>
+                    <button class="dropbtn1">Benvenuto,<br>[Nome Utente]</button>
+                    <div class="dropdown-content">
+                        <a href="#">Home</a>
+                        <a href="#">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <nav class="sidebar">
+            <ul>
+                <li><button onclick="showSection('anagrafica')">Anagrafica</button></li>
+                <li><button onclick="showSection('ordini')">I Miei Ordini</button></li>
+                <li><button onclick="showSection('punti')">Saldo Punti</button></li>
+            </ul>
+        </nav>
+        <main class="content">
+            <div id="anagrafica" class="user-section">
+                <h3>Informazioni Personali</h3>
+                <form class="user-form" id="user-form">
+                    <label>Nome: <input type="text" id="nome" value="" disabled></label>
+                    <label>Cognome: <input type="text" id="cognome" value="" disabled></label>
+                    <label>Email: <input type="email" id="email" value="" disabled
+                            pattern="[a-z0-9._%+-]+@("@")[a-z0-9.-]+\.[a-z]{2,}$" title="Inserisci un'email valida"></label>
+                    <label>Via: <input type="text" id="via" value="" disabled></label>
+                    <label>Città: <input type="text" id="citta" value="" disabled></label>
+                    <label>CAP: <input type="text" id="cap" value="" disabled pattern="\d{5}"
+                            title="Inserisci un CAP valido (5 cifre)"></label>
+                    <label>Numero di Cellulare: <input type="text" id="telefono" value="" disabled
+                            pattern="\d{10}" title="Inserisci un numero di cellulare valido (10 cifre)"></label>
+                    <label>Data di Nascita: <input type="date" id="data-nascita" value=""
+                            disabled></label>
+                    <button type="button" id="edit-button" onclick="enableEditing()">Modifica Profilo</button>
+                    <button type="button" id="save-button" style="display:none;" onclick="saveChanges()">Salva
+                        Modifiche</button>
+                </form>
+            </div>
+            <div id="ordini" class="user-section" style="display:none;">
+                <h3>I Miei Ordini</h3>
+                <ul>
+                    <li>
+                        Ordine #12345 - Stato: Consegnato - Data: 01/10/2024
+                        <button type="button" onclick="showOrderDetails('12345')">Mostra Dettagli</button>
+                        <div id="order-12345-details" class="order-details" style="display:none;">
+                            <h4>Dettagli Ordine #12345</h4>
+                            <ul>
+                                <li>Prodotto A - €10.00</li>
+                                <li>Prodotto B - €15.00</li>
+                            </ul>
+                            <p>Indirizzo di Spedizione: [Indirizzo Utente]</p>
+                        </div>
+                    </li>
+                    <li>
+                        Ordine #67890 - Stato: In Elaborazione - Data: 02/10/2024
+                        <button type="button" onclick="showOrderDetails('67890')">Mostra Dettagli</button>
+                        <div id="order-67890-details" class="order-details" style="display:none;">
+                            <h4>Dettagli Ordine #67890</h4>
+                            <ul>
+                                <li>Prodotto C - €20.00</li>
+                                <li>Prodotto D - €25.00</li>
+                            </ul>
+                            <p>Indirizzo di Spedizione: [Indirizzo Utente]</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div id="punti" class="user-section" style="display:block;">
+                <h3>Saldo Punti</h3>
+                <p>Hai <strong id="user-points">400</strong> punti disponibili.</p>
+            </div>
+        </main>
+    </div>
+    <script src="~/js/Account/Utente.js"></script>
 </body>
 </html>

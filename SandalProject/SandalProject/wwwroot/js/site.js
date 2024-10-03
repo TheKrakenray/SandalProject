@@ -1,4 +1,6 @@
-﻿document.addEventListener('DOMContentLoaded', function () {
+﻿var isDarkMode;
+
+document.addEventListener('DOMContentLoaded', function () {
     const menuButton = document.querySelector('.menu-button');
     const closeButton = document.querySelector('.close-button');
     const closeText = document.querySelector('.close-text');
@@ -11,16 +13,50 @@
     const header = document.querySelector('.header');
     const footer = document.querySelector('footer');
 
-    const isDarkMode = localStorage.getItem('isDarkMode')
-    
 
-    var load = true;
-    if (window.matchMedia("(prefers-color-scheme: dark)").matches && darkModeCheckbox.checked == false) {
-        darkModeCheckbox.checked = true;
-        darkModeCheckboxFooter.checked = true;
-        toggleDarkMode(darkModeCheckbox.checked);
-        load = false;
-    }
+    const defaultModeIsDark = localStorage.setItem('defaultModeIsDark', window.matchMedia("(prefers-color-scheme: dark)").matches)
+
+
+        isDarkMode = localStorage.getItem('isDarkMode');
+        
+
+        if (isDarkMode == "true") {
+            darkModeCheckboxFooter.checked = true;
+            darkModeCheckbox.checked = true;
+            console.log("darkmode");
+
+            document.body.classList.add('dark-mode');
+            header.classList.add('dark-mode');
+            footer.classList.add('dark-mode');
+            menuPopup.classList.add('dark-mode');
+            darkModeLabel.classList.add('dark-mode');
+            menuItems.forEach(item => item.classList.add('dark-mode'));
+            const loginPopup = document.querySelector('.login-popup');
+            if (loginPopup) {
+                loginPopup.classList.add('dark-mode');
+            }
+
+
+        }
+        else {
+            darkModeCheckboxFooter.checked = false;
+            darkModeCheckbox.checked = false;
+            console.log("lightmode");
+
+            document.body.classList.remove('dark-mode');
+            header.classList.remove('dark-mode');
+            footer.classList.remove('dark-mode');
+            menuPopup.classList.remove('dark-mode');
+            darkModeLabel.classList.remove('dark-mode');
+            menuItems.forEach(item => item.classList.remove('dark-mode'));
+            const loginPopup = document.querySelector('.login-popup');
+            if (loginPopup) {
+                loginPopup.classList.remove('dark-mode');
+            }
+        }
+
+
+
 
     function toggleDarkMode(checked) {
         document.body.classList.toggle('dark-mode', checked);
@@ -29,13 +65,13 @@
         menuPopup.classList.toggle('dark-mode', checked);
         darkModeLabel.classList.toggle('dark-mode', checked);
         menuItems.forEach(item => item.classList.toggle('dark-mode', checked));
-        localStorage.setItem('isDarkMode', checked);
         const loginPopup = document.querySelector('.login-popup');
         if (loginPopup) {
             loginPopup.classList.toggle('dark-mode', checked);
         }
-    }
 
+        localStorage.setItem('isDarkMode', checked);
+    }
 
 
     darkModeCheckbox.addEventListener('change', function () {
