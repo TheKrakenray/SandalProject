@@ -30,7 +30,7 @@ namespace SandalProject.Controllers
 
                 if(utenteLoggato!= null)
                     DAOAccount.GetInstance().AddCarrello(utenteLoggato,s);
-                return Redirect($"Dettagli/Dettagli/{id}");
+                return Redirect($"/Dettagli/Dettagli/{id}");
             }
             else
             {
@@ -48,11 +48,11 @@ namespace SandalProject.Controllers
               
                 if(utenteLoggato!=null)
                     DAOAccount.GetInstance().RemoveCarrello(utenteLoggato,s) ;
-                return Redirect($"Carrello/Carrello/");
+                return Redirect($"/Carrello/{carrello}");
             }
             else
             {
-                return Redirect($"/Carrello/Carrello/{carrello}");
+                return Redirect($"/Carrello/{carrello}");
             }
         }
 
@@ -62,7 +62,7 @@ namespace SandalProject.Controllers
             {
                 carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
 
-                return Redirect($"/Carrello/Carrello/{carrello}");
+                return Redirect($"/Carrello/{carrello}");
             }
             else
             {
@@ -76,7 +76,7 @@ namespace SandalProject.Controllers
                 DAOAccount.GetInstance().ResetCarrello(utenteLoggato);
 
             carrello.Clear();
-            return Redirect($"/Carrello/Carrello/{carrello}");
+            return Redirect($"/Carrello/{carrello}");
         }
     }
 }
