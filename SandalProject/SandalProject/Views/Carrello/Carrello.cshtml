@@ -26,23 +26,23 @@
         <div class="cart">
             <div class="cart-items">
 
-                <div class="cart-item">
+                <div id="id" class="cart-item">
                     <img src="product1.jpg" alt="Product 1">
                     <div class="cart-item-details">
                         <h4>Nome prodotto 1</h4>
                         <p>Taglia: M</p>
                         <p>€125.95</p>
                         <div class="cart-item-quantity">
-                            <button>-</button>
-                            <input type="number" value="2" min="1">
-                            <button>+</button>
+                            <button id="decrease_id">-</button>
+                            <input id="quantity_id" type="number" value="2" min="1">
+                            <button id="increase_id">+</button>
                         </div>
                     </div>
-                    <button href="/Carrello/EliminaCarrello/id" class="remove-item">X</button>
+                    <button id="remove-item_id" class="remove-item">X</button>
                 </div>
 
 
-                <button href="/Carrello/SvuotaCarrello" class="clear-cart">Svuota Carrello</button>
+                <button class="clear-cart" id="clear-cart">Svuota Carrello</button>
             </div>
 
             <div class="cart-summary">
@@ -62,5 +62,7 @@
             </div>
         </div>
     </div>
+
+    <script src="~/js/Account/Carrello.js"></script>
 </body>
 </html>

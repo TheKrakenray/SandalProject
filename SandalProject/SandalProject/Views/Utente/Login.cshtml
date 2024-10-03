@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -29,7 +29,7 @@
             <h2>Accedi al tuo profilo</h2>
         </div>
         <div class="login-content">
-            <form action="/Utente/Valida" method="post">
+            <form action="/Utente/Valida" method="post" onsubmit="">
                 <input type="email" name="mail" placeholder="Indirizzo e-mail*" required>
                 <div class="password-container">
                     <input type="password" name="psw" id="password" placeholder="Password*" required autocomplete="new-password">
@@ -45,7 +45,7 @@
             <div class="signup-button"><a href="/Utente/Registrazione">Iscriviti ora</a></div>
         </div>
     </div>
-    <script src="/js/Account/Login.js"></script>
+    <script src="~/js/Account/Login.js"></script>
 </body>
 
 

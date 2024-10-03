@@ -30,7 +30,10 @@ namespace SandalProject.Controllers
 
             il.LogInformation($"Tentativo di accesso numero {chiamata} alle ore {DateTime.Now.Hour}");
 
-            return View(chiamata);
+            if (utenteLoggato.Id <= 1)
+                return View(chiamata);
+            else
+                return Redirect("/Utente/Account/"+utenteLoggato.Id);
         }
 
         public IActionResult Valida(Dictionary<string, string> parametri)
