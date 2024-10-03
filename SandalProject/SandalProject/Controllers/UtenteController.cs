@@ -61,7 +61,7 @@ namespace SandalProject.Controllers
         {
             if (DAOAccount.GetInstance().Find(parametri["email"]) != null)
             {
-                return Content("Errore email già in uso");
+                return ViewBag("Errore email già in uso");
             }
             else
             {
@@ -78,7 +78,7 @@ namespace SandalProject.Controllers
                 }
                 else
                 {
-                    return Content("Errore nella creazione dell'account, riprovare!");
+                    return ViewBag("Errore nella creazione dell'account, riprovare!");
                 }
             }
         }

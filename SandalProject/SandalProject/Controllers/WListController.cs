@@ -10,7 +10,7 @@ namespace SandalProject.Controllers
 
         public IActionResult WList(List<Sandali> wList)
         {
-            if (utenteLoggato != null)
+            if (utenteLoggato.Id > 1)
                 return View(wList);
             else
                 return Redirect("/Utente/Login/");
@@ -54,7 +54,7 @@ namespace SandalProject.Controllers
 
         public IActionResult RiempiWList()
         {
-            if (utenteLoggato != null)
+            if (utenteLoggato.Id > 1)
             {
                 wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
                 return Redirect($"/WList/WList/{wList}");
@@ -64,7 +64,7 @@ namespace SandalProject.Controllers
 
         public IActionResult SvuotaWList()
         {
-            if (utenteLoggato != null)
+            if (utenteLoggato.Id > 1)
                 DAOAccount.GetInstance().ResetWList(utenteLoggato);
 
             wList.Clear();
