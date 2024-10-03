@@ -59,7 +59,7 @@
 }
 
 .login-content form .login-button,
-.login-content form .signup-button {
+.login-content form .signup-button, .signup-button a {
     background-color: #000;
     color: #fff;
     border: none;
@@ -68,6 +68,16 @@
     cursor: pointer;
     text-align: center;
 }
+
+.signup-button a{
+    color:white;
+    text-decoration:none;
+
+}
+.signup-button a:visited {
+        color: white;
+        text-decoration: none;
+    }
 
 .login-content form .forgot-password {
     align-self: flex-end;

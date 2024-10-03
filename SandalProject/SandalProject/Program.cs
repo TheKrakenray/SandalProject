@@ -22,8 +22,7 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-Database database = Database.GetInstance();
-
+Database database = Database.GetInstance(); 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

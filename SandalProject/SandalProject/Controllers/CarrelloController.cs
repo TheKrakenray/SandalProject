@@ -30,11 +30,11 @@ namespace SandalProject.Controllers
 
                 if(utenteLoggato!= null)
                     DAOAccount.GetInstance().AddCarrello(utenteLoggato,s);
-                return Redirect($"Dettagli/Dettagli/{id}");
+                return Redirect($"/Dettagli/Dettagli/{id}");
             }
             else
             {
-                return Redirect($"Home/Index/");
+                return Redirect($"/Home/Index/");
             }
         }
         
@@ -48,7 +48,7 @@ namespace SandalProject.Controllers
               
                 if(utenteLoggato!=null)
                     DAOAccount.GetInstance().RemoveCarrello(utenteLoggato,s) ;
-                return Redirect($"Carrello/Carrello/");
+                return Redirect($"/Carrello/Carrello/");
             }
             else
             {

@@ -15,11 +15,3 @@ document.getElementById('togglePassword').addEventListener('click', function (e)
     passwordField.setAttribute('type', type);
     this.classList.toggle('fa-eye-slash');
 });
-
-document
-
-document.querySelectorAll(".signup-button").forEach(el => {
-    el.addEventListener("click", () => {
-        window.location.href = "/Utente/Registrazione/";
-    })
-});

@@ -11,6 +11,17 @@
     const header = document.querySelector('.header');
     const footer = document.querySelector('footer');
 
+    const isDarkMode = localStorage.getItem('isDarkMode')
+    
+
+    var load = true;
+    if (window.matchMedia("(prefers-color-scheme: dark)").matches && darkModeCheckbox.checked == false) {
+        darkModeCheckbox.checked = true;
+        darkModeCheckboxFooter.checked = true;
+        toggleDarkMode(darkModeCheckbox.checked);
+        load = false;
+    }
+
     function toggleDarkMode(checked) {
         document.body.classList.toggle('dark-mode', checked);
         header.classList.toggle('dark-mode', checked);
@@ -18,12 +29,14 @@
         menuPopup.classList.toggle('dark-mode', checked);
         darkModeLabel.classList.toggle('dark-mode', checked);
         menuItems.forEach(item => item.classList.toggle('dark-mode', checked));
-
+        localStorage.setItem('isDarkMode', checked);
         const loginPopup = document.querySelector('.login-popup');
         if (loginPopup) {
             loginPopup.classList.toggle('dark-mode', checked);
         }
     }
+
+
 
     darkModeCheckbox.addEventListener('change', function () {
         toggleDarkMode(this.checked);
@@ -52,7 +65,10 @@
     closeButton.addEventListener('click', closePopup);
     closeText.addEventListener('click', closePopup);
     overlay.addEventListener('click', closePopup);
+
+
 });
+    
 
   //------------------------------------------------------------------------------//
  //------------------------------MENU BUTTONS------------------------------------//
