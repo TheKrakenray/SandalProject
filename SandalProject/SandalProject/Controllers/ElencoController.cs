@@ -105,11 +105,11 @@ namespace SandalProject.Controllers
                             .Where(a => a.Prezzo == double.Parse(filtro.Value.Replace(",", ".")))
                             .ToList();
                             break;
-                        //case "colore":
-                        //    risultati = risultati
-                        //    .Where(a => a.Colore == filtro.Value)
-                        //    .ToList();
-                        //    break;
+                        case "colore":
+                            risultati = risultati
+                            .Where(a => a.Colore == filtro.Value)
+                            .ToList();
+                            break;
                         case "taglia":
                             risultati = risultati
                             .Where(a => a.Taglia == int.Parse(filtro.Value))

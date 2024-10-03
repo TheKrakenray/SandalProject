@@ -215,16 +215,16 @@ namespace SandalProject.Controllers
                                     // Verifica la colonna dell'immagine e assegna correttamente la posizione
                                     switch (picture.From.Column + 1) // picture.From.Column è 0-indexed
                                     {
-                                        case 11:
+                                        case 13:
                                             img1 = picture.Image.ImageBytes;
                                             break;
-                                        case 12:
+                                        case 14:
                                             img2 = picture.Image.ImageBytes;
                                             break;
-                                        case 13:
+                                        case 15:
                                             img3 = picture.Image.ImageBytes;
                                             break;
-                                        case 14:
+                                        case 16:
                                             img4 = picture.Image.ImageBytes;
                                             break;
                                         default:
@@ -233,48 +233,26 @@ namespace SandalProject.Controllers
                                     }
                                 }
                             }
-
+                            Console.WriteLine("Sordi:" + worksheet.Cells[row, 6].Text);
                             Entity ent = new Sandali
                             {
                                 Nome = worksheet.Cells[row, 1].Text,
                                 Marca = worksheet.Cells[row, 2].Text,
-                                Descrizione = worksheet.Cells[row, 3].Text,
-                                Prezzo = double.Parse(worksheet.Cells[row, 4].Text),
-                                Categoria = worksheet.Cells[row, 5].Text,
-                                Genere = worksheet.Cells[row, 6].Text,
-                                Sconto = int.Parse(worksheet.Cells[row, 7].Text),
-                                Quantita = int.Parse(worksheet.Cells[row, 8].Text),
-                                Taglia = int.Parse(worksheet.Cells[row, 9].Text),
+                                Descrizione = worksheet.Cells[row, 3].Text + "|" + worksheet.Cells[row, 4].Text + "|" + worksheet.Cells[row, 5].Text,// 4 - 5
+                                Prezzo = double.Parse(worksheet.Cells[row, 6].Text),
+                                Categoria = worksheet.Cells[row, 7].Text,
+                                Genere = worksheet.Cells[row, 8].Text,
+                                Sconto = int.Parse(worksheet.Cells[row, 9].Text),
+                                Quantita = int.Parse(worksheet.Cells[row, 10].Text),
+                                Taglia = int.Parse(worksheet.Cells[row, 11].Text),
                                 Immagine1 = img1,
                                 Immagine2 = img2,
                                 Immagine3 = img3,
                                 Immagine4 = img4,
                                 Sku = "",
-                                Colore = worksheet.Cells[row, 10].Text
+                                Colore = worksheet.Cells[row, 12].Text
                             };
-                            Console.WriteLine($"{row} perchè dovrebbe essere il codice sku");
-                            string sku = $"{row}" + $"{((Sandali)ent).Nome[0]}" + $"{((Sandali)ent).Marca[0]}" + $"{((Sandali)ent).Categoria[0]}" + $"{((Sandali)ent).Genere[0]}" + ((Sandali)ent).Taglia + $"{((Sandali)ent).Colore[0]}";
-                            Console.WriteLine($"{sku}");
-
-                            if (!DAOSandali.GetInstance().FindSkuBool(((Sandali)ent).Sku))
-                            {
-                                if (nome != ((Sandali)ent).Nome)
-                                {
-                                    sku += skuId++;
-                                }
-                                else
-                                {
-                                    sku += skuId;
-                                }
-                            }
-                            else
-                            {
-                                string skuIdEsistente = ((Sandali)ent).Sku.Substring(7, ((Sandali)ent).Sku.Length - 4);
-
-                                sku += skuIdEsistente;
-                            }
-
-                            nome = ((Sandali)ent).Nome;
+                            string sku = $"{((Sandali)ent).Nome[0]}" + $"{((Sandali)ent).Nome[1]}" + $"{((Sandali)ent).Marca[0]}" + $"{((Sandali)ent).Marca[1]}" + $"{((Sandali)ent).Categoria[0]}" + $"{((Sandali)ent).Genere[0]}";
 
                             ((Sandali)ent).Sku = sku.ToUpper();
 

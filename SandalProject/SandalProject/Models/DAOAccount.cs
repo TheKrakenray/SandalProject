@@ -341,9 +341,9 @@ namespace SandalProject.Models
             try
             {
                 return db.Update($"Insert into Wishlist " +
-                                $"(IdAccount, IdSandali) " +
+                                $"(IdAccount, IdSandali, skuSandali) " +
                                 $"Values " +
-                                $"({utente.Id}, {s.Id});");
+                                $"({utente.Id}, {s.Id}, {s.Sku.Substring(0,s.Sku.Length - 4)});");
             }
             catch
             {

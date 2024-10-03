@@ -8,9 +8,16 @@ namespace SandalProject.Controllers
         static Account utenteLoggato = UtenteController.utenteLoggato;
         public static List<Sandali> carrello = new();
 
-        private IActionResult Carrello(List<Sandali> carrello)
+        public IActionResult Carrello(List<Sandali> carrello)
         {
-            return View(carrello);
+            if(utenteLoggato != null)
+            {
+                return View(carrello);
+            }
+            else
+            {
+                return Redirect("/Utente/Login");
+            }
         }
 
         public IActionResult InserisciCarrello(int id)

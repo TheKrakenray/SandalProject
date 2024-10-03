@@ -6,14 +6,18 @@ namespace SandalProject.Controllers
 {
     public class HomeController : Controller
     {
+        public List<Sandali> sandali = DAOSandali.GetInstance().ReadAll().Cast<Sandali>().ToList();
+
         public IActionResult Index()
         {
-            Database database = Database.GetInstance();
-            return View();
+            Dictionary<string, List<Sandali>> parametroView = new();
+            parametroView.Add("SandaloDelMese", SandaloDelMese());
+            parametroView.Add("SandaliAll", sandali);
+
+            return View(parametroView);
         }
 
-
-        public Sandali SandaloDelMese()
+        public List<Sandali> SandaloDelMese()
         {
             DateTime Data = DateTime.Now;
 
@@ -30,7 +34,11 @@ namespace SandalProject.Controllers
             else
                 stagione = "autunno";
 
-            return DAOSandali.GetInstance().SandaloDelMese(stagione);
+            List<Sandali> listSandaloDelMese = new List<Sandali>();
+
+            listSandaloDelMese.Add(DAOSandali.GetInstance().SandaloDelMese(stagione));
+
+            return listSandaloDelMese;
         }
     }
 }

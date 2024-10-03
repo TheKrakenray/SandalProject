@@ -8,7 +8,7 @@ namespace SandalProject.Controllers
         static Account utenteLoggato = UtenteController.utenteLoggato;
         public static List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
 
-        private IActionResult WList(List<Sandali> wList)
+        public IActionResult WList(List<Sandali> wList)
         {
             if (utenteLoggato != null)
                 return View(wList);
