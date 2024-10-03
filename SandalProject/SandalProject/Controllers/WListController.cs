@@ -8,7 +8,7 @@ namespace SandalProject.Controllers
         static Account utenteLoggato = UtenteController.utenteLoggato;
         public static List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
 
-        public IActionResult WList(List<Sandali> wList)
+        private IActionResult WList(List<Sandali> wList)
         {
             if (utenteLoggato != null)
                 return View(wList);
@@ -68,7 +68,7 @@ namespace SandalProject.Controllers
                 DAOAccount.GetInstance().ResetWList(utenteLoggato);
 
             wList.Clear();
-            return Redirect("/Utente/Account/");
+            return Redirect($"/WList/{wList}");
         }
     }
 }

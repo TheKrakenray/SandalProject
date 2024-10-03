@@ -8,7 +8,7 @@ namespace SandalProject.Controllers
         static Account utenteLoggato = UtenteController.utenteLoggato;
         public static List<Sandali> carrello = new();
 
-        public IActionResult Carrello(List<Sandali> carrello)
+        private IActionResult Carrello(List<Sandali> carrello)
         {
             return View(carrello);
         }
@@ -58,7 +58,7 @@ namespace SandalProject.Controllers
             }
             else
             {
-                return Redirect("Utente/Login/");
+                return Redirect("/Utente/Login/");
             }
         }
 
@@ -68,7 +68,7 @@ namespace SandalProject.Controllers
                 DAOAccount.GetInstance().ResetCarrello(utenteLoggato);
 
             carrello.Clear();
-            return Redirect("Utente/Account/");
+            return Redirect($"/Carrello/{carrello}");
         }
     }
 }

@@ -25,11 +25,11 @@
             <h2>Iscriviti ora</h2>
         </div>
         <div class="registrazione-content">
-            <form id="registration-form">
-                <input type="text" placeholder="Username" required>
-                <input type="email" placeholder="E-mail" required>
+            <form id="registration-form" action="/Utente/FormRegistrazione" onsubmit="return controllo_registrazione()" method="post">
+                <input type="text" name="username" placeholder="Username" required>
+                <input type="email" name="email" placeholder="E-mail" required>
                 <div class="password-container">
-                    <input type="password" id="password" placeholder="Password" required>
+                    <input type="password" name="psw" id="password" placeholder="Password" required>
                     <span class="toggle-password" onclick="togglePassword('password')"><i class="far fa-eye"></i></span>
                 </div>
                 <div class="password-container">

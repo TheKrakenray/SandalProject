@@ -70,6 +70,7 @@ namespace SandalProject.Controllers
 
                 if (DAOAccount.GetInstance().Update(a))
                 {
+                    utenteLoggato = (Account)DAOAccount.GetInstance().Find(a.Id);
                     return Redirect($"/Utente/Account/{a.Id}");
                 }
                 else
