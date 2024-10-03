@@ -10,7 +10,14 @@ namespace SandalProject.Controllers
 
         public IActionResult Carrello(List<Sandali> carrello)
         {
-            return View(carrello);
+            if(utenteLoggato != null)
+            {
+                return View(carrello);
+            }
+            else
+            {
+                return Redirect("/Utente/Login");
+            }
         }
 
         public IActionResult InserisciCarrello(int id)

@@ -268,7 +268,6 @@ namespace SandalProject.Models
 
             Sandali s = new();
             s.FromDictionary(riga);
-
             return s;
         }
 
