@@ -14,7 +14,7 @@ namespace SandalProject.Controllers
             }
             else
             {
-                return Redirect("/Info/404");
+                return Redirect("/Info/NotFound");
             }
         }
 

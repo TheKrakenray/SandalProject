@@ -1,4 +1,5 @@
 ﻿@using SandalProject.Models;
+@using SandalProject.Controllers;
 @model Sandali;
 @{
     Layout = "MainLayout";
@@ -18,56 +19,117 @@
     <main>
         <div class="product-container">
             <div class="image-grid">
-                <img src="" alt="Image 4">
-                <img src="" alt="Image 1">
-                <img src="" alt="Image 2">
-                <img src="" alt="Image 3">
+                <img src="/Dettagli/GetImage/id=@Model.Id&posizione=1" alt="Image 1">
+                <img src="/Dettagli/GetImage/id=@Model.Id&posizione=2" alt="Image 2">
+                <img src="/Dettagli/GetImage/id=@Model.Id&posizione=3" alt="Image 3">
+                <img src="/Dettagli/GetImage/id=@Model.Id&posizione=4" alt="Image 4">
             </div>
             <div class="product-details">
                 <div class="titolo">
-                    <h2>Loryol - €99,99</h2>
-                    <p href="/WList/AggiungiWList/id" class="far fa-heart" id="heart-icon" onclick="toggleHeart()"></p>
+                    <h2>@Model.Nome - €@(Model.Prezzo.ToString().Replace(".",","))</h2>
+                    <p href="/WList/AggiungiWList/@(Model.Id)" class="far fa-heart" id="heart-icon" onclick="toggleHeart()"></p>
+                    <!--Controllare se l'utente loggato ha wishlistato il sandalo-->
                 </div>
 
                 <div class="color-selection">
                     <p>Colore: </p>
                     <div class="colori">
-
-                        <span class="colore" id="selected" style="--coloreSandalo:#000000"></span>
-                        <span class="colore" id="2" style="--coloreSandalo:#00ff00"></span>
-                        <span class="colore" id="3" style="--coloreSandalo:#0000ff"></span>
+                        <span class="colore" id="selected" style="--coloreSandalo:@Model.Colore"></span>
+                        
+                     @* @foreach()
+                        {
+                           //Gestire i colori per i sandali dello stesso tipo mettere come id da 1 a n 
+                        } *@
                     </div>
                 </div>
 
                 <div class="size-selection">
                     <p>Taglia:</p>
                     <div class="sizes">
-                        <span class="selected">36</span><span>37</span><span>38</span><span>39</span><span>40</span><span>41</span>
+                        <span class="selected">@Model.Taglia</span>
+                        @* @foreach()
+                        {
+                        //Stessa cosa per le taglie
+                        } *@
                     </div>
                 </div>
 
-                <button href="/Carrello/AggiungiCarrello/id" class="add-to-cart">Aggiungi al carrello</button>
+                <button href="/Carrello/AggiungiCarrello/@Model.Id" class="add-to-cart">Aggiungi al carrello</button>
                 
 
+                @{
+                    string itemDesc = string.IsNullOrEmpty(Model.Descrizione) ? "default|default|default" : Model.Descrizione;
+
+                    List<string> listDesc = itemDesc.Split('|').ToList();
+
+                    string description = listDesc.ElementAt(0);
+
+                    string details = listDesc.ElementAt(1);
+
+                    string specifications = listDesc.ElementAt(2);
+
+                }
+
+
                 <div class="description">
-                    <h3>Descrizione</h3>
-                    <p>Il comfort perfetto abbinato all'eleganza. Realizzato con materiali di alta qualità per durare a lungo, le nostre scarpe sono progettate per essere indossate in ogni occasione.</p>
+                    @{
+                        string[] descriptionArr = description.Split(";;");
+                        <h3>@descriptionArr[0]</h3>
+                        <p>@descriptionArr[1]</p>
+                    }
                 </div>
 
                 <div class="details">
-                    <h3>Dettagli</h3>
-                    <ul>
-                        <li>Peso: 1.5kg</li>
-                        <li>Materiali: Cotone, nylon, lattice</li>
-                    </ul>
+                    @{
+                        string[] detailsArr = details.Split(";;");
+                        <h3>@detailsArr[0]</h3>
+                        <ul>
+                            @{
+                                Dictionary<string, string> detailsTable = new();
+
+                                string key = "";
+                                string value = "";
+
+                                bool isValue = false;
+                                foreach (char c in detailsArr[1])
+                                {
+                                    if (c != ' ' || c != '\n')
+                                    {
+                                        key+=c;
+
+                                        if (isValue)
+                                            value += c;
+                                    }
+
+                                    if (isValue)
+                                    {
+                                        isValue = false;
+                                        detailsTable.Add(key, value);
+
+                                        key = "";
+                                        value = "";
+                                    }
+                                }
+                            }
+                            @foreach(KeyValuePair<string,string>detail in detailsTable)
+                            {
+                                <li><strong>@detail.Key</strong> @detail.Value</li>
+                            }
+
+                        </ul>
+                    }
                 </div>
 
                 <div class="specifications">
-                    <h3>Caratteristiche</h3>
+                    @{
+                        string[] specificationsArr = specifications.Split(";;");
+                        <h3>@specificationsArr[0]</h3>
+                    }
                     <ul>
-                        <li>Resistente all'acqua</li>
-                        <li>Anti-scivolo</li>
-                        <li>Leggero</li>
+                        @for (int i = 1; i < specificationsArr.Count(); i++)
+                        {
+                            <li>@specificationsArr[i]</li>
+                        }
                     </ul>
                 </div>
             </div>
@@ -75,6 +137,6 @@
     </main>
 
     <script src="~/js/Elenco/Dettagli.js"></script>
-
+    
 </body>
 </html>

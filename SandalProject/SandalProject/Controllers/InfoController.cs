@@ -18,5 +18,10 @@ namespace SandalProject.Controllers
         {
             return View();
         }
+
+        public IActionResult NotFound()
+        {
+            return View();
+        }
     }
 }

@@ -283,5 +283,11 @@ namespace SandalProject.Controllers
 
             return Redirect($"/Utente/Admin/{utenteLoggato.Id}");
         }
+
+
+        public IActionResult RecuperaPassword()
+        {
+            return View();
+        }
     }
 }

@@ -1,2 +1,61 @@
 ﻿body {
+    font-family: 'Poppins', sans-serif;
+
+    
+}
+
+.title-box {
+    color: white;
+    padding: 20px;
+    width: 40%;
+    height: auto;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    font-size: 1em;
+    margin-left: 27%;
+}
+
+.content-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 100px 100px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgb(57, 57, 57);
+}
+
+
+.content-wrapper-aboutus {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgb(57, 57, 57);
+    margin-top: 7%;
+    margin-bottom: 7%;
+}
+
+
+.container {
+    padding: 30px;
+    max-width: 1300px;
+    border-radius: 10px;
+    width: 100%;
+}
+
+h1 {
+    text-align: center;
+}
+
+h2 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+p {
+    margin: 10px 0 20px;
+    font-size: 1.1em;
+}
+
+.container-privacy {
+    text-align: center;
 }

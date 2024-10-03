@@ -422,3 +422,118 @@ body.dark-mode .newsletter button {
     .menu-popup.inactive {
         animation: slideOut 0.3s forwards;
     }
+
+
+@media screen and (max-width: 800px) {
+
+    footer {
+        font-size:10px;
+        width:100%;
+        padding: 0px;
+        background-color: #fff;
+        color: #000;
+    }
+    .sezione-superiore {
+        display: flex;
+        justify-content: space-between;
+        border-top: 1px solid #000;
+        border-bottom: 1px solid #000;
+        padding-bottom: 40px;
+        margin-bottom: 10px;
+    }
+
+    .newsletter, .social-media {
+        flex: 1;
+        margin: 0 10px;
+        padding: 0 10px;
+    }
+
+    .social-media {
+        border-left: 1px solid #000;
+    }
+
+        .newsletter h2, .social-media h2 {
+            font-size: 1.2em;
+            margin-top:4px;
+            margin-bottom: 10px;
+        }
+
+    .newsletter form {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .newsletter label {
+        display: flex;
+        align-items: flex-start;
+        font-size: 0.9em;
+        margin-bottom: 5px;
+        max-width: 450px;
+        word-wrap: break-word;
+    }
+
+    .newsletter input[type="checkbox"] {
+        margin-right: 10px;
+        margin-top: 5px;
+    }
+
+    .newsletter input[type="email"] {
+        width: 200px;
+        padding: 5px;
+        margin-bottom: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    .newsletter button {
+        font-size:100%;
+        background-color: #000;
+        color: #fff;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+    .social-media a {
+        margin-right: 10px;
+    }
+
+    .social-media img {
+        width: 20px;
+        height: 20px;
+    }
+
+    .sezione-inferiore {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .link-footer {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+        font-size:13px;
+    }
+
+        .link-footer a {
+            margin-right: 30px;
+        }
+
+
+
+    .logobello img {
+        max-width: 80%;
+    }
+
+    .social-media a {
+        margin-right: 10px;
+        font-size: 20px;
+    }
+
+    .social-x{
+        font-weight: bold;
+        font-size: 20px;
+        text-decoration: none;
+    }
+}
