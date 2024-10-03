@@ -7,7 +7,19 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="wwwroot\js\Account\Admin.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\js\Account\Admin.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\img\Extra\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\js\Account\Admin.js" />
   </ItemGroup>
 
   <ItemGroup>

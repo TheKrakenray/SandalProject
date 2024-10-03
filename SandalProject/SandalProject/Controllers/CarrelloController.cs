@@ -58,7 +58,7 @@ namespace SandalProject.Controllers
 
         public IActionResult RiempiCarrello()
         {
-            if(utenteLoggato.Id > 1)
+            if(utenteLoggato.Id != 1)
             {
                 carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
 
@@ -72,7 +72,7 @@ namespace SandalProject.Controllers
 
         public IActionResult SvuotaCarrello()
         {
-            if(utenteLoggato.Id > 1)
+            if(utenteLoggato.Id != 1)
                 DAOAccount.GetInstance().ResetCarrello(utenteLoggato);
 
             carrello.Clear();

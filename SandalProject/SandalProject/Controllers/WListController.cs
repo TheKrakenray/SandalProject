@@ -54,7 +54,7 @@ namespace SandalProject.Controllers
 
         public IActionResult RiempiWList()
         {
-            if (utenteLoggato.Id > 1)
+            if (utenteLoggato.Id != 1)
             {
                 wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
                 return Redirect($"/WList/WList/{wList}");
@@ -64,7 +64,7 @@ namespace SandalProject.Controllers
 
         public IActionResult SvuotaWList()
         {
-            if (utenteLoggato.Id > 1)
+            if (utenteLoggato.Id != 1)
                 DAOAccount.GetInstance().ResetWList(utenteLoggato);
 
             wList.Clear();
