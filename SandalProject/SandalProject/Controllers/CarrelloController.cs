@@ -16,7 +16,7 @@ namespace SandalProject.Controllers
             }
             else
             {
-                return Redirect("/Utente/Login");
+                return Redirect("/Utente/Login/");
             }
         }
 
@@ -52,7 +52,7 @@ namespace SandalProject.Controllers
             }
             else
             {
-                return Redirect($"/Carrello");
+                return Redirect($"/Carrello/Carrello/");
             }
         }
 
@@ -62,7 +62,7 @@ namespace SandalProject.Controllers
             {
                 carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
 
-                return Redirect($"/Carrello");
+                return Redirect($"/Carrello/Carrello/");
             }
             else
             {
@@ -76,7 +76,7 @@ namespace SandalProject.Controllers
                 DAOAccount.GetInstance().ResetCarrello(utenteLoggato);
 
             carrello.Clear();
-            return Redirect($"/Carrello");
+            return Redirect($"/Carrello/Carrello/");
         }
     }
 }

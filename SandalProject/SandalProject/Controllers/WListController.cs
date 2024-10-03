@@ -13,7 +13,7 @@ namespace SandalProject.Controllers
             if (utenteLoggato != null)
                 return View(wList);
             else
-                return Redirect("/Utente/Login");
+                return Redirect("/Utente/Login/");
         }
 
         public IActionResult InserisciWList(int id)
@@ -26,11 +26,11 @@ namespace SandalProject.Controllers
 
                 if (utenteLoggato != null)
                     DAOAccount.GetInstance().AddWList(utenteLoggato, s);
-                return Redirect($"Dettagli/Dettagli/{id}");
+                return Redirect($"/Dettagli/Dettagli/{id}");
             }
             else
             {
-                return Redirect($"Home/Index/");
+                return Redirect($"/Home/Index/");
             }
         }
 
