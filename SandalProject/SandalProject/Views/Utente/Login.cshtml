@@ -29,7 +29,7 @@
             <h2>Accedi al tuo profilo</h2>
         </div>
         <div class="login-content">
-            <form action="/Utente/Valida" method="post">
+            <form action="/Utente/Valida" method="post" onsubmit="">
                 <input type="email" name="mail" placeholder="Indirizzo e-mail*" required>
                 <div class="password-container">
                     <input type="password" name="psw" id="password" placeholder="Password*" required autocomplete="new-password">
@@ -40,11 +40,11 @@
                     <a href="#" class="forgot-password">Password dimenticata?</a>
                 </div>
                 <button type="submit" class="login-button">Accedi al tuo profilo</button>
-                <p>Non sei ancora iscritto? <br><button type="button" class="signup-button">Iscriviti ora</button></p>
             </form>
+                <p>Non sei ancora iscritto? <br><button id="singIn" class="signup-button">Iscriviti ora</button></p>
         </div>
     </div>
-    <script src="/js/Account/Login.js"></script>
+    <script src="~/js/Account/Login.js"></script>
 </body>
 
 

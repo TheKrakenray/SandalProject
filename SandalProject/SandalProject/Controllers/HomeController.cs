@@ -11,7 +11,7 @@ namespace SandalProject.Controllers
         public IActionResult Index()
         {
             Dictionary<string, List<Sandali>> parametroView = new();
-            parametroView.Add("SandaloDelMese", SandaloDelMese());
+            //parametroView.Add("SandaloDelMese", SandaloDelMese());
             parametroView.Add("SandaliAll", sandali);
 
             return View(parametroView);

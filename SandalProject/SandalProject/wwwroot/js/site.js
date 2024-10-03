@@ -54,3 +54,65 @@
     overlay.addEventListener('click', closePopup);
 });
 
+  //------------------------------------------------------------------------------//
+ //------------------------------MENU BUTTONS------------------------------------//
+//------------------------------------------------------------------------------//
+
+document.getElementById("search").addEventListener("click", () => {
+    window.location.href = "/Elenco/Risultati/";
+});
+document.getElementById("wlist").addEventListener("click", () => {
+    if (document.getElementById("wlist").getAttribute("idaccount") != 1)
+        window.location.href = "/WList/RiempiWList/" + document.getElementById("wlist").getAttribute("idaccount");
+    else
+        window.location.href = "/Utente/Login/";
+});
+document.getElementById("cart").addEventListener("click", () => {
+    if (document.getElementById("cart").getAttribute("idaccount") != 1)
+        window.location.href = "/Carrello/RiempiCarrello/" + document.getElementById("cart").getAttribute("idaccount");
+    else
+        window.location.href = "/Utente/Login/";
+});
+document.getElementById("user").addEventListener("click", () => {
+    if (document.getElementById("user").getAttribute("idaccount") != 1)
+        window.location.href = "/Utente/Account/" + document.getElementById("user").getAttribute("idaccount");
+    else
+        window.location.href = "/Utente/Login/";
+});
+
+
+document.getElementById("menu-item-Uomo").addEventListener("click",() => {
+    window.location.href = "/Elenco/Risultati/";
+});
+document.getElementById("menu-item-Donna").addEventListener("click",() => {
+    window.location.href = "/Elenco/Risultati/";
+});
+document.getElementById("menu-item-Bambino").addEventListener("click",() => {
+    window.location.href = "/Elenco/Risultati/";
+});
+
+
+
+document.getElementById("menu-item-Primavera").addEventListener("click", () => {
+    window.location.href = "/Elenco/Primavera/";
+});
+document.getElementById("menu-item-Estate").addEventListener("click", () => {
+    window.location.href = "/Elenco/Estate/";
+});
+document.getElementById("menu-item-Autunno").addEventListener("click", () => {
+    window.location.href = "/Elenco/Autunno/";
+});
+document.getElementById("menu-item-Inverno").addEventListener("click", () => {
+    window.location.href = "/Elenco/Inverno/";
+});
+
+
+document.getElementById("menu-item-AboutUs").addEventListener("click", () => {
+    window.location.href = "/Info/AboutUs/";
+});
+document.getElementById("menu-item-FAQ").addEventListener("click", () => {
+    window.location.href = "/Info/FAQ/";
+});
+document.getElementById("menu-item-Contacts").addEventListener("click", () => {
+    window.location.href = "/Info/Contatti/";
+});

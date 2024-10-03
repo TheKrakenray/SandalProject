@@ -1,10 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using SandalProject.Controllers
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
     <title></title>
     <link rel="stylesheet" href="~/css/MainLayout.css">
-    <link rel="stylesheet" href="darkstyle.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
 </head>
@@ -23,10 +23,10 @@
                     <div class="ball"></div>
                 </label>
             </div>
-            <i class="fas fa-search"></i>
-            <a href="/Utente/Login"><i class="fas fa-user"></i></a>
-            <i class="fas fa-shopping-bag"></i>
-            <i class="fas fa-heart"></i>
+            <i id="search" class="fas fa-search"></i>
+            <i id="user" idaccount="@(UtenteController.utenteLoggato.Id)" class="fas fa-user"></i>
+            <i id="cart" idaccount="@(UtenteController.utenteLoggato.Id)" class="fas fa-shopping-bag"></i>
+            <i id="wlist" idaccount="@(UtenteController.utenteLoggato.Id)" class="fas fa-heart"></i>
         </div>
     </header>
     <div class="overlay"></div>
@@ -37,35 +37,34 @@
         <div class="section">
             <h2>Categorie</h2>
             <div class="categories">
-                <button class="menu-item">Uomo</button>
-                <button class="menu-item">Donna</button>
-                <button class="menu-item">Bambino</button>
-                <button class="menu-item">Bambina</button>
+                <button id="menu-item-Uomo" class="menu-item">Uomo</button>
+                <button id="menu-item-Donna" class="menu-item">Donna</button>
+                <button id="menu-item-Bambino" class="menu-item">Bambino</button>
             </div>
         </div>
         <hr>
         <div class="section">
             <h2>Collezioni</h2>
             <div class="collections">
-                <button class="menu-item">Inverno</button>
-                <button class="menu-item">Estate</button>
-                <button class="menu-item">Primavera</button>
-                <button class="menu-item">Autunno</button>
+                <button id="menu-item-Inverno" class="menu-item">Inverno</button>
+                <button id="menu-item-Estate" class="menu-item">Estate</button>
+                <button id="menu-item-Primavera" class="menu-item">Primavera</button>
+                <button id="menu-item-Autunno" class="menu-item">Autunno</button>
             </div>
         </div>
         <hr>
         <div class="section">
             <h2>Link utili</h2>
             <div class="useful-links">
-                <button class="menu-item">Chi siamo</button>
-                <button class="menu-item">F.A.Q</button>
-                <button class="menu-item">Contattaci</button>
+                <button id="menu-item-AboutUs" class="menu-item">Chi siamo</button>
+                <button id="menu-item-FAQ" class="menu-item">F.A.Q</button>
+                <button id="menu-item-Contacts" class="menu-item">Contattaci</button>
             </div>
         </div>
     </div>
 
     <main>
-        @RenderBody();
+        @RenderBody()
     </main>
 
     <footer>
@@ -83,10 +82,10 @@
             </div>
             <div class="social-media">
                 <h2>Seguici sui social</h2>
-                <a href="#collegamentochefaremo"><i class="fab fa-instagram"></i></a>
-                <a href="#collegamentochefaremo"><i class="fab fa-facebook-f"></i></a>
-                <a href="#collegamentochefaremo"><i class="fab fa-youtube"></i></a>
-                <a href="#collegamentochefaremo"><span class="social-x">X</span></a>
+                <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.X.com"><span class="social-x">X</span></a>
             </div>
         </div>
         <div class="sezione-inferiore">
@@ -94,8 +93,8 @@
                 <a href="/Home/Index/"><img src="~/img/Logos/logo.png" alt="Solo Sandali"></a>
             </div>
             <div class="link-footer">
-                <a href="#collegamentochefaremo">Privacy Policy</a>
-                <a href="#collegamentochefaremo">Cookies</a>
+                <a href="/Legal/Privacy">Privacy Policy</a>
+                <a href="/Legal/Cookies">Cookies</a>
             </div>
             <div class="dark-mode-toggle">
                 <input type="checkbox" id="dark-mode-checkbox-footer">
