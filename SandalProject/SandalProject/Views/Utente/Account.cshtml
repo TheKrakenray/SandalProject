@@ -21,7 +21,7 @@
 
     @if (((Account)Model).Ruolo == "admin")
     {
-        <a href="/Utente/Admin">Vai alla pagina Admin</a>
+        <a href="/Utente/Admin/@(((Account)Model).Id)">Vai alla pagina Admin</a>
     }
 
 </body>

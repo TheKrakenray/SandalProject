@@ -262,14 +262,14 @@ namespace SandalProject.Models
             return updated;
         }
 
-        public Sandali SandaloDelMese(string stagione)
-        {
-            var riga = db.ReadOne($"SELECT * FROM Sandali WHERE SKU = (SELECT TOP 1 s.SKU FROM Sandali s JOIN Wishlist w ON s.id = w.idSandali WHERE s.categoria = '{stagione}' GROUP BY s.SKU ORDER BY COUNT(w.idSandali) DESC );");
+        //public Sandali SandaloDelMese(string stagione)
+        //{
+        //    var riga = db.ReadOne($"SELECT * FROM Sandali WHERE SKU = (SELECT TOP 1 s.SKU FROM Sandali s JOIN Wishlist w ON s.id = w.idSandali WHERE s.categoria = '{stagione}' GROUP BY s.SKU ORDER BY COUNT(w.idSandali) DESC );");
 
-            Sandali s = new();
-            s.FromDictionary(riga);
-            return s;
-        }
+        //    Sandali s = new();
+        //    s.FromDictionary(riga);
+        //    return s;
+        //}
 
         public int GetId()
         {

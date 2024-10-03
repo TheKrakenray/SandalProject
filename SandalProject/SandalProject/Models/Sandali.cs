@@ -171,14 +171,17 @@ namespace SandalProject.Models
             get => _prezzo;
             set
             {
-                if(value != null)
+                if (value != null)
                 {
                     if (value < 1)
                         _prezzo = 1;
                     else
                         _prezzo = value;
                 }
-                _prezzo = 1;
+                else
+                {
+                    _prezzo = 2;
+                }
             } 
         }
          

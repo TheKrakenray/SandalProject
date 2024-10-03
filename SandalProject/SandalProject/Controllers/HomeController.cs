@@ -11,34 +11,34 @@ namespace SandalProject.Controllers
         public IActionResult Index()
         {
             Dictionary<string, List<Sandali>> parametroView = new();
-            parametroView.Add("SandaloDelMese", SandaloDelMese());
+            //parametroView.Add("SandaloDelMese", SandaloDelMese());
             parametroView.Add("SandaliAll", sandali);
 
             return View(parametroView);
         }
 
-        public List<Sandali> SandaloDelMese()
-        {
-            DateTime Data = DateTime.Now;
+        //public List<Sandali> SandaloDelMese()
+        //{
+        //    DateTime Data = DateTime.Now;
 
-            string stagione;
+        //    string stagione;
 
-            if ((Data.Month == 12 && Data.Day >= 21) || (Data.Month >= 1 && Data.Month < 3) ||  ( Data.Month == 3 && Data.Day < 20))
-                stagione = "inverno";
+        //    if ((Data.Month == 12 && Data.Day >= 21) || (Data.Month >= 1 && Data.Month < 3) ||  ( Data.Month == 3 && Data.Day < 20))
+        //        stagione = "inverno";
 
-            else if ((Data.Month >= 3 && Data.Day >= 21) || (Data.Month > 3 && Data.Month < 6) || (Data.Month == 6 && Data.Day < 21))
-                stagione = "primavera";
+        //    else if ((Data.Month >= 3 && Data.Day >= 21) || (Data.Month > 3 && Data.Month < 6) || (Data.Month == 6 && Data.Day < 21))
+        //        stagione = "primavera";
 
-            else if ((Data.Month >= 6 && Data.Day >= 21) || (Data.Month > 6 && Data.Month < 9) || (Data.Month == 9 && Data.Day < 22))
-                stagione = "estate";
-            else
-                stagione = "autunno";
+        //    else if ((Data.Month >= 6 && Data.Day >= 21) || (Data.Month > 6 && Data.Month < 9) || (Data.Month == 9 && Data.Day < 22))
+        //        stagione = "estate";
+        //    else
+        //        stagione = "autunno";
 
-            List<Sandali> listSandaloDelMese = new List<Sandali>();
+        //    List<Sandali> listSandaloDelMese = new List<Sandali>();
 
-            listSandaloDelMese.Add(DAOSandali.GetInstance().SandaloDelMese(stagione));
+        //    listSandaloDelMese.Add(DAOSandali.GetInstance().SandaloDelMese(stagione));
 
-            return listSandaloDelMese;
-        }
+        //    return listSandaloDelMese;
+        //}
     }
 }

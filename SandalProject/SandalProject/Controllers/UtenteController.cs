@@ -175,14 +175,22 @@ namespace SandalProject.Controllers
             return NotFound();
         }
 
-        public IActionResult Admin()
+        public IActionResult Admin(int id)
         {
-            return View();
+            Account account = (Account)DAOAccount.GetInstance().Find(id);
+
+            if(account != null && account.Ruolo == "admin")
+            {
+                return View();
+            }
+            else
+            {
+                return Redirect("Home/Index");
+            }
         }
 
         public IActionResult CaricaFileImgSandali(IFormFile filexlsx)
         {
-            Console.WriteLine("Dentro al metodo CaricaFileImgSandali");
             List<Entity> e = new List<Entity>();
             int skuId = DAOSandali.GetInstance().GetId();
             string nome = "";
@@ -233,7 +241,7 @@ namespace SandalProject.Controllers
                                     }
                                 }
                             }
-                            Console.WriteLine("Sordi:" + worksheet.Cells[row, 6].Text);
+
                             Entity ent = new Sandali
                             {
                                 Nome = worksheet.Cells[row, 1].Text,
@@ -242,7 +250,7 @@ namespace SandalProject.Controllers
                                 Prezzo = double.Parse(worksheet.Cells[row, 6].Text),
                                 Categoria = worksheet.Cells[row, 7].Text,
                                 Genere = worksheet.Cells[row, 8].Text,
-                                Sconto = int.Parse(worksheet.Cells[row, 9].Text),
+                                Sconto = double.Parse(worksheet.Cells[row, 9].Text),
                                 Quantita = int.Parse(worksheet.Cells[row, 10].Text),
                                 Taglia = int.Parse(worksheet.Cells[row, 11].Text),
                                 Immagine1 = img1,
@@ -252,13 +260,12 @@ namespace SandalProject.Controllers
                                 Sku = "",
                                 Colore = worksheet.Cells[row, 12].Text
                             };
+
                             string sku = $"{((Sandali)ent).Nome[0]}" + $"{((Sandali)ent).Nome[1]}" + $"{((Sandali)ent).Marca[0]}" + $"{((Sandali)ent).Marca[1]}" + $"{((Sandali)ent).Categoria[0]}" + $"{((Sandali)ent).Genere[0]}";
 
                             ((Sandali)ent).Sku = sku.ToUpper();
 
                             e.Add(ent);
-                          
-                            Console.WriteLine("Sono alla fine del metodo principale prima di caricare le liste");
                         }
                     }
                 }
@@ -267,12 +274,11 @@ namespace SandalProject.Controllers
 
                 foreach (Entity ents in e)
                 {
-                    Console.WriteLine("Carico sandalo");
                     DAOSandali.GetInstance().Insert(ents);
                 }
             }
 
-            return Redirect("/Utente/Admin");
+            return Redirect($"/Utente/Admin/{utenteLoggato.Id}");
         }
     }
 }
