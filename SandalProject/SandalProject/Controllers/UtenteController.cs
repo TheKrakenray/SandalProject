@@ -184,7 +184,7 @@ namespace SandalProject.Controllers
 
             if(account != null && account.Ruolo == "admin")
             {
-                return View();
+                return View(account);
             }
             else
             {

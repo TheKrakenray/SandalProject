@@ -16,13 +16,13 @@
         <div class="capocchia">
             <div onclick="window.location.href='/Home/Index/'" class="logo">Solo Sandali</div>
             <div class="user-menu">
-                <img src="~/img/Extra/user.png" alt="Profile Picture" class="profile-pic">
+                <img src="/Utente/GetImage/@(((Account)Model).Id)" alt="Profile Picture" class="profile-pic" />
                 <div class="dropdown">
                     <button class="dropbtn">Benvenuto,[Nome Utente]</button>
                     <button class="dropbtn1">Benvenuto,<br>[Nome Utente]</button>
                     <div class="dropdown-content">
-                        <a href="#">Home</a>
-                        <a href="#">Logout</a>
+                        <a href="/Home/Index/">Home</a>
+                        <a href="/Utente/Logout">Logout</a>
                     </div>
                 </div>
             </div>
@@ -32,7 +32,7 @@
         <nav class="sidebar">
             <ul>
                 @{
-                    var account = Model as Account;
+                    Account account = (Account)Model;
                     if (account != null && account.Ruolo == "admin")
                     {
                         <li><button onclick="window.location.href='/Utente/Admin/@account.Id'">Admin</button></li>
