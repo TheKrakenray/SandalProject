@@ -16,10 +16,44 @@
 <body>
         <div class="product-container">
             <div class="image-grid">
+
+                
+                @if(Model.First().Immagine1 != null)
+                {
                 <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=0" alt="Image 1">
+                }
+                else
+                {
+                <img src="~/img/Extra/Transparent_Square.png" alt="Image default">
+                }
+
+                @if(Model.First().Immagine2 != null)
+                {
                 <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=1" alt="Image 2">
+                }
+                else
+                {
+                <img src="~/img/Extra/Transparent_Square.png" alt="Image default">
+                }
+
+                @if(Model.First().Immagine3 != null)
+                {
                 <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=2" alt="Image 3">
+                }
+                else
+                {
+                <img src="~/img/Extra/Transparent_Square.png" alt="Image default">
+                }
+
+                @if(Model.First().Immagine4 != null)
+                {
                 <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=3" alt="Image 4">
+                }
+                else
+                {
+                <img src="~/img/Extra/Transparent_Square.png" alt="Image default">
+                }
+                
             </div>
             <div class="product-details">
                 <div class="titolo">
@@ -38,16 +72,21 @@
                     <p>Colore: </p>
                     <div class="colori">
                         
+                    @{
+                        List<string?> listColori = new();
+                    }
                     @for (int i = 0; i < Model.Count; i++)
                     {
+
                         if(i == 0 )
                         {
                             <span class="colore" id="selected" style="--coloreSandalo:@Model.ElementAt(i).Colore"></span>
-
+                            listColori.Add(Model.ElementAt(i).Colore);
                         }
-                        else
+                        else if (!listColori.Contains(Model.ElementAt(i).Colore) && Model.ElementAt(i).Colore != null)
                         {
                             <span class="colore" id="@Model.ElementAt(i).Id" style="--coloreSandalo:@Model.ElementAt(i).Colore"></span>
+                            listColori.Add(Model.ElementAt(i).Colore);
                         }
                     }
                 </div>

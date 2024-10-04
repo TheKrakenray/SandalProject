@@ -9,12 +9,11 @@ body {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-size: 1.2vw;
+    font-size: 1vw;
 }
 
 h1 {
     margin: 0;
-    font-size: 2vw;
 }
 
 .product-container {
@@ -46,15 +45,10 @@ h1 {
 
 .product-details {
     border: 1px solid #eaeaea;
-    padding: 2vw;
+    padding: 1vw;
     border-radius: 1vw;
-    width: 100%;
-    max-width: 40vw;
+    max-width: fit-content;
     width: 30%;
-}
-
-.fa-heart {
-    font-size: 2vw;
 }
 
 
@@ -70,22 +64,23 @@ h1 {
 
 .colori {
     display: flex;
-    width: fit-content;
+    width: 100%;
     max-width: 27vw;
     height: auto;
     overflow-y: hidden;
     overflow-x: hidden;
     touch-action: none;
     user-select: none;
-    padding: 0.3vw;
+    padding: 0.5vw;
 }
 
 .colore {
-    padding: 1vw;
+    width:2vw;
+    height:2vw;
     margin-inline: 0.5vw;
     background-color: var(--coloreSandalo);
-    border: solid 0.2vw var(--coloreSandalo);
-    border-radius: 50%;
+    border: solid 1px var(--coloreSandalo);
+    border-radius: 60%;
 }
 
     .colore.selected {
@@ -108,17 +103,25 @@ h1 {
         box-shadow: 0px 0px 0px var(--coloreSandalo);
     }
 
+.product-details .fa-heart {
+    margin-left: 85%;
+    font-size: 1.7vw;
+}
+
 .size-selection {
-    margin-bottom: 2vw;
+    margin-bottom: 1vw;
 }
 
 .sizes span {
     display: inline-block;
-    margin: 0.5vw;
-    padding: 1vw;
+    margin: 10px;
+    width:2vw;
+    height:2.4vw;
     border: 1px solid #eaeaea;
-    border-radius: 0.5vw;
+    border-radius: 30%;
     cursor: pointer;
+    text-align:center;
+    align-content:center;
 }
 
     .sizes span.selected {
@@ -137,14 +140,15 @@ h1 {
 
 button {
     display: block;
-    width: 100%;
+    margin:auto;
+    width: 80%;
     margin-bottom: 1vw;
-    padding: 1vw;
+    padding: 0.4vw;
     border: none;
     background-color: #000;
     color: white;
     cursor: pointer;
-    font-size: 1.5vw;
+    font-size: 1vw;
     border-radius: 0.5vw;
 }
 
@@ -153,11 +157,11 @@ button {
     }
 
 .description, .details, .specifications {
-    margin-bottom: 2vw;
+    margin-bottom: 1vw;
 }
 
     .description p, .details ul, .specifications ul {
-        font-size: 1.2vw;
+        font-size: 0.6vw;
     }
 
 ul {
@@ -180,7 +184,7 @@ li {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        font-size: 6vw;
+        font-size: 3vw;
     }
 
     .product-container {
@@ -208,6 +212,7 @@ li {
         width: 90%;
         max-width: unset;
         margin: auto;
+        padding:20px
     }
 
     .titolo{
@@ -220,9 +225,9 @@ li {
     }
 
     .product-details .fa-heart {
-        margin-top:10px;
-        margin-left:30%;
-        font-size: 7vw;
+        margin-top:5%;
+        margin-left:35%;
+        font-size: 5vw;
     }
 
     .product-container .fas{
@@ -230,80 +235,40 @@ li {
     }
 
     .titolo h2 {
-        font-size: 5vw;
+        font-size: 4vw;
         justify-content: center;
     }
 
     .colori {
         height: auto;
-        padding: 2rem;
-        padding-top: 0px;
-        padding-right: 40%;
+        padding: 1rem;
     }
 
     .colore {
-        padding: 4vw;
-        margin-inline: 5px;
-        background-color: var(--coloreSandalo);
-        border: solid 0.2vw var(--coloreSandalo);
-        border-radius: 50%;
+        padding: 2vw;
     }
-
+    
     .sizes span {
-        display: inline-block;
-        margin: 0.5vw;
-        padding: 1rem;
-        font-size: 1rem;
-        border: 1px solid #eaeaea;
-        border-radius: 0.5vw;
-        cursor: pointer;
+        width:5vw;
+        height:5vw;
+        font-size: 2vw;
     }
-
-        .sizes span#selected {
-            background-color: black;
-            color: white;
-        }
-
-        .sizes span:hover {
-            background-color: #f5f5f5;
-        }
-
-        .sizes span#selected:hover {
-            background-color: black;
-            color: white;
-        }
 
     button {
-        display: block;
-        width: 100%;
-        margin-bottom: 1vw;
-        padding: 2vw;
-        border: none;
-        background-color: #000;
-        color: white;
-        cursor: pointer;
-        font-size: 2rem;
-        border-radius: 0.5vw;
+        padding: 1vw;
+        font-size: 1.5rem;
     }
-
-        button:hover {
-            background-color: #444;
-        }
 
     .description, .details, .specifications {
         margin-bottom: 2vw;
     }
 
         .description p, .details ul, .specifications ul {
-            font-size: 1rem;
+            font-size: 1.8vw;
         }
 
-    ul {
-        list-style-type: none;
-        padding: 0;
-    }
 
     li {
-        margin-bottom: 0.5vw;
+        margin-bottom: 0.8vw;
     }
 }
