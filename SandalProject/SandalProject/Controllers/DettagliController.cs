@@ -12,6 +12,8 @@ namespace SandalProject.Controllers
 
             List<Sandali> sandaliList = DAOSandali.GetInstance().CercaColore(skuSandalo, id);
 
+            sandaliList.Insert(0, s);
+
             if(sandaliList.Count > 0)
             {
                 return View(sandaliList);
