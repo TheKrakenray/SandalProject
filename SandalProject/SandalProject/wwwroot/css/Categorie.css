@@ -16,8 +16,9 @@ hr {
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
 /* Main container */
-.main {
+main {
     display: flex;
+    gap:8%;
 }
 
 /* Sidebar container */
@@ -58,13 +59,18 @@ hr {
         margin: 0px auto;
     }
 
-    .main {
+    main {
         display: flex;
         flex-direction: column;
+        gap:0px;
+    }
+
+    .catalogo{
+        margin-left
     }
 
     .fullcatalogo {
-        margin: 0px auto;
+        margin: 0px 10%;
     }
 }
 

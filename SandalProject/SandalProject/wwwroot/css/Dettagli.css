@@ -1,4 +1,8 @@
-﻿
+﻿*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
 
 body {
     font-family: 'Poppins', sans-serif;
@@ -53,7 +57,8 @@ h1 {
     font-size: 2vw;
 }
 
-.fas {
+
+.product-container .fas {
     color: red;
 }
 
@@ -67,7 +72,7 @@ h1 {
     display: flex;
     width: fit-content;
     max-width: 27vw;
-    height: 2vw;
+    height: auto;
     overflow-y: hidden;
     overflow-x: hidden;
     touch-action: none;
@@ -164,6 +169,10 @@ li {
     margin-bottom: 0.5vw;
 }
 
+.specifications ul{
+    list-style-type:circle;
+    margin-left:20px;
+}
 
 @media screen and (max-width: 800px) {
     body {
@@ -195,7 +204,6 @@ li {
 
 
     .product-details {
-        background-color: white;
         z-index: 10;
         width: 90%;
         max-width: unset;
@@ -211,9 +219,14 @@ li {
     .titolo h2{
     }
 
-    .fa-heart {
-        margin-left:40%;
+    .product-details .fa-heart {
+        margin-top:10px;
+        margin-left:30%;
         font-size: 7vw;
+    }
+
+    .product-container .fas{
+        color:red;
     }
 
     .titolo h2 {
