@@ -1,5 +1,5 @@
 ﻿@using SandalProject.Models;
-@model Dictionary<string, List<Sandali>>
+@model List<Sandali>;
 
 @{
     Layout = "MainLayout";
@@ -18,27 +18,40 @@
     <div class="banner">
         <div class="slider">
             <div class="slides">
-                <div class="slide"><div class="text"><h2>SOLO SANDALI</h2></div><img src="~/img/Banners/download.png" alt="Image 1"></div>
-                <div class="slide"><div class="text"><h2>SOLO SANDALI</h2></div><img src="" alt="Image 2"></div>
-                <div class="slide"><div class="text"><h2>SOLO SANDALI</h2></div><img src="" alt="Image 3"></div>
+                @{
+                    // Console.WriteLine("Conteggio lista model: " + Model.Count);
+                    if(Model.Count > 0)
+                    {
+                        int i = 0;
+                        while(i < 3){
+                            <div class="slide">
+                                <div class="text">
+                                    <h2>SOLO SANDALI</h2>
+                                </div>
+                                <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=0" alt="Image 1">
+                            </div>
+                            i++;
+                        }
+                    }
+                    else
+                    {
+                        <div class="slide"><div class="text"><h2>SOLO SANDALI</h2></div><img src="" alt="Image 1"></div>
+                    }
+                }   
             </div>
         </div>
         <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
         <button class="next" onclick="moveSlide(1)">&#10095;</button>
     </div>
 
-
     <div class="seasons">
-
         <ul>
             <li onclick="window.location.href='/Elenco/Autunno/'">Autunno</li>
             <li onclick="window.location.href='/Elenco/Inverno/'">Inverno</li>
             <li onclick="window.location.href='/Elenco/Primavera/'">Primavera</li>
             <li onclick="window.location.href='/Elenco/Estate/'">Estate</li>
         </ul>
-
     </div>
-
 
     <section class="featured">
 
@@ -48,97 +61,153 @@
         </div>
 
         <div class="product-grid">
+            @{
+                if(Model.Count > 0)
+                {
+                    int y = 0;
 
-            <div class="product">
-                <img src="" alt="Prodotto 1">
-                <div class="color-options"></div>
-                <p>Lorem Ipsum</p><br>
-                <span>Sold Out</span><br>
-            </div>
+                    List<Sandali> donna = new();
 
+                    foreach(Sandali s in Model)
+                    {
+                        if (s.Genere.Trim('\'').ToLower() == "donna")
+                        {
+                            donna.Add(s);
+                        }
+                    }
 
-            <div class="product">
-                <img src="" alt="Prodotto 2">
-                <div class="color-options"></div>
-                <p>Lorem Ipsum</p><br>
-                <span>Sold Out</span><br>
-            </div>
+                    List<string> descrizioni = new();
 
-            <div class="product">
-                <img src="" alt="Prodotto 3">
-                <div class="color-options"></div>
-                <p>Lorem Ipsum</p><br>
-                <span>Sold Out</span><br>
-            </div>
+                    foreach(Sandali s in donna)
+                    {
+                        string[] desc = s.Descrizione.Split("|");
 
+                        foreach(string d in desc)
+                        {
+                            string[] paragrafo = d.Split(";;");
+
+                            string testo = paragrafo[1];
+
+                            descrizioni.Add(testo);
+                        }
+                    }
+
+                    while (y < 3)
+                    {
+                        <div class="product">
+                            <img src="/Dettagli/GetImage?id=@donna[y].Id&posizioneLista=0" alt="Prodotto 1">
+                            <div class="color-options"></div>
+                            <p>@descrizioni[y]</p><br>
+                            <span>Sold Out</span><br>
+                        </div>
+                        y++;
+                    }
+                }
+            }
         </div>
 
     </section>
     <hr />
+     <section class="featured">
+        <div class="categoria">
+            <h3 class="categoria-titolo"> Uomo </h3>
+        </div>
+        <div class="product-grid">
+            @{
+                if (Model.Count > 0)
+                {
+                    int y = 0;
+
+                    List<Sandali> uomo = new();
+
+                    foreach (Sandali s in Model)
+                    {
+                        if (s.Genere.Trim('\'').ToLower() == "uomo")
+                        {
+                            uomo.Add(s);
+                        }
+                    }
+
+                    List<string> descrizioni = new();
+
+                    foreach (Sandali s in uomo)
+                    {
+                        string[] desc = s.Descrizione.Split("|");
+
+                        foreach (string d in desc)
+                        {
+                            string[] paragrafo = d.Split(";;");
+
+                            string testo = paragrafo[1];
+
+                            descrizioni.Add(testo);
+                        }
+                    }
+
+                    while (y < 3)
+                    {
+                        <div class="product">
+                            <img src="/Dettagli/GetImage?id=@uomo[y].Id&posizioneLista=0" alt="Prodotto 1">
+                            <div class="color-options"></div>
+                            <p>@descrizioni[y]</p><br>
+                            <span>Sold Out</span><br>
+                        </div>
+                        y++;
+                    }
+                }
+            }
+        </div>
+    </section>
+    <hr />
+
     <section class="featured">
         <div class="categoria">
             <h3 class="categoria-titolo"> Kids </h3>
         </div>
         <div class="product-grid">
+            @{
+                if (Model.Count > 0)
+                {
+                    int y = 0;
 
-            <div class="product">
-                <img src="" alt="Prodotto 1">
-                <div class="color-options">
-                </div>
-                <p>Lorem Ipsum</p><br>
-                <span>Sold Out</span><br>
-            </div>
+                    List<Sandali> bambino = new();
 
+                    foreach (Sandali s in Model)
+                    {
+                        if (s.Genere.Trim('\'').ToLower() == "bambino")
+                        {
+                            bambino.Add(s);
+                        }
+                    }
 
-            <div class="product">
-                <img src="" alt="Prodotto 2">
-                <div class="color-options">
-                </div>
-                <p>Lorem Ipsum</p><br>
-                <span>Sold Out</span><br>
-            </div>
+                    List<string> descrizioni = new();
 
-            <div class="product">
-                <img src="" alt="Prodotto 3">
-                <div class="color-options">
-                </div>
-                <p>Lorem Ipsum</p><br>
-                <span>Sold Out</span><br>
-            </div>
-        </div>
-    </section>
-    <hr />
+                    foreach (Sandali s in bambino)
+                    {
+                        string[] desc = s.Descrizione.Split("|");
 
-    <section class="featured">
-        <div class="categoria">
-            <h3 class="categoria-titolo"> Uomo </h3>
-        </div>
-        <div class="product-grid">
+                        foreach (string d in desc)
+                        {
+                            string[] paragrafo = d.Split(";;");
 
-            <div class="product">
-                <img src="" alt="Prodotto 1">
-                <div class="color-options">
-                </div>
-                <p>Lorem Ipsum</p><br>
-                <span>Sold Out</span><br>
-            </div>
+                            string testo = paragrafo[1];
 
+                            descrizioni.Add(testo);
+                        }
+                    }
 
-            <div class="product">
-                <img src="" alt="Prodotto 2">
-                <div class="color-options">
-                </div>
-                <p>Lorem Ipsum</p><br>
-                <span>Sold Out</span><br>
-            </div>
-
-            <div class="product">
-                <img src="" alt="Prodotto 3">
-                <div class="color-options">
-                </div>
-                <p>Lorem Ipsum</p><br>
-                <span>Sold Out</span><br>
-            </div>
+                    while (y < 3)
+                    {
+                        <div class="product">
+                            <img src="/Dettagli/GetImage?id=@bambino[y].Id&posizioneLista=0" alt="Prodotto 1">
+                            <div class="color-options"></div>
+                            <p>@descrizioni[y]</p><br>
+                            <span>Sold Out</span><br>
+                        </div>
+                        y++;
+                    }
+                }
+            }
         </div>
     </section>
     <script src="~/js/Home.js"></script>

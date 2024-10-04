@@ -180,6 +180,7 @@ namespace SandalProject.Models
                 {
                     Sandali a = new();
                     a.FromDictionary(r);
+                    //Console.WriteLine("Genere nel ReadAll " + a.Genere);
                     lista.Add(a);
                 }
 
@@ -262,26 +263,34 @@ namespace SandalProject.Models
             return updated;
         }
 
-        public Sandali SandaloDelMese(string stagione)
-        {
-            var riga = db.ReadOne($@"SELECT TOP 1 s.*
-                                     FROM Sandali s
-                                     WHERE RIGHT(s.SKU, 4) LIKE '%1%'
-                                     AND s.SKU IN (
-                                         SELECT TOP 1 w.skuSandali 
-                                         FROM Wishlist w
-                                         JOIN Sandali s2 ON s2.id = w.idSandali 
-                                         WHERE s2.categoria = '{stagione}' 
-                                         GROUP BY w.skuSandali 
-                                         ORDER BY COUNT(w.idSandali) DESC
-                                     );");
+        //public Sandali SandaloDelMese(string stagione)
+        //{
+        //    var riga = new Dictionary<string, string>();
+        //    Sandali s = new();
+        //    try
+        //    {
+        //        riga = db.ReadOne($@"SELECT TOP 1 s.*
+        //                                 FROM Sandali s
+        //                                 WHERE RIGHT(s.SKU, 4) LIKE '%1%'
+        //                                 AND s.SKU IN (
+        //                                     SELECT TOP 1 w.skuSandali 
+        //                                     FROM Wishlist w
+        //                                     JOIN Sandali s2 ON s2.id = w.idSandali 
+        //                                     WHERE s2.categoria = '{stagione}' 
+        //                                     GROUP BY w.skuSandali 
+        //                                     ORDER BY COUNT(w.idSandali) DESC
+        //                                 );");
 
-            Sandali s = new();
-            s.FromDictionary(riga);
-            Console.WriteLine(s.Sku);
+                
+        //        s.FromDictionary(riga);
+        //    }
+        //    catch
+        //    {
+        //        throw new ArgumentException("errore sandalo del mese");
+        //    }
 
-            return s;
-        }
+        //    return s;
+        //}
 
         public int GetId()
         {
