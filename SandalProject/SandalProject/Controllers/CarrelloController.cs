@@ -89,5 +89,9 @@ namespace SandalProject.Controllers
             carrello.Clear();
             return Redirect($"/Carrello/Carrello/");
         }
+        public IActionResult Paymentone()
+        {
+            return View();
+        }
     }
 }

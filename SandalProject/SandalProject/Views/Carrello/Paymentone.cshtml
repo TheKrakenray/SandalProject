@@ -1,0 +1,61 @@
+﻿@{
+    Layout = "MainLayout";
+}
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modalità di Pagamento</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Pagamento.css">
+</head>
+<body>
+  <div class="container">
+    <div class="payment-form">
+        <h2>Modalità di Pagamento</h2>
+        <div class="payment-option">
+            <input type="radio" name="payment-method" id="credit-card" onclick="showPaymentFields('credit-card-fields')">
+            <label for="credit-card">Carta di Credito</label>
+        </div>
+        <div id="credit-card-fields" class="payment-fields">
+            <div class="input-container">
+                <input type="text" id="card-number" placeholder="Numero di Carta" oninput="formatCardNumber(); validateCardNumber()">
+                <img id="card-icon" class="card-icon" src="" alt="">
+            </div>
+            <span id="card-number-error" class="error"></span>
+            <input type="text" id="card-name" placeholder="Nome sulla Carta" oninput="validateCardName()">
+            <span id="card-name-error" class="error"></span>
+            <input type="text" id="card-expiry" placeholder="Data di Scadenza (MM/AA)" oninput="validateCardExpiry()" maxlength="5">
+            <span id="card-expiry-error" class="error"></span>
+            <input type="password" id="card-cvv" placeholder="CVV" oninput="validateCardCVV()" maxlength="4"> <!-- Changed to password type -->
+            <span id="card-cvv-error" class="error"></span>
+        </div>
+        <div class="payment-option">
+            <input type="radio" name="payment-method" id="paypal" onclick="showPaymentFields('paypal-fields')">
+            <label for="paypal">PayPal</label>
+        </div>
+        <div id="paypal-fields" class="payment-fields">
+            <button onclick="window.location.href='https://www.paypal.com/signin'">Vai a PayPal</button>
+        </div>
+        <div class="payment-option">
+            <input type="radio" name="payment-method" id="klarna" onclick="showPaymentFields('klarna-fields')">
+            <label for="klarna">Klarna</label>
+        </div>
+        <div id="klarna-fields" class="payment-fields">
+            <button onclick="window.location.href='https://www.klarna.com/login'">Vai a Klarna</button>
+        </div>
+        <div class="payment-option">
+            <input type="radio" name="payment-method" id="scalapay" onclick="showPaymentFields('scalapay-fields')">
+            <label for="scalapay">ScalaPay</label>
+        </div>
+        <div id="scalapay-fields" class="payment-fields">
+            <button onclick="window.location.href='https://portal.scalapay.com/login?amp_device_id=g8ZxVZlzfxVZkm10o6vHH8'">Vai a ScalaPay</button>
+        </div>
+        <button onclick="validateForm()">Conferma Acquisto</button>
+    </div>
+  </div>
+    <script src="~/js/paymentpagamento.js" defer></script>
+</body>
+</html>
+

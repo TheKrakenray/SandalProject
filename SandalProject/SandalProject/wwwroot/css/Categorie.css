@@ -15,22 +15,21 @@ hr {
     width: 80%;
 }
 /*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
-/* Main container */
-main {
-    display: flex;
-    gap:8%;
-}
 
 /* Sidebar container */
-.contenitore {
-    width: 12%;
+.contenitore
+{
     padding: 15px;
+    border: 30px solid red;
+    display: flex;
+    gap: 18%;
+}
 }
 
 /* Sidebar form layout */
 .sidebar-filter {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
     gap: 20px; /* Add space between sections */
     min-width: 100px;
     height: fit-content;
