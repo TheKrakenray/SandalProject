@@ -16,6 +16,10 @@
         </div>
         <div class="logo" onclick="window.location.href='/Home/Index'">SOLO SANDALI</div>
         <div class="icons">
+            <i id="search" class="fas fa-search"></i>
+            <i id="user" idaccount="@(UtenteController.utenteLoggato.Id)" class="fas fa-user"></i>
+            <i id="cart" idaccount="@(UtenteController.utenteLoggato.Id)" class="fas fa-shopping-bag"></i>
+            <i id="wlist" idaccount="@(UtenteController.utenteLoggato.Id)" class="fas fa-heart"></i>
             <div class="dark-mode-toggle">
                 <input type="checkbox" id="dark-mode-checkbox">
                 <label for="dark-mode-checkbox" class="dark-mode-label">
@@ -24,10 +28,6 @@
                     <div class="ball"></div>
                 </label>
             </div>
-            <i id="search" class="fas fa-search"></i>
-            <i id="user" idaccount="@(UtenteController.utenteLoggato.Id)" class="fas fa-user"></i>
-            <i id="cart" idaccount="@(UtenteController.utenteLoggato.Id)" class="fas fa-shopping-bag"></i>
-            <i id="wlist" idaccount="@(UtenteController.utenteLoggato.Id)" class="fas fa-heart"></i>
         </div>
     </header>
     <div class="overlay"></div>
