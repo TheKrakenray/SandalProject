@@ -1,4 +1,10 @@
-﻿
+﻿@using SandalProject.Models;
+@using SandalProject.Utility;
+@model Entity;
+
+@{
+    Layout = "MainLayout";
+}
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -14,7 +20,7 @@
         <div class="capocchia">
             <div class="logo">Solo Sandali</div>
             <div class="user-menu">
-                <img src="admin.png" alt="Profile Picture" class="profile-pic">
+                <img src="/Utente/GetImage/@(((Account)Model).Id)" alt="Profile Picture" class="profile-pic">
                 <div class="dropdown">
                     <button class="dropbtn">Benvenuto, Admin</button>
                     <button class="dropbtn1">Benvenuto,<br>Admin</button>

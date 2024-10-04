@@ -8,9 +8,13 @@ namespace SandalProject.Controllers
         {
             Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
 
-            if(s != null)
+            string skuSandalo = s.Sku.Substring(s.Sku.Length - 4);
+
+            List<Sandali> sandaliList = DAOSandali.GetInstance().CercaColore(skuSandalo, id);
+
+            if(sandaliList.Count > 0)
             {
-                return View(s);
+                return View(sandaliList);
             }
             else
             {
