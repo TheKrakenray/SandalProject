@@ -338,7 +338,8 @@ namespace SandalProject.Models
 
             try
             {
-                righe = db.Read($"SELECT * FROM Sandali WHERE LEFT(sku, LEN(sku) - 4) = '{sku}' Order by case When id = {id} then 0 else 1 END;");
+                righe = db.Read($"SELECT * FROM Sandali WHERE Left(sku,Len(sku)-4) = '{sku}' Order by case When id = {id} then 0 else 1 END;");
+
             }
             catch
             {

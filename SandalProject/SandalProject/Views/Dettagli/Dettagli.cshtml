@@ -14,65 +14,87 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
-
-    <main>
         <div class="product-container">
             <div class="image-grid">
-                <img src="/Dettagli/GetImage/id=@Model.First().Id&posizione=1" alt="Image 1">
-                <img src="/Dettagli/GetImage/id=@Model.First().Id&posizione=2" alt="Image 2">
-                <img src="/Dettagli/GetImage/id=@Model.First().Id&posizione=3" alt="Image 3">
-                <img src="/Dettagli/GetImage/id=@Model.First().Id&posizione=4" alt="Image 4">
+                <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=0" alt="Image 1">
+                <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=1" alt="Image 2">
+                <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=2" alt="Image 3">
+                <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=3" alt="Image 4">
             </div>
             <div class="product-details">
                 <div class="titolo">
-                    <h2>@Model.First().Nome - €@(Model.First().Prezzo.ToString().Replace(".", ","))</h2>
-                    <p href="/WList/AggiungiWList/@(Model.First().Id)" class="far fa-heart" id="heart-icon" onclick="toggleHeart()"></p>
+                @{
+                    string nome = @Model.First().Nome;
+                    nome = nome.Remove(0, 1);
+                    nome = nome.Remove(nome.Length - 1, 1);
+                }
+                    <h2>@nome - €@(Model.First().Prezzo.ToString().Replace(".", ","))</h2>
+
+                    <p href="/WList/InserisciWList/@(Model.First().Id)" class="far fa-heart" id="heart-icon" onclick="toggleHeart()"></p>
                     <!--Controllare se l'utente loggato ha wishlistato il sandalo-->
                 </div>
 
                 <div class="color-selection">
                     <p>Colore: </p>
                     <div class="colori">
-                        <span class="colore" id="selected" style="--coloreSandalo:@Model.First().Colore"></span>
                         
-                     @* @foreach()
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        if(i == 0 )
                         {
-                           //Gestire i colori per i sandali dello stesso tipo mettere come id da 1 a n 
-                        } *@
-                    </div>
+                            <span class="colore" id="selected" style="--coloreSandalo:@Model.ElementAt(i).Colore"></span>
+
+                        }
+                        else
+                        {
+                            <span class="colore" id="@Model.ElementAt(i).Id" style="--coloreSandalo:@Model.ElementAt(i).Colore"></span>
+                        }
+                    }
+                </div>
                 </div>
 
                 <div class="size-selection">
                     <p>Taglia:</p>
                     <div class="sizes">
-                        <span class="selected">@Model.First().Taglia</span>
-                        @* @foreach()
+                    @{
+                        List<int?> listTaglie = new();
+                    }
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        if (!listTaglie.Contains(Model.ElementAt(i).Taglia) && Model.ElementAt(i).Taglia != null)
                         {
-                        //Stessa cosa per le taglie
-                        } *@
+                            listTaglie.Add(Model.ElementAt(i).Taglia);
+                            <span>@Model.ElementAt(i).Taglia</span>
+                        }
+                    }
                     </div>
                 </div>
 
                 <button href="/Carrello/AggiungiCarrello/@Model.First().Id" class="add-to-cart">Aggiungi al carrello</button>
                 
 
+            @{
+                string itemDesc = string.IsNullOrEmpty(Model.First().Descrizione) ? "default|default|default" : Model.First().Descrizione;
+                itemDesc = itemDesc.Replace("''", "'");
+                itemDesc = itemDesc.Remove(0,1);
+                itemDesc = itemDesc.Remove(itemDesc.Length - 1,1);
+
+
+                List<string> listDesc = itemDesc.Split('|').ToList();
+
+                string description = listDesc.ElementAt(0);
+
+                string details = listDesc.ElementAt(1);
+
+                string specifications = listDesc.ElementAt(2);
+
+            }
+
+
+            <div class="description">
                 @{
-                    string itemDesc = string.IsNullOrEmpty(Model.First().Descrizione) ? "default|default|default" : Model.First().Descrizione;
 
-                    List<string> listDesc = itemDesc.Split('|').ToList();
-
-                    string description = listDesc.ElementAt(0);
-
-                    string details = listDesc.ElementAt(1);
-
-                    string specifications = listDesc.ElementAt(2);
-
-                }
-
-
-                <div class="description">
-                    @{
-                        string[] descriptionArr = description.Split(";;");
+                    string[] descriptionArr = description.Split(";;");
                         <h3>@descriptionArr[0]</h3>
                         <p>@descriptionArr[1]</p>
                     }
@@ -83,37 +105,35 @@
                         string[] detailsArr = details.Split(";;");
                         <h3>@detailsArr[0]</h3>
                         <ul>
-                            @{
-                                Dictionary<string, string> detailsTable = new();
+                        @{
+                            Dictionary<string, string> detailsTable = new();
 
+
+                            for(int i = 1; i < detailsArr.Length; i++)
+                            {
+                                
                                 string key = "";
                                 string value = "";
 
                                 bool isValue = false;
-                                foreach (char c in detailsArr[1])
+                                foreach (char c in detailsArr[i])
                                 {
-                                    if (c != ' ' || c != '\n')
-                                    {
-                                        key+=c;
+                                    if (!isValue)
+                                        key += c;
+                                    else
+                                        value += c;
 
-                                        if (isValue)
-                                            value += c;
-                                    }
-
-                                    if (isValue)
-                                    {
-                                        isValue = false;
-                                        detailsTable.Add(key, value);
-
-                                        key = "";
-                                        value = "";
-                                    }
+                                    if (c == ':')
+                                        isValue = isValue ? false : true;
+                                    
                                 }
+                                detailsTable.Add(key, value);
                             }
-                            @foreach(KeyValuePair<string,string>detail in detailsTable)
-                            {
-                                <li><strong>@detail.Key</strong> @detail.Value</li>
-                            }
+                        }
+                        @foreach(KeyValuePair<string,string>detail in detailsTable)
+                        {
+                            <li><strong>@detail.Key</strong> @detail.Value</li>
+                        }
 
                         </ul>
                     }
@@ -133,9 +153,6 @@
                 </div>
             </div>
         </div>
-    </main>
-
     <script src="~/js/Elenco/Dettagli.js"></script>
-    
 </body>
 </html>

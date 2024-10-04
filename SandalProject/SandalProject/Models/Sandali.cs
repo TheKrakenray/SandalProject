@@ -62,38 +62,41 @@ namespace SandalProject.Models
             set
             {
                 _sku = value;
+                if (_sku.Length < 10)
+                {
 
-                if (Immagine1 != null)
-                {
-                    _sku += "1";
-                }
-                else
-                {
-                    _sku += "0";
-                }
-                if (Immagine2 != null)
-                {
-                    _sku += "1";
-                }
-                else
-                {
-                    _sku += "0";
-                }
-                if (Immagine3 != null)
-                {
-                    _sku += "1";
-                }
-                else
-                {
-                    _sku += "0";
-                }
-                if (Immagine4 != null)
-                {
-                    _sku += "1";
-                }
-                else
-                {
-                    _sku += "0";
+                    if (Immagine1 != null)
+                    {
+                        _sku += "1";
+                    }
+                    else
+                    {
+                        _sku += "0";
+                    }
+                    if (Immagine2 != null)
+                    {
+                        _sku += "1";
+                    }
+                    else
+                    {
+                        _sku += "0";
+                    }
+                    if (Immagine3 != null)
+                    {
+                        _sku += "1";
+                    }
+                    else
+                    {
+                        _sku += "0";
+                    }
+                    if (Immagine4 != null)
+                    {
+                        _sku += "1";
+                    }
+                    else
+                    {
+                        _sku += "0";
+                    }
                 }
             }
         }
