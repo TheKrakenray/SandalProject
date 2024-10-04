@@ -41,7 +41,7 @@ namespace SandalProject.Models
             bool d = false;
             try
             {
-                d = db.Update($"delete from Sandali WHERE sku = LIKE '{sku_DB}[^0-9]%';");
+                d = db.Update($"delete from Sandali WHERE sku LIKE '{sku_DB}[^0-9]%';");
             }
             catch
             {
@@ -283,10 +283,6 @@ namespace SandalProject.Models
             return s;
         }
 
-
-
-
-
         public int GetId()
         {
             Dictionary<string, string> riga = null;
@@ -324,6 +320,34 @@ namespace SandalProject.Models
             }
 
             return updated;
+        }
+
+        public List<Sandali> CercaColore(string sku, int id)
+        {
+            List<Sandali> lista = new();
+            List<Dictionary<string, string>> righe = null;
+
+            try
+            {
+                righe = db.Read($"SELECT * FROM Sandali WHERE LEFT(sku, LEN(sku) - 4) = '{sku}' Order by case When id = 5 then 0 else 1 END;");
+
+            }
+            catch
+            {
+                throw new ArgumentException("Errore nell'aggiornamento");
+            }
+
+            if (righe != null)
+            {
+                foreach (var r in righe)
+                {
+                    Sandali a = new();
+                    a.FromDictionary(r);
+                    lista.Add(a);
+                }
+            }
+
+            return lista;
         }
     }
 }
