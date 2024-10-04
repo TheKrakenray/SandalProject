@@ -85,6 +85,7 @@ namespace SandalProject.Controllers
 
         public IActionResult Logout()
         {
+      
             chiamata = 0;
             il.LogInformation($"LOGOUT: {utenteLoggato.Username} alle ore {DateTime.Now.Hour}");
             utenteLoggato = (Account)DAOAccount.GetInstance().Find(1);
@@ -202,7 +203,7 @@ namespace SandalProject.Controllers
 
             List<Entity> e = new List<Entity>();
             //int skuId = DAOSandali.GetInstance().GetId();
-            string nome = "";
+            //string nome = "";
             List<Entity> sandali = DAOSandali.GetInstance().ReadAll();
             //Console.WriteLine(filexlsx.ContentType);
 
@@ -289,7 +290,6 @@ namespace SandalProject.Controllers
 
             return Redirect($"/Utente/Admin/{utenteLoggato.Id}");
         }
-
 
         public IActionResult RecuperaPassword()
         {

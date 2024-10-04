@@ -222,17 +222,26 @@ namespace SandalProject.Models
                 string generi = "uomo donna bambino kid woman man";
                 if(value != null)
                 {
-                    if (!generi.Contains(value.ToLowerInvariant()))
-                        _genere = "#";
+                    //Console.WriteLine("Value Genere: " + value.Trim('\'').ToLower());
+                    if (generi.Contains(value.Trim('\'').ToLower()))
+                    //    _genere = "#";
+                    //if (value.ToLower() != "'donna'" || value.ToLower() != "'uomo'" || value.ToLower() != "bambino")
+                    {
+                        //Console.WriteLine("Entro");
+                        //Console.WriteLine(value);
+                        _genere = value;
+                        //Console.WriteLine("Genere POST: " + _genere);
+                        //_genere.Replace("'", "''");
+                    }
                     else
                     {
-                        _genere = value;
-                        _genere.Replace("'", "''");
+                        //Console.WriteLine("Pre " + value);
+                        _genere = "#";
+                        //Console.WriteLine("Post " + _genere);
                     }
                 }
                 else
                     _genere = "0";
-
             }
         }
 

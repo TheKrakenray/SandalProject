@@ -146,7 +146,7 @@ namespace SandalProject.Utility
                             valore = riga[property.Name.ToLower()];
                                 break;
                     }
-
+                    //Console.WriteLine("FromDictionary " + property.Name.ToLower() + riga[property.Name.ToLower()]);
                     property.SetValue(this, valore);
                 }
             }
