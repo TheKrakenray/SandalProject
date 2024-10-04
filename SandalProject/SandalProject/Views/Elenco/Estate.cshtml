@@ -5,11 +5,123 @@
 }
 <!DOCTYPE html>
 <html>
+
+
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweaty Sandals</title>
+    <link rel="stylesheet" href="~/css/Categorie.css">
 </head>
+
 <body>
 
+
+
+    <div class="main">
+        <div class="contenitore">
+            <div class="sidebar-filter" id="sideFilter">
+                <!-- Gender Filters -->
+                <div class="genere">
+                    <label><strong>Generi</strong></label>
+                    <br>
+                    <input type="checkbox" name="gender" value="donna" class="generesp"> Donna
+                    <br>
+                    <input type="checkbox" name="gender" value="uomo" class="generesp"> Uomo
+                    <br>
+                    <input type="checkbox" name="gender" value="bambino" class="generesp"> Bambino
+                </div>
+
+                <!-- Brand Selector -->
+                <div>
+                    <div class="marca">
+                        <label><strong>Marche</strong></label>
+                        <select id="marca" name="Marca">
+                            <option value="placeholder">Urgus</option>
+                            <option value="placeholder">jasmine</option>
+                            <option value="placeholder">domenico</option>
+                            <option value="placeholder">ernesto</option>
+                        </select>
+                    </div>
+
+                    <!-- Size Selector -->
+                    <div class="taglie">
+                        <label><strong>Taglie</strong></label>
+                        <select id="taglie" name="Taglie">
+                            <option value="placeholder">35</option>
+                            <option value="placeholder">36</option>
+                            <option value="placeholder">37</option>
+                            <option value="placeholder">38</option>
+                        </select>
+                    </div>
+                </div>
+                <div>
+                    <!-- Single Price Range Slider -->
+                    <div class="prezzo">
+                        <section class="range-slider">
+                            <section class="rangeValues">Prezzo</section>
+                            <input id="range" name="range" value="0" min="0" max="500" step="5" type="range">
+                            <input id="range" name="range" value="500" min="0" max="500" step="5" type="range">
+                        </section>
+                    </div>
+
+
+                    <!-- Submit/Reset Buttons -->
+                    <div class="submit">
+                        <input type="submit" value="Invia">
+                    </div>
+                </div>
+
+
+
+            </div>
+
+        </div>
+
+        <div class="fullcatalogo">
+
+
+            <h1>Estate</h1>
+            <hr id="linea">
+
+
+            <div class="catalogo">
+
+                <div class="elemento">
+                    <div class="immagine"></div>
+                    <div class="pulsanti">
+                        <button><i class="fas fa-heart"></i></button>
+                        <button><i class="fas fa-shopping-bag"></i></button>
+                        <button><i class="fa-solid fa-circle-info"></i></button>
+                    </div>
+                </div>
+
+                <div class="elemento">
+                    <div class="immagine"></div>
+                    <div class="pulsanti">
+                        <button><i class="fas fa-heart"></i></button>
+                        <button><i class="fas fa-shopping-bag"></i></button>
+                        <button><i class="fa-solid fa-circle-info"></i></button>
+                    </div>
+                </div>
+
+                <div class="elemento">
+                    <div class="immagine"></div>
+                    <div class="pulsanti">
+                        <button><i class="fas fa-heart"></i></button>
+                        <button><i class="fas fa-shopping-bag"></i></button>
+                        <button><i class="fa-solid fa-circle-info"></i></button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <script src="~/js/Elenco/Risultati.js"></script>
 </body>
+
 </html>

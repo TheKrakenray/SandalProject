@@ -31,6 +31,13 @@
     <div class="container">
         <nav class="sidebar">
             <ul>
+                @{
+                    var account = Model as Account;
+                    if (account != null && account.Ruolo == "admin")
+                    {
+                        <li><button onclick="window.location.href='/Utente/Admin/@account.Id'">Admin</button></li>
+                    }
+                }
                 <li><button onclick="showSection('anagrafica')">Anagrafica</button></li>
                 <li><button onclick="showSection('ordini')">I Miei Ordini</button></li>
                 <li><button onclick="showSection('punti')">Saldo Punti</button></li>

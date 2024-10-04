@@ -188,7 +188,7 @@ namespace SandalProject.Controllers
             }
             else
             {
-                return Redirect("Home/Index");
+                return Redirect("/Home/Index");
             }
         }
 
