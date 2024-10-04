@@ -4,7 +4,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>@ViewData["Title"]</title>
     <link rel="stylesheet" href="~/css/MainLayout.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
@@ -67,7 +67,10 @@
     <main>
         @RenderBody()
     </main>
-
+    <div id="cookie-popup" class="cookie-popup">
+        <p>Questo sito utilizza i cookie per migliorare l'esperienza dell'utente. Continuando a navigare nel sito, accetti il nostro utilizzo dei cookie.</p>
+        <button id="accept-cookies">Accetto</button>
+    </div>
     <footer>
         <div class="sezione-superiore">
             <div class="newsletter">
