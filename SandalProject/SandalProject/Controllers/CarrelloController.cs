@@ -5,13 +5,15 @@ namespace SandalProject.Controllers
 {
     public class CarrelloController : Controller
     {
-        static Account utenteLoggato = UtenteController.utenteLoggato;
         public static List<Sandali> carrello = new(); 
 
         public IActionResult Carrello()
         {
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            Console.WriteLine("id utente " + utenteLoggato.Id);
             if (utenteLoggato.Id != 1)
-            {
+            {   
                 return View(carrello);
             }
             else
@@ -22,31 +24,36 @@ namespace SandalProject.Controllers
 
         public IActionResult InserisciCarrello(int id)
         {
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            Console.WriteLine("Carrello Id " + id);
             Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
 
             if(s != null)
             {
                 carrello.Add(s);
 
-                if(utenteLoggato.Id > 1)
+                if(utenteLoggato.Id != 1)
                     DAOAccount.GetInstance().AddCarrello(utenteLoggato,s);
-                return Redirect($"/Dettagli/Dettagli/{id}");
+                return Redirect($"/Carrello/Carrello");
             }
             else
             {
-                return Redirect($"/Home/Index/");
+                return Redirect($"/Info/NotFound");
             }
         }
         
         public IActionResult EliminaCarrello(int id)
         {
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
             Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
 
             if (s != null)
             {
                 carrello.Remove(s);
               
-                if(utenteLoggato!=null)
+                if(utenteLoggato != null)
                     DAOAccount.GetInstance().RemoveCarrello(utenteLoggato,s) ;
                 return Redirect($"/Carrello/Carrello/");
             }
@@ -58,7 +65,9 @@ namespace SandalProject.Controllers
 
         public IActionResult RiempiCarrello()
         {
-            if(utenteLoggato.Id != 1)
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if (utenteLoggato.Id != 1)
             {
                 carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
 
@@ -72,7 +81,9 @@ namespace SandalProject.Controllers
 
         public IActionResult SvuotaCarrello()
         {
-            if(utenteLoggato.Id != 1)
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if (utenteLoggato.Id != 1)
                 DAOAccount.GetInstance().ResetCarrello(utenteLoggato);
 
             carrello.Clear();

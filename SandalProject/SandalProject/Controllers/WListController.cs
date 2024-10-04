@@ -5,11 +5,10 @@ namespace SandalProject.Controllers
 {
     public class WListController : Controller
     {
-        static Account utenteLoggato = UtenteController.utenteLoggato;
-        public static List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
-
-        public IActionResult WList(List<Sandali> wList)
+        public IActionResult WList()
         {
+            Account utenteLoggato = UtenteController.utenteLoggato;
+            List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
             if (utenteLoggato.Id > 1)
                 return View(wList);
             else
@@ -18,6 +17,8 @@ namespace SandalProject.Controllers
 
         public IActionResult InserisciWList(int id)
         {
+            Account utenteLoggato = UtenteController.utenteLoggato;
+            List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
             Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
 
             if (s != null)
@@ -36,6 +37,8 @@ namespace SandalProject.Controllers
 
         public IActionResult EliminaWList(int id)
         {
+            Account utenteLoggato = UtenteController.utenteLoggato;
+            List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
             Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
 
             if (s != null)
@@ -54,6 +57,8 @@ namespace SandalProject.Controllers
 
         public IActionResult RiempiWList()
         {
+            Account utenteLoggato = UtenteController.utenteLoggato;
+            List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
             if (utenteLoggato.Id != 1)
             {
                 wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
@@ -64,6 +69,8 @@ namespace SandalProject.Controllers
 
         public IActionResult SvuotaWList()
         {
+            Account utenteLoggato = UtenteController.utenteLoggato;
+            List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
             if (utenteLoggato.Id != 1)
                 DAOAccount.GetInstance().ResetWList(utenteLoggato);
 

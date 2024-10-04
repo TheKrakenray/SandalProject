@@ -82,23 +82,26 @@
                     {
                         string[] desc = s.Descrizione.Split("|");
 
-                        foreach(string d in desc)
-                        {
-                            string[] paragrafo = d.Split(";;");
+                        string[] colonna1 = desc[0].Split(";;");
 
-                            string testo = paragrafo[1];
+                        foreach (string c in colonna1)
+                        {
+                            string testo = colonna1[1];
 
                             descrizioni.Add(testo);
                         }
                     }
 
+                    int charMax = 200;
+
                     while (y < 3)
                     {
                         <div class="product">
                             <img src="/Dettagli/GetImage?id=@donna[y].Id&posizioneLista=0" alt="Prodotto 1">
-                            <div class="color-options"></div>
-                            <p>@descrizioni[y]</p><br>
-                            <span>Sold Out</span><br>
+                            <div>
+                                <p>@descrizioni[y].Substring(0, charMax)...</p>
+                                <a href="/Carrello/InserisciCarrello?id=@donna[y].Id">Aggiungi +</a>
+                            </div
                         </div>
                         y++;
                     }
@@ -134,23 +137,25 @@
                     {
                         string[] desc = s.Descrizione.Split("|");
 
-                        foreach (string d in desc)
-                        {
-                            string[] paragrafo = d.Split(";;");
+                        string[] colonna1 = desc[0].Split(";;");
 
-                            string testo = paragrafo[1];
+                        foreach (string c in colonna1)
+                        {
+                            string testo = colonna1[1];
 
                             descrizioni.Add(testo);
                         }
                     }
 
+                    int charMax = 200;
                     while (y < 3)
                     {
                         <div class="product">
                             <img src="/Dettagli/GetImage?id=@uomo[y].Id&posizioneLista=0" alt="Prodotto 1">
-                            <div class="color-options"></div>
-                            <p>@descrizioni[y]</p><br>
-                            <span>Sold Out</span><br>
+                            <div>
+                                <p>@descrizioni[y].Substring(0, charMax)...</p>
+                                <a href="/Carrello/InserisciCarrello?id=@uomo[y].Id">Aggiungi +</a>
+                            </div>
                         </div>
                         y++;
                     }
@@ -186,23 +191,25 @@
                     {
                         string[] desc = s.Descrizione.Split("|");
 
-                        foreach (string d in desc)
-                        {
-                            string[] paragrafo = d.Split(";;");
+                        string[] colonna1 = desc[0].Split(";;");
 
-                            string testo = paragrafo[1];
+                        foreach (string c in colonna1)
+                        {
+                            string testo = colonna1[1];
 
                             descrizioni.Add(testo);
                         }
                     }
-
+                    
+                    int charMax = 200;
                     while (y < 3)
                     {
                         <div class="product">
                             <img src="/Dettagli/GetImage?id=@bambino[y].Id&posizioneLista=0" alt="Prodotto 1">
-                            <div class="color-options"></div>
-                            <p>@descrizioni[y]</p><br>
-                            <span>Sold Out</span><br>
+                            <div>
+                                <p>@descrizioni[y].Substring(0, charMax)...</p>
+                                <a href="/Carrello/InserisciCarrello?id=@bambino[y].Id">Aggiungi +</a>
+                            </div>
                         </div>
                         y++;
                     }
