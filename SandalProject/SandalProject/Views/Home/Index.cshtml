@@ -27,14 +27,37 @@
                                 <div class="text">
                                     <h2>SOLO SANDALI</h2>
                                 </div>
-                                <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=0" alt="Image 1">
+                                @if (Model[i].Immagine1 != null)
+                                {
+                                    <a href="/Dettagli/Dettagli/@Model[i].Id">
+                                        <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=0" alt="Image 1">
+                                    </a>
+                                }
+                                else if (Model[i].Immagine2 != null)
+                                {
+                                    <a href="/Dettagli/Dettagli/@Model[i].Id">
+                                        <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=1" alt="Prodotto 1">
+                                    </a>
+                                }
+                                else if (Model[i].Immagine3 != null)
+                                {
+                                    <a href="/Dettagli/Dettagli/@Model[i].Id">
+                                        <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=2" alt="Prodotto 1">
+                                    </a>
+                                }
+                                else if (Model[i].Immagine4 != null)
+                                {
+                                    <a href="/Dettagli/Dettagli/@Model[i].Id">
+                                        <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=3" alt="Prodotto 1">
+                                    </a>
+                                }
                             </div>
                             i++;
                         }
                     }
                     else
                     {
-                        <div class="slide"><div class="text"><h2>SOLO SANDALI</h2></div><img src="" alt="Image 1"></div>
+                        <div class="slide"><div class="text"><h2>SOLO SANDALI</h2></div><img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1"></div>
                     }
                 }   
             </div>
@@ -96,7 +119,34 @@
                     while (y < 3)
                     {
                         <div class="product">
-                            <a href="/Dettagli/Dettagli/@donna[y].Id"><img src="/Dettagli/GetImage?id=@donna[y].Id&posizioneLista=0" alt="Prodotto 1"></a>
+                            @if (@donna[y].Immagine1 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@donna[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@donna[y].Id&posizioneLista=0" alt="Prodotto 1">
+                                </a>
+                            }
+                            else if (@donna[y].Immagine2 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@donna[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@donna[y].Id&posizioneLista=1" alt="Prodotto 1">
+                                </a>
+                            }
+                            else if (@donna[y].Immagine3 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@donna[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@donna[y].Id&posizioneLista=2" alt="Prodotto 1">
+                                </a>
+                            }
+                            else if (@donna[y].Immagine4 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@donna[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@donna[y].Id&posizioneLista=3" alt="Prodotto 1">
+                                </a>
+                            }
+                            else
+                            {
+                                <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                            }
                             <div>
                                 <p>@descrizioni[y].Substring(0, charMax)...</p>
                                 <a href="/Carrello/InserisciCarrello?id=@donna[y].Id">Aggiungi +</a>
@@ -150,7 +200,34 @@
                     while (y < 3)
                     {
                         <div class="product">
-                            <img src="/Dettagli/GetImage?id=@uomo[y].Id&posizioneLista=0" alt="Prodotto 1">
+                            @if (@uomo[y].Immagine1 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@uomo[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@uomo[y].Id&posizioneLista=0" alt="Prodotto 1">
+                                </a>
+                            }
+                            else if (@uomo[y].Immagine2 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@uomo[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@uomo[y].Id&posizioneLista=1" alt="Prodotto 1">
+                                </a>
+                            }
+                            else if (@uomo[y].Immagine3 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@uomo[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@uomo[y].Id&posizioneLista=2" alt="Prodotto 1">
+                                </a>
+                            }
+                            else if (@uomo[y].Immagine4 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@uomo[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@uomo[y].Id&posizioneLista=3" alt="Prodotto 1">
+                                </a>
+                            }
+                            else
+                            {
+                                <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                            }
                             <div>
                                 <p>@descrizioni[y].Substring(0, charMax)...</p>
                                 <a href="/Carrello/InserisciCarrello?id=@uomo[y].Id">Aggiungi +</a>
@@ -204,7 +281,34 @@
                     while (y < 3)
                     {
                         <div class="product">
-                            <img src="/Dettagli/GetImage?id=@bambino[y].Id&posizioneLista=0" alt="Prodotto 1">
+                            @if (@bambino[y].Immagine1 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@bambino[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@bambino[y].Id&posizioneLista=0" alt="Prodotto 1">
+                                </a>
+                            }
+                            else if (@bambino[y].Immagine2 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@bambino[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@bambino[y].Id&posizioneLista=1" alt="Prodotto 1">
+                                </a>
+                            }
+                            else if (@bambino[y].Immagine3 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@bambino[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@bambino[y].Id&posizioneLista=2" alt="Prodotto 1">
+                                </a>
+                            }
+                            else if (@bambino[y].Immagine4 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@bambino[y].Id">
+                                    <img src="/Dettagli/GetImage?id=@bambino[y].Id&posizioneLista=3" alt="Prodotto 1">
+                                </a>
+                            }
+                            else
+                            {
+                                <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                            }
                             <div>
                                 <p>@descrizioni[y].Substring(0, charMax)...</p>
                                 <a href="/Carrello/InserisciCarrello?id=@bambino[y].Id">Aggiungi +</a>
