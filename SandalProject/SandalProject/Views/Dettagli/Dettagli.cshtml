@@ -18,22 +18,22 @@
     <main>
         <div class="product-container">
             <div class="image-grid">
-                <img src="/Dettagli/GetImage/id=@Model.Id&posizione=1" alt="Image 1">
-                <img src="/Dettagli/GetImage/id=@Model.Id&posizione=2" alt="Image 2">
-                <img src="/Dettagli/GetImage/id=@Model.Id&posizione=3" alt="Image 3">
-                <img src="/Dettagli/GetImage/id=@Model.Id&posizione=4" alt="Image 4">
+                <img src="/Dettagli/GetImage/id=@Model.First().Id&posizione=1" alt="Image 1">
+                <img src="/Dettagli/GetImage/id=@Model.First().Id&posizione=2" alt="Image 2">
+                <img src="/Dettagli/GetImage/id=@Model.First().Id&posizione=3" alt="Image 3">
+                <img src="/Dettagli/GetImage/id=@Model.First().Id&posizione=4" alt="Image 4">
             </div>
             <div class="product-details">
                 <div class="titolo">
-                    <h2>@Model.Nome - €@(Model.Prezzo.ToString().Replace(".",","))</h2>
-                    <p href="/WList/AggiungiWList/@(Model.Id)" class="far fa-heart" id="heart-icon" onclick="toggleHeart()"></p>
+                    <h2>@Model.First().Nome - €@(Model.First().Prezzo.ToString().Replace(".", ","))</h2>
+                    <p href="/WList/AggiungiWList/@(Model.First().Id)" class="far fa-heart" id="heart-icon" onclick="toggleHeart()"></p>
                     <!--Controllare se l'utente loggato ha wishlistato il sandalo-->
                 </div>
 
                 <div class="color-selection">
                     <p>Colore: </p>
                     <div class="colori">
-                        <span class="colore" id="selected" style="--coloreSandalo:@Model.Colore"></span>
+                        <span class="colore" id="selected" style="--coloreSandalo:@Model.First().Colore"></span>
                         
                      @* @foreach()
                         {
@@ -45,7 +45,7 @@
                 <div class="size-selection">
                     <p>Taglia:</p>
                     <div class="sizes">
-                        <span class="selected">@Model.Taglia</span>
+                        <span class="selected">@Model.First().Taglia</span>
                         @* @foreach()
                         {
                         //Stessa cosa per le taglie
@@ -53,11 +53,11 @@
                     </div>
                 </div>
 
-                <button href="/Carrello/AggiungiCarrello/@Model.Id" class="add-to-cart">Aggiungi al carrello</button>
+                <button href="/Carrello/AggiungiCarrello/@Model.First().Id" class="add-to-cart">Aggiungi al carrello</button>
                 
 
                 @{
-                    string itemDesc = string.IsNullOrEmpty(Model.Descrizione) ? "default|default|default" : Model.Descrizione;
+                    string itemDesc = string.IsNullOrEmpty(Model.First().Descrizione) ? "default|default|default" : Model.First().Descrizione;
 
                     List<string> listDesc = itemDesc.Split('|').ToList();
 
