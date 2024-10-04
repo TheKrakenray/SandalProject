@@ -1,0 +1,215 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f0f0f0;
+    height: 100%;
+    overflow-y: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #000;
+    color: #fff;
+}
+
+.capocchia {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    align-items: center;
+    padding-top: 15px;
+}
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+}
+
+.profile-pic {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropbtn {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.dropbtn1 {
+    display: none;
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    right: 0;
+    background-color: #fff;
+    min-width: 160px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+}
+
+.dropdown-content a {
+    color: #000;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 60px);
+}
+
+.content {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.buttonstyle {
+    width: fit-content; 
+    box-sizing: border-box; 
+    padding: 10px; 
+    margin-top: 10px;
+    border-radius: 5px; 
+    background: #fff; 
+    color: #000; 
+    border: 2px solid #000; 
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    font-size: 16px; 
+}
+
+label[for="file"].buttonstyle {
+    font-size: 16px; 
+    background: #000; 
+    color: #fff; 
+    border: none; 
+}
+
+#file {
+    display: none;
+}
+
+#file-name {
+    margin-left: 10px;
+    font-family: 'Poppins', sans-serif;
+}
+
+
+#submit-button {
+    background-color: #fff;
+    color: #000;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 25px;
+    padding: 10px 20px;
+    border: 2px solid #000;
+    font-family: 'Poppins', sans-serif;
+}
+
+@media (max-width: 700px) {
+    .container {
+        flex-direction: column;
+        width: 100%;
+        margin: 0 auto;
+        overflow-y: auto;
+        height: 100%;
+    }
+
+    header, .user-menu {
+        flex-direction: column;
+        align-items: flex-start;
+        width: 100%;
+        word-wrap: break-word;
+    }
+    .user-menu {
+        align-items: flex-end;
+        justify-content: flex-end; 
+        margin-top: 0px auto;
+    }
+
+    .profile-pic {
+        margin-bottom: 10px;
+    }
+
+    .dropdown {
+        text-align: right;
+    }
+
+    .dropdown-content {
+        margin-top: 10px;
+        width: 100%;
+        box-sizing: border-box;
+        text-align: center;
+    }
+
+    .dropbtn {
+        display: none;
+    }
+
+    .dropbtn1 {
+        display: flex;
+    }
+
+    #upload-button {
+        margin-top: 250px;
+        justify-content: center; 
+        align-items: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    label[for="file"], #file-name, .buttonstyle {
+        width: 100%;
+        text-align: center;
+        margin-top: 10px;
+    }
+}
