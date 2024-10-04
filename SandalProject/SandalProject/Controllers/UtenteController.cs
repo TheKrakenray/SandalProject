@@ -194,13 +194,11 @@ namespace SandalProject.Controllers
 
         public IActionResult CaricaFileSandali(IFormFile filexlsx)
         {
-            Console.WriteLine("Dentro metodo excel");
             if (filexlsx == null)
             {
                 Console.WriteLine("File non ricevuto.");
                 return BadRequest("File non ricevuto.");
             }
-            Console.WriteLine($"File ricevuto: {filexlsx.FileName}, dimensione: {filexlsx.Length}");
 
             List<Entity> e = new List<Entity>();
             //int skuId = DAOSandali.GetInstance().GetId();
@@ -210,99 +208,48 @@ namespace SandalProject.Controllers
 
             if (filexlsx != null && filexlsx.Length > 0 && filexlsx.ContentType == "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet")
             {
-                Console.WriteLine("Dentro metodo excel - 1");
                 // Utilizza EPPlus per caricare il file Excel
                 using (var stream = new MemoryStream())
                 {
-                    Console.WriteLine("Dentro metodo excel - 2");
-
                     // Copia il file in un MemoryStream
                     filexlsx.CopyTo(stream);
-                    Console.WriteLine("Dentro metodo excel - 3");
-
                     stream.Position = 0; // Riporta il puntatore all'inizio
-                    Console.WriteLine("Dentro metodo excel - 4");
 
                     using (var package = new ExcelPackage(stream))
                     {
-                        Console.WriteLine("Dentro metodo excel - 5");
-
                         // Seleziona il primo foglio di lavoro
                         var worksheet = package.Workbook.Worksheets[0];
-                        Console.WriteLine("Dentro metodo excel - 6");
 
                         // Inizia dalla riga 2 per saltare l'intestazione
                         for (int row = 2; row <= worksheet.Dimension.End.Row; row++)
                         {
-                            Console.WriteLine("Dentro metodo excel - 7");
-
                             // Estrazione delle immagini dal foglio
                             byte[] img1 = null, img2 = null, img3 = null, img4 = null;
 
                             foreach (var drawing in worksheet.Drawings)
                             {
-                                Console.WriteLine("Dentro metodo excel - 8");
-
                                 if (drawing is ExcelPicture picture && picture.From.Row + 1 == row)  // picture.From.Row è 0-indexed
                                 {
-                                    Console.WriteLine("Dentro metodo excel - 9");
-
                                     // Verifica la colonna dell'immagine e assegna correttamente la posizione
                                     switch (picture.From.Column + 1) // picture.From.Column è 0-indexed
                                     {
                                         case 13:
-                                            Console.WriteLine("Dentro metodo excel - 10");
-
                                             img1 = picture.Image.ImageBytes;
-                                            Console.WriteLine("Dentro metodo excel - 11");
-
                                             break;
                                         case 14:
-                                            Console.WriteLine("Dentro metodo excel - 12");
-
                                             img2 = picture.Image.ImageBytes;
-                                            Console.WriteLine("Dentro metodo excel - 13");
-
                                             break;
                                         case 15:
-                                            Console.WriteLine("Dentro metodo excel - 14");
-
                                             img3 = picture.Image.ImageBytes;
-                                            Console.WriteLine("Dentro metodo excel - 15");
-
                                             break;
                                         case 16:
-                                            Console.WriteLine("Dentro metodo excel - 16");
-
                                             img4 = picture.Image.ImageBytes;
-                                            Console.WriteLine("Dentro metodo excel - 17");
-
                                             break;
                                         default:
-                                            Console.WriteLine("Colonna dell'immagine non prevista");
                                             break;
                                     }
                                 }
                             }
-                            Console.WriteLine("Dentro metodo excel - 18");
-
-                            Console.WriteLine(worksheet.Cells[row, 1].Text);
-                            Console.WriteLine(worksheet.Cells[row, 2].Text);
-                            Console.WriteLine(worksheet.Cells[row, 3].Text);
-                            Console.WriteLine(worksheet.Cells[row, 4].Text);
-                            Console.WriteLine(worksheet.Cells[row, 5].Text);
-                            Console.WriteLine(worksheet.Cells[row, 6].Text);
-                            Console.WriteLine(worksheet.Cells[row, 7].Text);
-                            Console.WriteLine(worksheet.Cells[row, 8].Text);
-                            Console.WriteLine(worksheet.Cells[row, 9].Text);
-                            Console.WriteLine(worksheet.Cells[row, 10].Text);
-                            Console.WriteLine(worksheet.Cells[row, 11].Text);
-                            Console.WriteLine(worksheet.Cells[row, 12].Text);
-                            Console.WriteLine(worksheet.Cells[row, 13].Text);
-                            Console.WriteLine(worksheet.Cells[row, 14].Text);
-                            Console.WriteLine(worksheet.Cells[row, 15].Text);
-                            Console.WriteLine(worksheet.Cells[row, 16].Text);
-                            Console.WriteLine("Dentro metodo excel - 19");
 
                             Entity ent = new Sandali
                             {
@@ -322,33 +269,23 @@ namespace SandalProject.Controllers
                                 Sku = "",
                                 Colore = worksheet.Cells[row, 12].Text
                             };
-                            Console.WriteLine("Dentro metodo excel - 20");
 
                             string sku = $"{((Sandali)ent).Nome[0]}" + $"{((Sandali)ent).Nome[1]}" + $"{((Sandali)ent).Marca[0]}" + $"{((Sandali)ent).Marca[1]}" + $"{((Sandali)ent).Categoria[0]}" + $"{((Sandali)ent).Genere[0]}";
-                            Console.WriteLine("Dentro metodo excel - 21");
 
                             ((Sandali)ent).Sku = sku.ToUpper();
-                            Console.WriteLine("Dentro metodo excel - 22");
 
                             e.Add(ent);
-                            Console.WriteLine("Dentro metodo excel - 23");
-
                         }
                     }
                 }
-                Console.WriteLine("Dentro metodo excel - 24");
 
                 DAOSandali.GetInstance().AggiornaTabella();
-                Console.WriteLine("Dentro metodo excel - 25");
 
                 foreach (Entity ents in e)
                 {
-                    Console.WriteLine("Dentro metodo excel - 26");
-
                     DAOSandali.GetInstance().Insert(ents);
                 }
             }
-            Console.WriteLine("Dentro metodo excel - 27");
 
             return Redirect($"/Utente/Admin/{utenteLoggato.Id}");
         }
