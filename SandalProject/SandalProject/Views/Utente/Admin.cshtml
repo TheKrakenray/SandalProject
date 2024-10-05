@@ -1,10 +1,6 @@
 ﻿@using SandalProject.Models;
 @using SandalProject.Utility;
 @model Entity;
-
-@{
-    Layout = "MainLayout";
-}
 <!DOCTYPE html>
 <html lang="it">
 <head>
@@ -25,14 +21,21 @@
                     <button class="dropbtn">Benvenuto, Admin</button>
                     <button class="dropbtn1">Benvenuto,<br>Admin</button>
                     <div class="dropdown-content">
-                        <a href="#">Home</a>
-                        <a href="#">Logout</a>
+                        <a href="/Home/Index/">Home</a>
+                        <a href="/WList/WList/">WishList</a>
+                        <a href="/Carrello/Carrello/">Carrello</a>
+                        <a href="/Utente/Logout">Logout</a>
                     </div>
                 </div>
             </div>
         </div>
     </header>
     <div class="container">
+        <nav class="sidebar">
+            <ul>
+                <li><button onclick="window.location.href='/Utente/Admin/@(((Account)Model).Id)'">Admin</button></li>
+            </ul>
+        </nav>
         <main class="content">
             <form method="post" enctype="multipart/form-data" action="/Utente/CaricaFileSandali">
                 <label for="file">Carica file Excel:</label>
