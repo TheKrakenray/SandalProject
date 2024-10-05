@@ -114,21 +114,12 @@ document.getElementById("search").addEventListener("click", () => {
     window.location.href = "/Elenco/Risultati/";
 });
 document.getElementById("wlist").addEventListener("click", () => {
-    if (document.getElementById("wlist").getAttribute("idaccount") != 1)
-        window.location.href = "/WList/RiempiWList/" + document.getElementById("wlist").getAttribute("idaccount");
-    else
-        window.location.href = "/Utente/Login/";
+        window.location.href = "/WList/WList/";
 });
 document.getElementById("cart").addEventListener("click", () => {
-    if (document.getElementById("cart").getAttribute("idaccount") != 1)
-        window.location.href = "/Carrello/RiempiCarrello/" + document.getElementById("cart").getAttribute("idaccount");
-    else
-        window.location.href = "/Utente/Login/";
+        window.location.href = "/Carrello/Carrello/";
 });
 document.getElementById("user").addEventListener("click", () => {
-    if (document.getElementById("user").getAttribute("idaccount") != 1)
-        window.location.href = "/Utente/Account/" + document.getElementById("user").getAttribute("idaccount");
-    else
         window.location.href = "/Utente/Login/";
 });
 
