@@ -18,16 +18,21 @@ namespace SandalProject.Controllers
         public IActionResult InserisciWList(int id)
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
-            List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
+
             Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
 
             if (utenteLoggato.Id != 1) 
             {
-                wList.Add(s);
-
-                if (s != null)
+                if (DAOAccount.GetInstance().FindSandaloWList(id))
+                {
+                    return Redirect($"/Dettagli/Dettagli/{id}"); // Sandalo già presente in wishlist!
+                }
+                else
+                {
                     DAOAccount.GetInstance().AddWList(utenteLoggato, s);
-                return Redirect($"/Dettagli/Dettagli/{id}");
+
+                    return Redirect($"/Dettagli/Dettagli/{id}");
+                }
             }
             else
             {

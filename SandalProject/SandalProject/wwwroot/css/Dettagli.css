@@ -21,6 +21,15 @@ h1 {
     text-decoration: none;
 }
 
+/*.link-icon {
+    color: #000;
+    text-decoration: none;
+}
+.link-icon:visited {
+    color: #000;
+    text-decoration: none;
+}
+*/
 .product-container {
     display: flex;
     justify-content: center;
@@ -74,6 +83,7 @@ h1 {
 #heart-icon{
     margin: 0px;
     font-size: 25px;
+    color: #000;
 }
 
 .sottotitolo {

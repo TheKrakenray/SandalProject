@@ -310,6 +310,36 @@ namespace SandalProject.Models
             return san;
         }
 
+        public bool FindSandaloWList(int id)
+        {
+            List<Sandali> san = new();
+            List<Dictionary<string, string>> righe = new();
+
+            try
+            {
+                righe = db.Read($"Select * from Wishlist where IdSandali = {id};");
+            }
+            catch
+            {
+                Console.WriteLine("Errore nel find in tabella WList id " + id);
+                return false;
+            }
+
+            foreach (var r in righe)
+            {
+                Sandali s = new();
+                s.FromDictionary(r);
+                san.Add(s);
+            }
+
+            if (san.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public bool ResetWList(Account utente)
         {
             try
