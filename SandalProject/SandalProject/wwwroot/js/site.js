@@ -168,3 +168,27 @@ document.getElementById("menu-item-FAQ").addEventListener("click", () => {
 document.getElementById("menu-item-Contacts").addEventListener("click", () => {
     window.location.href = "/Info/Contatti/";
 });
+
+
+
+//--COOKIES--//
+
+window.onload = function () {
+    if (!localStorage.getItem("cookiesAccepted")) {
+        document.getElementById("cookie-popup").style.display = "flex";
+    }
+
+    document.getElementById("accept-cookies").addEventListener("click", function () {
+        localStorage.setItem("cookiesAccepted", "true");
+        document.getElementById("cookie-popup").style.display = "none";
+        document.getElementById("cookie-popup").remove();
+    });
+};
+
+document.getElementById('accept-cookies').addEventListener('click', function () {
+    document.getElementById('cookie-popup').classList.add('hidden');
+});
+
+if (localStorage.getItem('cookiesAccepted') === 'true') {
+    document.getElementById('cookie-popup').classList.add('hidden');
+}
