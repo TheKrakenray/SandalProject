@@ -115,7 +115,7 @@ document.getElementById("search").addEventListener("click", () => {
 });
 document.getElementById("wlist").addEventListener("click", () => {
     if (document.getElementById("wlist").getAttribute("idaccount") != 1)
-        window.location.href = "/WList/RiempiWList/" + document.getElementById("wlist").getAttribute("idaccount");
+        window.location.href = "/WList/WList/" + document.getElementById("wlist").getAttribute("idaccount");
     else
         window.location.href = "/Utente/Login/";
 });
