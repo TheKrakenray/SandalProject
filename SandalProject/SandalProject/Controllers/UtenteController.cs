@@ -44,7 +44,14 @@ namespace SandalProject.Controllers
 
                 utenteLoggato = (Account)DAOAccount.GetInstance().Find(parametri["mail"]);
 
-                return Redirect($"/Utente/Account/{utenteLoggato.Id}");
+                if(utenteLoggato.Ruolo == "admin")
+                {
+                    return Redirect($"/Utente/Admin/{utenteLoggato.Id}");
+                }
+                else
+                {
+                    return Redirect($"/Utente/Account/{utenteLoggato.Id}");
+                }
             }
             else
             {
@@ -180,11 +187,9 @@ namespace SandalProject.Controllers
 
         public IActionResult Admin(int id)
         {
-            Account account = (Account)DAOAccount.GetInstance().Find(id);
-
-            if(account != null && account.Ruolo == "admin")
+            if(utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "admin" )
             {
-                return View(account);
+                return View(utenteLoggato);
             }
             else
             {

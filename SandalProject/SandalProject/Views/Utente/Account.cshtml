@@ -18,8 +18,8 @@
             <div class="user-menu">
                 <img src="/Utente/GetImage/@(((Account)Model).Id)" alt="Profile Picture" class="profile-pic" />
                 <div class="dropdown">
-                    <button class="dropbtn">Benvenuto,[Nome Utente]</button>
-                    <button class="dropbtn1">Benvenuto,<br>[Nome Utente]</button>
+                    <button class="dropbtn">Benvenuto @(((Account)Model).Username)</button>
+                    <button class="dropbtn1">Benvenuto<br>@(((Account)Model).Username)</button>
                     <div class="dropdown-content">
                         <a href="/Home/Index/">Home</a>
                         <a href="/WList/WList/">WishList</a>
@@ -33,13 +33,6 @@
     <div class="container">
         <nav class="sidebar">
             <ul>
-                @{
-                    Account account = (Account)Model;
-                    if (account != null && account.Ruolo == "admin")
-                    {
-                        <li><button onclick="window.location.href='/Utente/Admin/@account.Id'">Admin</button></li>
-                    }
-                }
                 <li><button onclick="showSection('anagrafica')">Anagrafica</button></li>
                 <li><button onclick="showSection('ordini')">I Miei Ordini</button></li>
                 <li><button onclick="showSection('punti')">Saldo Punti</button></li>
