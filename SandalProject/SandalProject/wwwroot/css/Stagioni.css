@@ -18,7 +18,7 @@
     gap: 10px;
     margin-bottom: 10px;
     padding-bottom: 10px;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
     justify-content: center;
 }
 
@@ -70,7 +70,7 @@
     font-size: 20px;
     font-weight: 600;
     margin: 10px 0;
-    border-bottom: 2px solid black;
+    border-bottom: 1px solid black;
     padding-bottom: 10px;
 }
 
