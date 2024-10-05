@@ -9,10 +9,11 @@ namespace SandalProject.Controllers
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
             List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
-            if (utenteLoggato.Id > 1)
+
+            if (utenteLoggato.Id != 1)
                 return View(wList);
             else
-                return Redirect("/Utente/Login/");
+                return Redirect("/Utente/Logout/");
         }
 
         public IActionResult InserisciWList(int id)
@@ -23,7 +24,7 @@ namespace SandalProject.Controllers
 
             if (utenteLoggato.Id != 1) 
             {
-                if (DAOAccount.GetInstance().FindSandaloWList(id))
+                if (DAOAccount.GetInstance().FindSandaloWList(utenteLoggato, id))
                 {
                     return Redirect($"/Dettagli/Dettagli/{id}"); // Sandalo già presente in wishlist!
                 }
@@ -36,51 +37,51 @@ namespace SandalProject.Controllers
             }
             else
             {
-                return Redirect($"/Utente/Login/");
+                return Redirect($"/Utente/Logout/");
             }
         }
 
         public IActionResult EliminaWList(int id)
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
-            List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
             Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
 
-            if (s != null)
+            if (utenteLoggato.Id != 1)
             {
-                wList.Remove(s);
-
-                if (utenteLoggato != null)
+                if (DAOAccount.GetInstance().FindSandaloWList(utenteLoggato, id))
+                {
                     DAOAccount.GetInstance().RemoveWList(utenteLoggato, s);
-                return Redirect($"/WList/WList/{wList}");
+
+                    return Redirect($"/WList/WList/");
+                }
+                else
+                {
+                    return Redirect($"/WList/WList/");
+                }
             }
             else
             {
-                return Redirect($"/WList/WList/{wList}");
+                return Redirect($"/Utente/Logout/");
             }
-        }
-
-        public IActionResult RiempiWList()
-        {
-            Account utenteLoggato = UtenteController.utenteLoggato;
-            List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
-            if (utenteLoggato.Id != 1)
-            {
-                wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
-                return Redirect($"/WList/WList/{wList}");
-            }
-            return Redirect("/Utente/Login/");
         }
 
         public IActionResult SvuotaWList()
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
             List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
+
             if (utenteLoggato.Id != 1)
+            {
                 DAOAccount.GetInstance().ResetWList(utenteLoggato);
 
-            wList.Clear();
-            return Redirect($"/WList/WList/{wList}");
+                wList.Clear();
+
+                return Redirect($"/WList/WList/");
+            }
+            else
+            {
+                return Redirect("/Utente/Logout/");
+            }
         }
     }
 }

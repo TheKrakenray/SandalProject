@@ -310,14 +310,14 @@ namespace SandalProject.Models
             return san;
         }
 
-        public bool FindSandaloWList(int id)
+        public bool FindSandaloWList(Account utente, int id)
         {
             List<Sandali> san = new();
             List<Dictionary<string, string>> righe = new();
 
             try
             {
-                righe = db.Read($"Select * from Wishlist where IdSandali = {id};");
+                righe = db.Read($"Select * from Wishlistwhere IdAccount = {utente.Id} AND IdSandali = {Id} ;");
             }
             catch
             {

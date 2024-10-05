@@ -28,19 +28,27 @@ namespace SandalProject.Controllers
         {
             chiamata++;
 
-            il.LogInformation($"Tentativo di accesso numero {chiamata} alle ore {DateTime.Now.Hour}");
+            il.LogInformation($"Tentativo di accesso numero {chiamata} alle ore {DateTime.Now.Hour}:{DateTime.Now.Minute}");
 
-            if (utenteLoggato.Id <= 1)
-                return View(chiamata);
+            if(utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "user")
+            {
+                return Redirect("/Utente/Account/" + utenteLoggato.Id);
+            }
+            else if(utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "admin")
+            {
+                return Redirect($"/Utente/Admin/{utenteLoggato.Id}");
+            }
             else
-                return Redirect("/Utente/Account/"+utenteLoggato.Id);
+            {
+                return View(chiamata);
+            }
         }
 
         public IActionResult Valida(Dictionary<string, string> parametri)
         {
             if (DAOAccount.GetInstance().Valida(parametri["mail"], parametri["psw"]))
             {
-                il.LogInformation($"UTENTE LOGGATO: {parametri["mail"]}");
+                il.LogInformation($"UTENTE LOGGATO: {parametri["mail"]} alle ore {DateTime.Now.Hour}:{DateTime.Now.Minute}");
 
                 utenteLoggato = (Account)DAOAccount.GetInstance().Find(parametri["mail"]);
 
@@ -55,7 +63,7 @@ namespace SandalProject.Controllers
             }
             else
             {
-                return Redirect("Login");
+                return Redirect("/Utente/Login");
             }
         }
 
@@ -92,12 +100,11 @@ namespace SandalProject.Controllers
 
         public IActionResult Logout()
         {
-      
             chiamata = 0;
-            il.LogInformation($"LOGOUT: {utenteLoggato.Username} alle ore {DateTime.Now.Hour}");
+            il.LogInformation($"LOGOUT: {utenteLoggato.Email} alle ore {DateTime.Now.Hour}:{DateTime.Now.Minute}");
             utenteLoggato = (Account)DAOAccount.GetInstance().Find(1);
 
-            return Redirect("Login");
+            return Redirect("/Utente/Login");
         }
 
         public IActionResult Account(int id)
@@ -146,7 +153,7 @@ namespace SandalProject.Controllers
 
         public Entity SetDefaultPropic()
         {
-            Entity ricchione = new Account();
+            Entity temp = new Account();
 
             // Trova l'oggetto account da salvare nel DB
             Entity accountDefault = DAOAccount.GetInstance().Find(1);
@@ -158,15 +165,15 @@ namespace SandalProject.Controllers
             var puntiFedelta = ((Account)accountDefault).PFedelta;
 
             // RICORDARSI I POINTERS
-            ((Account)ricchione).Username = username;
-            ((Account)ricchione).Email = email;
-            ((Account)ricchione).Psw = psw;
-            ((Account)ricchione).Ruolo = ruolo;
-            ((Account)ricchione).Propic = propic;
-            ((Account)ricchione).PFedelta = puntiFedelta;
+            ((Account)temp).Username = username;
+            ((Account)temp).Email = email;
+            ((Account)temp).Psw = psw;
+            ((Account)temp).Ruolo = ruolo;
+            ((Account)temp).Propic = propic;
+            ((Account)temp).PFedelta = puntiFedelta;
 
             // Salva l'account nel DB
-            DAOAccount.GetInstance().Insert(ricchione);
+            DAOAccount.GetInstance().Insert(temp);
 
             Entity a = DAOAccount.GetInstance().MaxId();
 
