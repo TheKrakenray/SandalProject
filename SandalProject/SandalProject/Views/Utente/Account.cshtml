@@ -33,14 +33,8 @@
     <div class="container">
         <nav class="sidebar">
             <ul>
-                @{
-                    Account account = (Account)Model;
-                    if (account != null && account.Ruolo == "admin")
-                    {
-                        <li><button onclick="window.location.href='/Utente/Admin/@account.Id'">Admin</button></li>
-                    }
-                }
                 <li><button onclick="showSection('anagrafica')">Anagrafica</button></li>
+                <li><button onclick="showSection('password-change')">Modifica Password</button></li>
                 <li><button onclick="showSection('ordini')">I Miei Ordini</button></li>
                 <li><button onclick="showSection('punti')">Saldo Punti</button></li>
             </ul>
@@ -64,6 +58,15 @@
                     <button type="button" id="edit-button" onclick="enableEditing()">Modifica Profilo</button>
                     <button type="button" id="save-button" style="display:none;" onclick="saveChanges()">Salva
                         Modifiche</button>
+                </form>
+            </div>
+            <div id="password-change" class="user-section">
+                <h3>Modifica Password</h3>
+                <form class="password-form" id="password-form">
+                    <label>Inserisci la password attuale: <input type="password" id="current-password" required></label>
+                    <label>Inserisci nuova password: <input type="password" id="new-password" required></label>
+                    <label>Conferma nuova password: <input type="password" id="confirm-password" required></label>
+                    <button type="button" id="change-password-button" onclick="changePassword()">Cambia Password</button>
                 </form>
             </div>
             <div id="ordini" class="user-section" style="display:none;">
