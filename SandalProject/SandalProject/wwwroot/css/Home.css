@@ -61,8 +61,11 @@ hr {
     position: relative;
     margin: 0 auto;
     font-size: clamp(10px, 11vw, 165px);
-    -webkit-text-stroke: 10px rgb(0, 0, 0);
-    text-align:center;
+    -webkit-text-stroke: 0.6vw rgb(0, 0, 0);
+    text-align: center;
+}
+.container.dark-mode > .text > .title {
+    -webkit-text-stroke-color:rgb(255, 255, 255);
 }
 
 .banner {
@@ -312,6 +315,7 @@ button:hover {
 
     .banner {
         text-align: center;
+        margin-top:0px;
     }
 
     .sidebar {
@@ -365,13 +369,11 @@ button:hover {
         font-size: 50px;
     }
 
-        .text h2 {
-            padding: 0;
-            margin-top: auto;
-            border: white 12px;
-            -webkit-text-stroke: 5px rgb(250, 250, 250);
-        }
-
+    .title {
+        font-size: clamp(5px, 8vw, 165px);
+        -webkit-text-stroke-width: 0.4vw;
+        align-content:center;
+    }
 
     .slide {
         min-width: 100%;

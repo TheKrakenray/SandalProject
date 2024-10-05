@@ -1,6 +1,5 @@
 ﻿.container {
     width: 100%;
-    height: 80vh;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -14,9 +13,8 @@
     width: 100%;
     max-width: 400px;
     margin: 50px auto;
-    background-color: #fff;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(100, 100, 100, 1);
     padding: 20px;
     font-family: 'Poppins', sans-serif;
 }
@@ -89,7 +87,6 @@
 
 .password-note {
     font-size: 0.9em;
-    color: #000;
     margin-top: 10px;
     margin-bottom: 10px;
 }
@@ -172,6 +169,7 @@ input::-ms-clear {
     top: 15%;
     cursor: pointer;
     font-size: 1.2em;
+    color:#000;
 }
 
 input[type="text"],

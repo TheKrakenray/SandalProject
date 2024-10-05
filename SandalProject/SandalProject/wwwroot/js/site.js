@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const menuItems = document.querySelectorAll('.menu-item');
     const header = document.querySelector('.header');
     const footer = document.querySelector('footer');
-
+    const container = document.querySelector('.container');
 
     const defaultModeIsDark = localStorage.setItem('defaultModeIsDark', window.matchMedia("(prefers-color-scheme: dark)").matches)
 
@@ -23,9 +23,10 @@ document.addEventListener('DOMContentLoaded', function () {
         if (isDarkMode == "true") {
             darkModeCheckboxFooter.checked = true;
             darkModeCheckbox.checked = true;
-            console.log("darkmode");
+            
 
             document.body.classList.add('dark-mode');
+            container.classList.add('dark-mode');
             header.classList.add('dark-mode');
             footer.classList.add('dark-mode');
             menuPopup.classList.add('dark-mode');
@@ -41,9 +42,10 @@ document.addEventListener('DOMContentLoaded', function () {
         else {
             darkModeCheckboxFooter.checked = false;
             darkModeCheckbox.checked = false;
-            console.log("lightmode");
+            
 
             document.body.classList.remove('dark-mode');
+            container.classList.remove('dark-mode');
             header.classList.remove('dark-mode');
             footer.classList.remove('dark-mode');
             menuPopup.classList.remove('dark-mode');
@@ -60,6 +62,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     function toggleDarkMode(checked) {
         document.body.classList.toggle('dark-mode', checked);
+        container.classList.toggle('dark-mode',checked);
         header.classList.toggle('dark-mode', checked);
         footer.classList.toggle('dark-mode', checked);
         menuPopup.classList.toggle('dark-mode', checked);

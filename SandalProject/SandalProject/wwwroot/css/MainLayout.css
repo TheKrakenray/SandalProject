@@ -12,7 +12,7 @@ body {
 }
 
 main{
-    min-height:80vh;
+    min-height:90vh;
 }
 
 .header {
@@ -183,6 +183,20 @@ body.dark-mode {
     border-bottom: 1px solid #444;
 }
 
+.header.dark-mode #logo-link {
+    color: #fff;
+}
+
+    .header.dark-mode #logo-link:visited, .header.dark-mode #logo-link:active {
+        color: #fff;
+    }
+
+.header.dark-mode .icons{
+    color:#fff;
+}
+    .header.dark-mode .icons i{
+        color: #fff;
+    }
 .menu-popup.dark-mode {
     background-color: #1e1e1e;
     color: #ffffff;
@@ -196,10 +210,26 @@ body.dark-mode {
         text-decoration: underline;
     }
 
+.header.dark-mode .menu {
+    color: #fff;
+}
+
+
 footer.dark-mode {
     background-color: #1e1e1e;
     color: #ffffff;
 }
+
+footer .logo-footer a{
+    color:#fff;
+}
+
+.header.dark-mode #logo-link, .header.dark-mode #logo-link:visited, .header.dark-mode #logo-link:active
+footer.dark-mode #logo-link, footer.dark-mode #logo-link:visited, footer.dark-mode #logo-link:active{
+    color:#fff;
+}
+
+
 
 .dark-mode-label.dark-mode {
     background-color: #000000;
@@ -368,6 +398,7 @@ footer {
     margin-right: 10px;
     color: #000;
     font-size: 24px;
+    text-decoration:none;
 }
 
     .social-media a:hover {
@@ -521,19 +552,19 @@ body.dark-mode .newsletter button {
     left: 20px;
 }
     footer {
-        font-size:10px;
-        width:100%;
+        font-size:8px;
         padding: 0px;
         background-color: #fff;
-        color: #000;
+        margin:0px 10px;
     }
     .sezione-superiore {
         display: flex;
-        justify-content: space-between;
         border-top: 1px solid #000;
         border-bottom: 1px solid #000;
-        padding: 40px;
         margin-bottom: 10px;
+        gap: 10px;
+        flex-direction: column-reverse;
+        padding:10px 0px;
     }
 
     .newsletter, .social-media {
@@ -543,7 +574,10 @@ body.dark-mode .newsletter button {
     }
 
     .social-media {
-        border-left: 1px solid #000;
+        border-left: none;
+    }
+    footer.dark-mode .social-media {
+        border-left: none;
     }
 
         .newsletter h2, .social-media h2 {
@@ -582,7 +616,6 @@ body.dark-mode .newsletter button {
     .newsletter button {
         font-size:100%;
         background-color: #000;
-        color: #fff;
         border: none;
         border-radius: 10px;
         cursor: pointer;
@@ -593,41 +626,41 @@ body.dark-mode .newsletter button {
     }
 
     .social-media img {
-        width: 20px;
-        height: 20px;
+        width: 5px;
+        height: 5px;
     }
 
     .sezione-inferiore {
         display: flex;
         justify-content: space-between;
         align-items: center;
+        gap:10px;
     }
 
     .link-footer {
         display: flex;
         flex-direction: row;
         align-items: flex-end;
-        font-size:13px;
+        font-size:10px;
     }
 
         .link-footer a {
             margin-right: 30px;
         }
 
-
-
-    .logobello img {
+    .logo-footer  {
+        font-size: 20px;
         max-width: 80%;
     }
 
     .social-media a {
         margin-right: 10px;
-        font-size: 20px;
+        font-size: 15px;
     }
 
     .social-x{
         font-weight: bold;
-        font-size: 20px;
+        font-size: 15px;
         text-decoration: none;
     }
 
