@@ -1,4 +1,8 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "MainLayout";
+}
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="UTF-8">
@@ -9,41 +13,28 @@
     <link rel="stylesheet" href="~/css/Login.css">
 </head>
 <body>
-
-    @*     <div class="login-container">
-    <h2><strong>Login</strong></h2>
-    <form action="/Utente/Valida" onsubmit="return controllo_login()" method="post">
-    <input type="email" name="mail" id="mail" placeholder="Email" required>
-    <input type="password" name="psw" id="passw" placeholder="Password" required>
-    <a href="#" class="forgot-password"><strong>Password Dimenticata</strong></a>
-    <button type="submit">Accedi</button>
-    </form>
-    <div class="login-options">
-    <p>Non hai un account? <a href="@Url.Action("Registrazione","Utente")" class="register">Registrati</a></p>
-    </div>
-    </div> *@
-
-
-    <div class="login-page">
-        <div class="login-header">
-            <a href="/Home/Index">🡨</a>
-            <h2>Accedi al tuo profilo</h2>
-        </div>
-        <div class="login-content">
-            <form action="/Utente/Valida" method="post" onsubmit="">
-                <input type="email" name="mail" placeholder="Indirizzo e-mail*" required>
-                <div class="password-container">
-                    <input type="password" name="psw" id="password" placeholder="Password*" required autocomplete="new-password">
-                    <i class="far fa-eye toggle-password" id="togglePassword"></i>
-                </div>
-                <div class="required-forgot-container">
-                    <p class="required-fields">*Campi obbligatori</p>
-                    <a href="/Utente/RecuperaPassword" class="forgot-password">Password dimenticata?</a>
-                </div>
-                <button type="submit" class="login-button">Accedi al tuo profilo</button>
-            </form>
-            <p>Non sei ancora iscritto?</p>
-            <div class="signup-button"><a href="/Utente/Registrazione">Iscriviti ora</a></div>
+    <div class="container">
+        <div class="login-page">
+            <div class="login-header">
+                <a href="/Home/Index">🡨</a>
+                <h2>Accedi al tuo profilo</h2>
+            </div>
+            <div class="login-content">
+                <form action="/Utente/Valida" method="post" onsubmit="">
+                    <input type="email" name="mail" placeholder="Indirizzo e-mail*" required>
+                    <div class="password-container">
+                        <input type="password" name="psw" id="password" placeholder="Password*" required autocomplete="new-password">
+                        <i class="far fa-eye toggle-password" id="togglePassword"></i>
+                    </div>
+                    <div class="required-forgot-container">
+                        <p class="required-fields">*Campi obbligatori</p>
+                        <a href="/Utente/RecuperaPassword" class="forgot-password">Password dimenticata?</a>
+                    </div>
+                    <button type="submit" class="login-button">Accedi al tuo profilo</button>
+                </form>
+                <p>Non sei ancora iscritto?</p>
+                <div class="signup-button"><a href="/Utente/Registrazione">Iscriviti ora</a></div>
+            </div>
         </div>
     </div>
     <script src="~/js/Account/Login.js"></script>

@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\Stagioni.css" />
     <_ContentIncludedByDefault Remove="wwwroot\js\Account\Admin.js" />
   </ItemGroup>
 

@@ -1,7 +1,17 @@
-﻿.registrazione-page {
-    display: block;
-    position: relative;
-    width: 90%;
+﻿.container {
+    width: 100%;
+    height: 80vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.registrazione-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
     max-width: 400px;
     margin: 50px auto;
     background-color: #fff;
@@ -18,64 +28,64 @@
     margin-bottom: 20px;
 }
 
-    .registrazione-header h2 {
-        margin: 10px;
-        font-size: 1.5em;
-        font-weight: bold;
-        font-family: 'Poppins', sans-serif;
-    }
+.registrazione-header h2 {
+    margin: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    font-family: 'Poppins', sans-serif;
+}
 
 .registrazione-content form {
     display: flex;
     flex-direction: column;
 }
 
-    .registrazione-content form input,
-    .registrazione-content form button {
-        margin-bottom: 10px;
-        padding: 10px;
-        font-size: 1em;
-        border: 1px solid #000;
-        border-radius: 5px;
-        font-family: 'Poppins', sans-serif;
-    }
+.registrazione-content form input,
+.registrazione-content form button {
+    margin-bottom: 10px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
 
-    .registrazione-content form .phone-field {
-        display: flex;
-        align-items: center;
-    }
+.registrazione-content form .phone-field {
+    display: flex;
+    align-items: center;
+}
 
-        .registrazione-content form .phone-field select {
-            margin-right: 10px;
-            padding: 10px;
-            font-size: 1em;
-            border: 1px solid #000;
-            border-radius: 5px;
-        }
+.registrazione-content form .phone-field select {
+    margin-right: 10px;
+    padding: 10px;
+    font-size: 1em;
+    border: 1px solid #000;
+    border-radius: 5px;
+}
 
-    .registrazione-content form button {
-        background-color: #000;
-        color: #fff;
-        font-weight: bold;
-        cursor: pointer;
-        border-radius: 25px;
-        width: 200px;
-    }
+.registrazione-content form button {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 25px;
+    width: 200px;
+}
 
-    .registrazione-content form label {
-        display: flex;
-        align-items: center;
-        margin-bottom: 10px;
-    }
+.registrazione-content form label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
 
-        .registrazione-content form label input {
-            margin-right: 10px;
-        }
+.registrazione-content form label input {
+    margin-right: 10px;
+}
 
-        .registrazione-content form label a {
-            text-decoration: underline;
-            color: rgb(0, 0, 0);
-        }
+.registrazione-content form label a {
+    text-decoration: underline;
+    color: rgb(0, 0, 0);
+}
 
 .password-note {
     font-size: 0.9em;
@@ -90,14 +100,14 @@
     margin-top: 10px;
 }
 
-    .privacy-label span {
-        display: inline-block;
-        margin-left: 10px;
-        text-align: justify;
-        margin-top: 10px;
-        letter-spacing: -0.5px;
-        line-height: 1.2;
-    }
+.privacy-label span {
+    display: inline-block;
+    margin-left: 10px;
+    text-align: justify;
+    margin-top: 10px;
+    letter-spacing: -0.5px;
+    line-height: 1.2;
+}
 
 .terms-label span {
     display: inline-block;
@@ -115,20 +125,24 @@
     color: #ffffff;
 }
 
-    .registrazione-page.dark-mode input,
-    .registrazione-page.dark-mode button {
-        background-color: #333;
-        color: #ffffff;
-        border: 1px solid #555;
-    }
+.registrazione-page.dark-mode input,
+.registrazione-page.dark-mode button {
+    background-color: #333;
+    color: #ffffff;
+    border: 1px solid #555;
+}
 
-    .registrazione-page.dark-mode a {
-        color: #ffffff;
-    }
+.registrazione-page.dark-mode a {
+    color: #ffffff;
+}
 
-        .registrazione-page.dark-mode a:hover {
-            color: #aaaaaa;
-        }
+.registrazione-page.dark-mode a:hover {
+    color: #aaaaaa;
+}
+
+.legalInfo{
+    font-size: 12px;
+}
 
 .required-fields {
     color: #000;
@@ -137,7 +151,7 @@
 }
 
 .small-text {
-    font-size: 0.8em;
+    font-size: 14px;
     letter-spacing: -0.5px;
 }
 
