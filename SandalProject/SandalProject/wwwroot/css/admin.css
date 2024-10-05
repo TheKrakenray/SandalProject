@@ -20,6 +20,14 @@ header {
     color: #fff;
 }
 
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
 .capocchia {
     display: flex;
     justify-content: space-between;

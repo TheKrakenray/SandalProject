@@ -14,7 +14,7 @@
 <body>
     <header>
         <div class="capocchia">
-            <div class="logo">Solo Sandali</div>
+            <div onclick="window.location.href='/Home/Index/'" class="logo">Solo Sandali</div>
             <div class="user-menu">
                 <img src="/Utente/GetImage/@(((Account)Model).Id)" alt="Profile Picture" class="profile-pic">
                 <div class="dropdown">
@@ -22,8 +22,6 @@
                     <button class="dropbtn1">Benvenuto,</button>
                     <div class="dropdown-content">
                         <a href="/Home/Index/">Home</a>
-                        <a href="/WList/WList/">WishList</a>
-                        <a href="/Carrello/Carrello/">Carrello</a>
                         <a href="/Utente/Logout">Logout</a>
                     </div>
                 </div>
