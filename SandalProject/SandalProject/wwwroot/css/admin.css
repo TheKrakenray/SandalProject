@@ -20,6 +20,14 @@ header {
     color: #fff;
 }
 
+
+.logo {
+    font-size: 1.5em;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+
 .capocchia {
     display: flex;
     justify-content: space-between;
@@ -251,6 +259,21 @@ label[for="file"].buttonstyle {
         .password button:hover {
             background-color: #333;
         }
+
+#change-password-button {
+    background-color: #000; 
+    color: #fff;
+    font-family: 'Poppins', sans-serif; 
+    padding: 10px 20px;
+    border: none; 
+    border-radius: 5px; 
+    cursor: pointer;
+    font-size: 16px;
+}
+
+    #change-password-button:hover {
+        background-color: #333; 
+    }
 @media (max-width: 700px) {
     .container {
         flex-direction: column;
