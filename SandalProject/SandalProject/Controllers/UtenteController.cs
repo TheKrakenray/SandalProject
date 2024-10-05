@@ -169,7 +169,6 @@ namespace SandalProject.Controllers
         [HttpGet]
         public IActionResult GetImage(int id)
         {
-            Console.WriteLine(id + " Sono nel UtenteController/GetImage");
             var account = DAOAccount.GetInstance().Find(id);
             var image = (Account)account;
             if (image != null && image.Propic != null)

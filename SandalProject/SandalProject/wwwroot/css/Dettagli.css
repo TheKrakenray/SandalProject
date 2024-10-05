@@ -16,10 +16,15 @@ h1 {
     margin: 0;
 }
 
+.link {
+    color: #fff;
+    text-decoration: none;
+}
+
 .product-container {
     display: flex;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 2vw;
     padding: 2vw;
 }
@@ -33,15 +38,15 @@ h1 {
 }
 
 
-    .image-grid img {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        border-radius: 1vw;
-    }
+.image-grid img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1vw;
+}
 
 .product-details {
     border: 1px solid #eaeaea;
@@ -51,15 +56,29 @@ h1 {
     width: 30%;
 }
 
-
 .product-container .fas {
     color: red;
 }
 
-
-.titolo h2 {
+.titolo{
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    margin: 0 0 20px 0;
+}
+
+.nome{
+    font-size: 30px;
+}
+
+#heart-icon{
+    margin: 0px;
+    font-size: 25px;
+}
+
+.sottotitolo {
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .colori {
@@ -75,33 +94,33 @@ h1 {
 }
 
 .colore {
-    width:2vw;
-    height:2vw;
-    margin-inline: 0.5vw;
+    width: 30px;
+    height: 30px;
+    margin-inline: 15px;
     background-color: var(--coloreSandalo);
-    border: solid 1px var(--coloreSandalo);
-    border-radius: 60%;
+    border-radius: 50%;
+    border: solid 1px black !important; 
 }
 
-    .colore.selected {
-        border: solid 0.2vw black;
-        margin-top: 0.2vw white;
-    }
+.colore.selected {
+    border: solid 1px black;
+    margin-top: 0.2vw;
+}
 
-        .colore.selected[data-color="black"] {
-            border: solid 0.2vw cyan;
-        }
+.colore.selected[data-color="black"] {
+    border: solid 1px cyan;
+}
 
-    .colore:hover {
-        background-color: var(--coloreSandalo) !important;
-        border-color: #000;
-        box-shadow: 0px 0px 5px var(--coloreSandalo);
-    }
+.colore:hover {
+    background-color: var(--coloreSandalo) !important;
+    border-color: #000;
+    box-shadow: 0px 0px 5px var(--coloreSandalo);
+}
 
-    .colore.selected:hover {
-        background-color: var(--coloreSandalo) !important;
-        box-shadow: 0px 0px 0px var(--coloreSandalo);
-    }
+.colore.selected:hover {
+    background-color: var(--coloreSandalo) !important;
+    box-shadow: 0px 0px 0px var(--coloreSandalo);
+}
 
 .product-details .fa-heart {
     margin-left: 85%;
@@ -115,54 +134,63 @@ h1 {
 .sizes span {
     display: inline-block;
     margin: 10px;
-    width:2vw;
-    height:2.4vw;
+    width:50px;
+    height:50px;
     border: 1px solid #eaeaea;
-    border-radius: 30%;
+    border-radius: 15px;
     cursor: pointer;
     text-align:center;
     align-content:center;
+    font-size: 20px;
 }
 
-    .sizes span.selected {
-        background-color: black;
-        color: white;
-    }
+.sizes span.selected {
+    background-color: black;
+    color: white;
+}
 
-    .sizes span:hover {
-        background-color: #f5f5f5;
-    }
+.sizes span:hover {
+    background-color: #f5f5f5;
+}
 
-    .sizes span.selected:hover {
-        background-color: black;
-        color: white;
-    }
+.sizes span.selected:hover {
+    background-color: black;
+    color: white;
+}
 
 button {
     display: block;
-    margin:auto;
-    width: 80%;
-    margin-bottom: 1vw;
+    margin: 20px auto;
+    width: 60%;
     padding: 0.4vw;
     border: none;
     background-color: #000;
     color: white;
     cursor: pointer;
-    font-size: 1vw;
+    font-size: 20px;
     border-radius: 0.5vw;
 }
 
-    button:hover {
-        background-color: #444;
-    }
+button:hover {
+    background-color: #444;
+}
+
+hr{
+    margin: 20px auto;
+}
 
 .description, .details, .specifications {
     margin-bottom: 1vw;
 }
 
-    .description p, .details ul, .specifications ul {
-        font-size: 0.6vw;
-    }
+.description h3, .details h3, .specifications h3{
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.description p, .details ul, .specifications ul {
+    font-size: 16px;
+}
 
 ul {
     list-style-type: none;
@@ -178,7 +206,7 @@ li {
     margin-left:20px;
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 1100px) {
     body {
         font-family: 'Poppins', sans-serif;
         margin: 0;

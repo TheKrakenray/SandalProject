@@ -21,17 +21,17 @@ namespace SandalProject.Controllers
             List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
             Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
 
-            if (s != null)
+            if (utenteLoggato.Id != 1) 
             {
                 wList.Add(s);
 
-                if (utenteLoggato != null)
+                if (s != null)
                     DAOAccount.GetInstance().AddWList(utenteLoggato, s);
                 return Redirect($"/Dettagli/Dettagli/{id}");
             }
             else
             {
-                return Redirect($"/Home/Index/");
+                return Redirect($"/Utente/Login/");
             }
         }
 

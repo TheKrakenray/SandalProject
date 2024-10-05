@@ -14,7 +14,7 @@
         <div class="menu">
             <i class="fas fa-bars menu-button"></i>
         </div>
-        <div class="logo" onclick="window.location.href='/Home/Index'">SOLO SANDALI</div>
+        <div class="logo"><a id="logo-link" href='/Home/Index'>SOLO SANDALI</a></div>
         <div class="icons">
             <i id="search" class="fas fa-search"></i>
             <i id="user" idaccount="@(UtenteController.utenteLoggato.Id)" class="fas fa-user"></i>
@@ -90,9 +90,10 @@
             </div>
         </div>
         <div class="sezione-inferiore">
-            <div class="logobello">
-                <a href="/Home/Index/"><img src="~/img/Logos/logo.png" alt="Solo Sandali"></a>
+            <div class="logo-footer">
+                <a id="logo-link" href='/Home/Index'>SOLO SANDALI</a>
             </div>
+
             <div class="link-footer">
                 <a href="/Legal/Privacy">Privacy Policy</a>
                 <a href="/Legal/Cookies">Cookies</a>

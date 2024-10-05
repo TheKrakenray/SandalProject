@@ -27,7 +27,6 @@ namespace SandalProject.Controllers
         [HttpGet]
         public IActionResult GetImage(int id,int posizioneLista)
         {
-            Console.WriteLine(id + " Sono nel DettagliController/GetImage");
             List<FileResult> immagini = new List<FileResult>();
             var sandalo = DAOSandali.GetInstance().Find(id);
             var s = (Sandali)sandalo;
