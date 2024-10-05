@@ -13,7 +13,9 @@ namespace SandalProject.Controllers
 
             Console.WriteLine("id utente " + utenteLoggato.Id);
             if (utenteLoggato.Id != 1)
-            {   
+            {
+                carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
+
                 return View(carrello);
             }
             else
