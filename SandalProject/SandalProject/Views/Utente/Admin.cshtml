@@ -69,6 +69,11 @@
                 sections[i].style.display = 'none';
             }
             document.getElementById(sectionId).style.display = 'block';
+
+            var fileUploadForm = document.querySelector('form[action="/Utente/CaricaFileSandali"]');
+            if (fileUploadForm) {
+                fileUploadForm.style.display = 'none';
+            }
         }
 
         function changePassword() {
