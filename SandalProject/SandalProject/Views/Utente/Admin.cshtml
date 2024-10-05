@@ -34,6 +34,7 @@
         <nav class="sidebar">
             <ul>
                 <li><button onclick="window.location.href='/Utente/Admin/@(((Account)Model).Id)'">Admin</button></li>
+                <li><button onclick="showSection('password-change')">Modifica Password</button></li>
             </ul>
         </nav>
         <main class="content">
@@ -44,13 +45,49 @@
                 <span id="file-name">Nessun file scelto</span>
                 <button class="buttonstyle" type="submit">Carica</button>
             </form>
+            <div id="password-change" class="user-section">
+                <h3>Modifica Password</h3>
+                <form class="password-form" id="password-form">
+                    <label>Inserisci la password attuale: <input type="password" id="current-password" required></label>
+                    <label>Inserisci nuova password: <input type="password" id="new-password" required></label>
+                    <label>Conferma nuova password: <input type="password" id="confirm-password" required></label>
+                    <button type="button" id="change-password-button" onclick="changePassword()">Cambia Password</button>
+                </form>
+            </div>
         </main>
     </div>
-    <script>
+    <script> /*Essendo roba fittizia, non creero' un file apposito su js. SE LO VOLETE VE LO FATE.*/
         function updateFileName() {
             const input = document.getElementById('file');
             const fileName = input.files[0] ? input.files[0].name : 'Nessun file scelto';
             document.getElementById('file-name').textContent = fileName;
+        }
+
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName('user-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = 'none';
+            }
+            document.getElementById(sectionId).style.display = 'block';
+        }
+
+        function changePassword() {
+            var currentPassword = document.getElementById('current-password').value;
+            var newPassword = document.getElementById('new-password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+
+            if (newPassword !== confirmPassword) {
+                alert("Le nuove password non coincidono.");
+                return;
+            }
+
+            if (currentPassword && newPassword && confirmPassword) {
+                // Qui puoi aggiungere il codice per inviare la richiesta al server per cambiare la password
+                alert("Password cambiata con successo!");
+                document.getElementById('password-form').reset();
+            } else {
+                alert("Per favore, compila tutti i campi.");
+            }
         }
     </script>
 </body>

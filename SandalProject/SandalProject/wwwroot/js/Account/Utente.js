@@ -5,6 +5,9 @@ function showSection(section) {
         el.style.display = 'none';
     });
     document.getElementById(section).style.display = 'block';
+    if (section === 'password-change') {
+        document.getElementById('password-change').style.display = 'block';
+    }
 }
 
 function showOrderDetails(orderId) {
@@ -38,3 +41,22 @@ function updatePointsDisplay() {
 }
 
 updatePointsDisplay();
+
+function changePassword() {
+    var currentPassword = document.getElementById('current-password').value;
+    var newPassword = document.getElementById('new-password').value;
+    var confirmPassword = document.getElementById('confirm-password').value;
+
+    if (newPassword !== confirmPassword) {
+        alert("Le nuove password non coincidono.");
+        return;
+    }
+
+    if (currentPassword && newPassword && confirmPassword) {
+        // Qui puoi aggiungere il codice per inviare la richiesta al server per cambiare la password
+        alert("Password cambiata con successo!");
+        document.getElementById('password-form').reset();
+    } else {
+        alert("Per favore, compila tutti i campi.");
+    }
+}
