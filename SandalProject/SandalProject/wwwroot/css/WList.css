@@ -6,7 +6,8 @@
 }
 
 .container {
-    width: 80%;
+    max-width: 900px;
+    width: 100%;
     margin: auto;
     overflow: hidden;
 }
@@ -91,6 +92,7 @@
     border-radius: 5px;
     margin-top: 20px;
     display: block;
+    max-width: 300px;
     width: 100%;
     text-align: center;
 }
