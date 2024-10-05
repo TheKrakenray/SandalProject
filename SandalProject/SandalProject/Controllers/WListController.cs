@@ -8,12 +8,16 @@ namespace SandalProject.Controllers
         public IActionResult WList()
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
-            List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
 
             if (utenteLoggato.Id != 1)
+            {
+                List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
                 return View(wList);
+            }
             else
+            {
                 return Redirect("/Utente/Logout/");
+            }
         }
 
         public IActionResult InserisciWList(int id)

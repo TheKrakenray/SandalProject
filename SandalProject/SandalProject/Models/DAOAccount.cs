@@ -317,7 +317,7 @@ namespace SandalProject.Models
 
             try
             {
-                righe = db.Read($"Select * from Wishlistwhere IdAccount = {utente.Id} AND IdSandali = {id} ;");
+                righe = db.Read($"Select * from Wishlist where IdAccount = {utente.Id} AND IdSandali = {id} ;");
             }
             catch
             {
