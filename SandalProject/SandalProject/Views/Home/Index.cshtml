@@ -1,10 +1,345 @@
-﻿<!DOCTYPE html>
+﻿@using SandalProject.Models;
+@model List<Sandali>;
+
+@{
+    Layout = "MainLayout";
+}
+
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweaty Sandals</title>
+    <link rel="stylesheet" href="~/css/Home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+    <div class="container">
+        <div class="text">
+            <h2 class="title">SOLO SANDALI</h2>
+        </div>
 
+        <div class="banner">
+            <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
+            <div class="slider overflow">
+                <div class="slides">
+                    @{
+                        if (Model.Count > 0)
+                        {
+                            int i = 0;
+                            while (i < 3)
+                            {
+                                <div class="slide">
+                                    @if (Model[i].Immagine1 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@Model[i].Id">
+                                            <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=0" alt="Image 1">
+                                        </a>
+                                    }
+                                    else if (Model[i].Immagine2 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@Model[i].Id">
+                                            <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=1" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (Model[i].Immagine3 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@Model[i].Id">
+                                            <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=2" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (Model[i].Immagine4 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@Model[i].Id">
+                                            <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=3" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Dettagli/Dettagli/@Model[i].Id">
+                                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                </div>
+                                i++;
+                            }
+                        }
+                    }
+                </div>
+            </div>
+            <button class="next" onclick="moveSlide(1)">&#10095;</button>
+        </div>
+
+        <div class="seasons">
+            <ul>
+                <li onclick="window.location.href='/Elenco/Categoria?stagione=primavera'">Primavera</li>
+                <li onclick="window.location.href='/Elenco/Categoria?stagione=estate'">Estate</li>
+                <li onclick="window.location.href='/Elenco/Categoria?stagione=autunno'">Autunno</li>
+                <li onclick="window.location.href='/Elenco/Categoria?stagione=inverno'">Inverno</li>
+            </ul>
+        </div>
+
+        <section class="featured">
+
+            <div class="categoria">
+                <h3>In evidenza</h3>
+                <h3 class="categoria-titolo"> Donna </h3>
+            </div>
+
+            <div class="product-grid">
+                @{
+                    if (Model.Count > 0)
+                    {
+                        int y = 0;
+
+                        List<Sandali> donna = new();
+
+                        foreach (Sandali s in Model)
+                        {
+                            if (s.Genere.Trim('\'').ToLower() == "donna")
+                            {
+                                donna.Add(s);
+                            }
+                        }
+
+                        List<string> descrizioni = new();
+
+                        foreach (Sandali s in donna)
+                        {
+                            string[] desc = s.Descrizione.Split("|");
+
+                            string[] colonna1 = desc[0].Split(";;");
+
+                            foreach (string c in colonna1)
+                            {
+                                string testo = colonna1[1];
+
+                                descrizioni.Add(testo);
+                            }
+                        }
+
+                        int charMax = 150;
+
+                        while (y < 3)
+                        {
+                            <div class="product">
+                                <div class="product-inner">
+                                    @if (@donna[y].Immagine1 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@donna[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@donna[y].Id&posizioneLista=0" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (@donna[y].Immagine2 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@donna[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@donna[y].Id&posizioneLista=1" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (@donna[y].Immagine3 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@donna[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@donna[y].Id&posizioneLista=2" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (@donna[y].Immagine4 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@donna[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@donna[y].Id&posizioneLista=3" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Dettagli/Dettagli/@donna[y].Id">
+                                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    <div class="ct-descrizione">
+                                        <p>@descrizioni[y].Substring(0, charMax)...</p>
+                                        <div class="link-btn"><a class="link" href="/Carrello/InserisciCarrello?id=@donna[y].Id">Aggiungi +</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            y++;
+                        }
+                    }
+                }
+            </div>
+
+        </section>
+        <hr />
+        <section class="featured">
+            <div class="categoria">
+                <h3>In evidenza</h3>
+                <h3 class="categoria-titolo"> Uomo </h3>
+            </div>
+            <div class="product-grid">
+                @{
+                    if (Model.Count > 0)
+                    {
+                        int y = 0;
+
+                        List<Sandali> uomo = new();
+
+                        foreach (Sandali s in Model)
+                        {
+                            if (s.Genere.Trim('\'').ToLower() == "uomo")
+                            {
+                                uomo.Add(s);
+                            }
+                        }
+
+                        List<string> descrizioni = new();
+
+                        foreach (Sandali s in uomo)
+                        {
+                            string[] desc = s.Descrizione.Split("|");
+
+                            string[] colonna1 = desc[0].Split(";;");
+
+                            foreach (string c in colonna1)
+                            {
+                                string testo = colonna1[1];
+
+                                descrizioni.Add(testo);
+                            }
+                        }
+
+                        int charMax = 150;
+                        while (y < 3)
+                        {
+                            <div class="product">
+                                <div class="product-inner">
+                                    @if (@uomo[y].Immagine1 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@uomo[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@uomo[y].Id&posizioneLista=0" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (@uomo[y].Immagine2 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@uomo[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@uomo[y].Id&posizioneLista=1" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (@uomo[y].Immagine3 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@uomo[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@uomo[y].Id&posizioneLista=2" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (@uomo[y].Immagine4 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@uomo[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@uomo[y].Id&posizioneLista=3" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Dettagli/Dettagli/@uomo[y].Id">
+                                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    <div class="ct-descrizione">
+                                        <p>@descrizioni[y].Substring(0, charMax)...</p>
+                                        <div class="link-btn"><a class="link" href="/Carrello/InserisciCarrello?id=@uomo[y].Id">Aggiungi +</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            y++;
+                        }
+                    }
+                }
+            </div>
+        </section>
+        <hr />
+        <section class="featured">
+            <div class="categoria">
+                <h3>In evidenza</h3>
+                <h3 class="categoria-titolo"> Bambino </h3>
+            </div>
+            <div class="product-grid">
+                @{
+                    if (Model.Count > 0)
+                    {
+                        int y = 0;
+
+                        List<Sandali> bambino = new();
+
+                        foreach (Sandali s in Model)
+                        {
+                            if (s.Genere.Trim('\'').ToLower() == "bambino")
+                            {
+                                bambino.Add(s);
+                            }
+                        }
+
+                        List<string> descrizioni = new();
+
+                        foreach (Sandali s in bambino)
+                        {
+                            string[] desc = s.Descrizione.Split("|");
+
+                            string[] colonna1 = desc[0].Split(";;");
+
+                            foreach (string c in colonna1)
+                            {
+                                string testo = colonna1[1];
+
+                                descrizioni.Add(testo);
+                            }
+                        }
+
+                        int charMax = 150;
+                        while (y < 3)
+                        {
+                            <div class="product">
+                                <div class="product-inner">
+                                    @if (@bambino[y].Immagine1 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@bambino[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@bambino[y].Id&posizioneLista=0" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (@bambino[y].Immagine2 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@bambino[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@bambino[y].Id&posizioneLista=1" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (@bambino[y].Immagine3 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@bambino[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@bambino[y].Id&posizioneLista=2" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (@bambino[y].Immagine4 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@bambino[y].Id">
+                                            <img src="/Dettagli/GetImage?id=@bambino[y].Id&posizioneLista=3" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else
+                                    {
+                                        <a href="/Dettagli/Dettagli/@bambino[y].Id">
+                                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    <div class="ct-descrizione">
+                                        <p>@descrizioni[y].Substring(0, charMax)...</p>
+                                        <div class="link-btn"><a class="link" href="/Carrello/InserisciCarrello?id=@bambino[y].Id">Aggiungi +</a></div>
+                                    </div>
+                                </div>
+                            </div>
+                            y++;
+                        }
+                    }
+                }
+            </div>
+        </section>
+
+    </div>
+    <script src="~/js/Home.js"></script>
 </body>
 </html>

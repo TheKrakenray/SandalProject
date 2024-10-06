@@ -1,10 +1,97 @@
-﻿<!DOCTYPE html>
-<html>
+﻿@using SandalProject.Models;
+@using SandalProject.Utility;
+@model Entity;
+<!DOCTYPE html>
+<html lang="it">
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina Admin</title>
+    <link rel="stylesheet" href="~/css/admin.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
 </head>
 <body>
+    <header>
+        <div class="capocchia">
+            <div onclick="window.location.href='/Home/Index/'" class="logo">Solo Sandali</div>
+            <div class="user-menu">
+                <img src="/Utente/GetImage/@(((Account)Model).Id)" alt="Profile Picture" class="profile-pic">
+                <div class="dropdown">
+                    <button class="dropbtn">Benvenuto @(((Account)Model).Username)</button>
+                    <button class="dropbtn1">Benvenuto,</button>
+                    <div class="dropdown-content">
+                        <a href="/Home/Index/">Home</a>
+                        <a href="/Utente/Logout">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <nav class="sidebar">
+            <ul>
+                <li><button onclick="window.location.href='/Utente/Admin/@(((Account)Model).Id)'">Admin</button></li>
+                <li><button onclick="showSection('password-change')">Modifica Password</button></li>
+            </ul>
+        </nav>
+        <main class="content">
+            <form method="post" enctype="multipart/form-data" action="/Utente/CaricaFileSandali">
+                <label for="file">Carica file Excel:</label>
+                <label for="file" class="buttonstyle">Scegli il File</label>
+                <input type="file" name="filexlsx" id="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display: none;" onchange="updateFileName()" />
+                <span id="file-name">Nessun file scelto</span>
+                <button class="buttonstyle" type="submit">Carica</button>
+            </form>
+            <div id="password-change" class="user-section">
+                <h3>Modifica Password</h3>
+                <form class="password-form" id="password-form">
+                    <label>Inserisci la password attuale: <input type="password" id="current-password" required></label>
+                    <label>Inserisci nuova password: <input type="password" id="new-password" required></label>
+                    <label>Conferma nuova password: <input type="password" id="confirm-password" required></label>
+                    <button type="button" id="change-password-button" onclick="changePassword()">Cambia Password</button>
+                </form>
+            </div>
+        </main>
+    </div>
+    <script> /*Essendo roba fittizia, non creero' un file apposito su js. SE LO VOLETE VE LO FATE.*/
+        function updateFileName() {
+            const input = document.getElementById('file');
+            const fileName = input.files[0] ? input.files[0].name : 'Nessun file scelto';
+            document.getElementById('file-name').textContent = fileName;
+        }
 
+        function showSection(sectionId) {
+            var sections = document.getElementsByClassName('user-section');
+            for (var i = 0; i < sections.length; i++) {
+                sections[i].style.display = 'none';
+            }
+            document.getElementById(sectionId).style.display = 'block';
+
+            var fileUploadForm = document.querySelector('form[action="/Utente/CaricaFileSandali"]');
+            if (fileUploadForm) {
+                fileUploadForm.style.display = 'none';
+            }
+        }
+
+        function changePassword() {
+            var currentPassword = document.getElementById('current-password').value;
+            var newPassword = document.getElementById('new-password').value;
+            var confirmPassword = document.getElementById('confirm-password').value;
+
+            if (newPassword !== confirmPassword) {
+                alert("Le nuove password non coincidono.");
+                return;
+            }
+
+            if (currentPassword && newPassword && confirmPassword) {
+                // Qui puoi aggiungere il codice per inviare la richiesta al server per cambiare la password
+                alert("Password cambiata con successo!");
+                document.getElementById('password-form').reset();
+            } else {
+                alert("Per favore, compila tutti i campi.");
+            }
+        }
+    </script>
 </body>
 </html>

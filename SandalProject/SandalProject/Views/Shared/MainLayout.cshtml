@@ -1,10 +1,123 @@
-﻿<!DOCTYPE html>
+﻿@using SandalProject.Controllers
+
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
-    <title></title>
+    <title>@ViewData["Title"]</title>
+    <link rel="stylesheet" href="~/css/MainLayout.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
 </head>
 <body>
+    <header class="header">
+        <div class="menu">
+            <i class="fas fa-bars menu-button"></i>
+        </div>
+        <div class="logo"><a id="logo-link" href='/Home/Index'>SOLO SANDALI</a></div>
+        <div class="icons">
+            <i id="search" class="fas fa-search"></i>
+            <input type="text" id="search-input" class="search-input" placeholder="Cerca...">
+            <i id="user" class="fas fa-user"></i>
+            <i id="cart" class="fas fa-shopping-bag"></i>
+            <i id="wlist" class="fas fa-heart"></i>
+            <div class="dark-mode-toggle">
+                <input type="checkbox" id="dark-mode-checkbox">
+                <label for="dark-mode-checkbox" class="dark-mode-label">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                    <div class="ball"></div>
+                </label>
+            </div>
+        </div>
+    </header>
+    <div class="overlay"></div>
+    <div class="menu-popup">
+        <div class="close-container">
+            <i class="fas fa-times close-button"></i> <span class="close-text">Chiudi</span>
+        </div>
+        <div class="section">
+            <h2>Categorie</h2>
+            <div class="categories">
+                <button id="menu-item-Uomo" class="menu-item">Uomo</button>
+                <button id="menu-item-Donna" class="menu-item">Donna</button>
+                <button id="menu-item-Bambino" class="menu-item">Bambino</button>
+            </div>
+        </div>
+        <hr>
+        <div class="section">
+            <h2>Collezioni</h2>
+            <div class="collections">
+                <button id="menu-item-Inverno" class="menu-item">Inverno</button>
+                <button id="menu-item-Estate" class="menu-item">Estate</button>
+                <button id="menu-item-Primavera" class="menu-item">Primavera</button>
+                <button id="menu-item-Autunno" class="menu-item">Autunno</button>
+            </div>
+        </div>
+        <hr>
+        <div class="section">
+            <h2>Link utili</h2>
+            <div class="useful-links">
+                <button id="menu-item-AboutUs" class="menu-item">Chi siamo</button>
+                <button id="menu-item-FAQ" class="menu-item">F.A.Q</button>
+                <button id="menu-item-Contacts" class="menu-item">Contattaci</button>
+                <a href="/Legal/Privacy"><button class="menu-item">Privacy Policy</button></a>
+            </div>
+        </div>
+    </div>
 
+    <main>
+        @RenderBody()
+    </main>
+    <div id="cookie-popup" class="cookie-popup">
+        <p>Questo sito utilizza i cookie per migliorare l'esperienza dell'utente. Continuando a navigare nel sito, accetti il nostro utilizzo dei cookie.</p>
+        <button id="accept-cookies">Accetto</button>
+    </div>
+    <footer>
+        <div class="sezione-superiore">
+            <div class="newsletter">
+                <h2>Iscriviti alla newsletter</h2>
+                <form>
+                    <input type="email" placeholder="Indirizzo email">
+                    <label>
+                        <input type="checkbox">
+                        Prendo atto di aver letto e compreso la Politica sulla Privacy e acconsento all'elaborazione dei miei dati personali per scopi di marketing e profilazione.
+                    </label>
+                    <button type="submit">Iscriviti</button>
+                </form>
+            </div>
+            <div class="social-media">
+                <h2>Seguici sui social</h2>
+                <a href="https://www.instagram.com"><i class="fab fa-instagram"></i></a>
+                <a href="https://www.facebook.com"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.youtube.com"><i class="fab fa-youtube"></i></a>
+                <a href="https://www.X.com"><span class="social-x">X</span></a>
+            </div>
+        </div>
+        <div class="sezione-inferiore">
+            <div class="logo-footer">
+                <a id="logo-link" href='/Home/Index'>SOLO SANDALI</a>
+            </div>
+
+            <div class="loghi-footer">
+                <img src="https://shop.akinformatica.it/wp-content/uploads/2022/03/klarna-header-mobile.jpg" alt="Klarna">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/b/b5/PayPal.svg" alt="PayPal">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/41/Visa_Logo.png" alt="Visa">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/2/2a/Mastercard-logo.svg" alt="Mastercard">
+                <img src="https://www.readypro.it/files/codice_Files/Web/Layout34/Galleries/324/895/448_4761_3253891776BMP_1.PNG" alt="Scalapay"
+            </div>
+
+            <div class="dark-mode-toggle">
+                <input type="checkbox" id="dark-mode-checkbox-footer">
+                <label for="dark-mode-checkbox-footer" class="dark-mode-label">
+                    <i class="fas fa-sun"></i>
+                    <i class="fas fa-moon"></i>
+                    <div class="ball"></div>
+                </label>
+            </div>
+        </div>
+    </footer>
+    <script src="~/js/site.js"></script>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>

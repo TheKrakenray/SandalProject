@@ -1,10 +1,192 @@
-﻿<!DOCTYPE html>
+﻿@using SandalProject.Models;
+@using SandalProject.Controllers;
+@model List<Sandali>;
+@{
+    Layout = "MainLayout";
+}
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweaty Sandals - Product Page</title>
+    <link rel="stylesheet" href="~/css/Dettagli.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body>
+        <div class="product-container">
+            <div class="image-grid">
+                @if(Model.First().Immagine1 != null)
+                {
+                <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=0" alt="Image 1">
+                }
+                else
+                {
+                <img src="~/img/Extra/Transparent_Square.png" alt="Image default">
+                }
 
+                @if(Model.First().Immagine2 != null)
+                {
+                <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=1" alt="Image 2">
+                }
+                else
+                {
+                <img src="~/img/Extra/Transparent_Square.png" alt="Image default">
+                }
+
+                @if(Model.First().Immagine3 != null)
+                {
+                <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=2" alt="Image 3">
+                }
+                else
+                {
+                <img src="~/img/Extra/Transparent_Square.png" alt="Image default">
+                }
+
+                @if(Model.First().Immagine4 != null)
+                {
+                <img src="/Dettagli/GetImage?id=@Model.First().Id&posizioneLista=3" alt="Image 4">
+                }
+                else
+                {
+                <img src="~/img/Extra/Transparent_Square.png" alt="Image default">
+                }
+            </div>
+            <div class="product-details">
+                <div class="titolo">
+                @{
+                    string nome = @Model.First().Nome;
+                    nome = nome.Remove(0, 1);
+                    nome = nome.Remove(nome.Length - 1, 1);
+                }
+                    <h2 class="nome">@nome - €@(Model.First().Prezzo.ToString().Replace(".", ","))</h2>
+
+@*                     I link vanno sui link AAAAAAAAAA!!!!!!!!!!!!!
+ *@
+                    <a href="/WList/InserisciWList?id=@(Model.First().Id)" class="link-icon"><p class="far fa-heart" id="heart-icon" onclick="toggleHeart()"></p></a> 
+                    <!--Controllare se l'utente loggato ha wishlistato il sandalo-->
+                </div>
+
+                <div class="color-selection">
+                    <p class="sottotitolo">Colore: </p>
+                    <div class="colori">
+                        
+                        @{
+                            List<string?> listColori = new();
+                        }
+                        @for (int i = 0; i < Model.Count; i++)
+                        {
+                            if(i == 0 )
+                            {
+                                <span class="colore" id="selected" style="--coloreSandalo:@Model.ElementAt(i).Colore"></span>
+                                listColori.Add(Model.ElementAt(i).Colore);
+                            }
+                            else if (!listColori.Contains(Model.ElementAt(i).Colore) && Model.ElementAt(i).Colore != null)
+                            {
+                                <span class="colore" id="@Model.ElementAt(i).Id" style="--coloreSandalo:@Model.ElementAt(i).Colore"></span>
+                                listColori.Add(Model.ElementAt(i).Colore);
+                            }
+                        }
+                    </div>
+                </div>
+
+                <div class="size-selection">
+                <p class="sottotitolo">Taglia:</p>
+                    <div class="sizes">
+                    @{
+                        List<int?> listTaglie = new();
+                    }
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        if (!listTaglie.Contains(Model.ElementAt(i).Taglia) && Model.ElementAt(i).Taglia != null)
+                        {
+                            listTaglie.Add(Model.ElementAt(i).Taglia);
+                            <span>@Model.ElementAt(i).Taglia</span>
+                        }
+                    }
+                    </div>
+                </div>
+
+                <a class="link" href='/Carrello/InserisciCarrello?id=@Model.First().Id'><button class="add-to-cart">+ Aggiungi al carrello</button></a>
+
+                @{
+                    string itemDesc = string.IsNullOrEmpty(Model.First().Descrizione) ? "default|default|default" : Model.First().Descrizione;
+                    itemDesc = itemDesc.Replace("''", "'");
+                    itemDesc = itemDesc.Remove(0,1);
+                    itemDesc = itemDesc.Remove(itemDesc.Length - 1,1);
+
+
+                    List<string> listDesc = itemDesc.Split('|').ToList();
+
+                    string description = listDesc.ElementAt(0);
+
+                    string details = listDesc.ElementAt(1);
+
+                    string specifications = listDesc.ElementAt(2);
+                }
+
+                <div class="description">
+                @{
+
+                    string[] descriptionArr = description.Split(";;");
+                    <h3 >@descriptionArr[0]</h3>
+                        <p>@descriptionArr[1]</p>
+                    }
+                </div>
+                <hr />
+                <div class="details">
+                    @{
+                        string[] detailsArr = details.Split(";;");
+                    <h3 >@detailsArr[0]</h3>
+                        <ul>
+                        @{
+                            Dictionary<string, string> detailsTable = new();
+
+
+                            for(int i = 1; i < detailsArr.Length; i++)
+                            {
+                                
+                                string key = "";
+                                string value = "";
+
+                                bool isValue = false;
+                                foreach (char c in detailsArr[i])
+                                {
+                                    if (!isValue)
+                                        key += c;
+                                    else
+                                        value += c;
+
+                                    if (c == ':')
+                                        isValue = isValue ? false : true;
+                                    
+                                }
+                                detailsTable.Add(key, value);
+                            }
+                        }
+                        @foreach(KeyValuePair<string,string>detail in detailsTable)
+                        {
+                            <li><strong>@detail.Key</strong> @detail.Value</li>
+                        }
+
+                        </ul>
+                    }
+                </div>
+                <hr />
+                <div class="specifications">
+                    @{
+                        string[] specificationsArr = specifications.Split(";;");
+                    <h3 >@specificationsArr[0]</h3>
+                    }
+                    <ul>
+                        @for (int i = 1; i < specificationsArr.Count(); i++)
+                        {
+                            <li>@specificationsArr[i]</li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    <script src="~/js/Elenco/Dettagli.js"></script>
 </body>
 </html>
