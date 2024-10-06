@@ -243,6 +243,41 @@ button[onclick^="showOrderDetails"] {
     justify-content: center;
     text-align: center;
 }
+/* Tutta sezione che gestisce l'upload file della pic utente. */
+
+.user-section form label {
+    display: block;
+    margin-bottom: 10px;
+}
+
+.user-section form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
+
+#edit-button,
+#save-button,
+button[onclick^="showOrderDetails"] {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 25px;
+    padding: 10px;
+    border: none;
+    width: 55%;
+    font-family: 'Poppins', sans-serif;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
 
 
 @media (max-width: 700px) {

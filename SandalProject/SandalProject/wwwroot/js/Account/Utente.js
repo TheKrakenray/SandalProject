@@ -60,3 +60,4 @@ function changePassword() {
         alert("Per favore, compila tutti i campi.");
     }
 }
+
