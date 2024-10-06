@@ -12,6 +12,7 @@ namespace SandalProject.Controllers
             if (utenteLoggato.Id != 1)
             {
                 List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
+
                 return View(wList);
             }
             else
@@ -24,10 +25,10 @@ namespace SandalProject.Controllers
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
 
-            Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
-
             if (utenteLoggato.Id != 1) 
             {
+                Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
+
                 if (DAOAccount.GetInstance().FindSandaloWList(utenteLoggato, id))
                 {
                     return Redirect($"/Dettagli/Dettagli/{id}"); // Sandalo già presente in wishlist!
@@ -48,10 +49,11 @@ namespace SandalProject.Controllers
         public IActionResult EliminaWList(int id)
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
-            Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
 
             if (utenteLoggato.Id != 1)
             {
+                Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
+
                 if (DAOAccount.GetInstance().FindSandaloWList(utenteLoggato, id))
                 {
                     DAOAccount.GetInstance().RemoveWList(utenteLoggato, s);
@@ -72,10 +74,11 @@ namespace SandalProject.Controllers
         public IActionResult SvuotaWList()
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
-            List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
 
             if (utenteLoggato.Id != 1)
             {
+                List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
+
                 DAOAccount.GetInstance().ResetWList(utenteLoggato);
 
                 wList.Clear();

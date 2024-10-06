@@ -27,13 +27,14 @@ namespace SandalProject.Controllers
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
 
-            Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
-
             if(utenteLoggato.Id != 1)
             {
+                Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
+
                 if(s != null)
                 {
                     DAOAccount.GetInstance().AddCarrello(utenteLoggato, s);
+
                     return Redirect($"/Carrello/Carrello");
                 }
                 else
@@ -51,13 +52,14 @@ namespace SandalProject.Controllers
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
 
-            Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
-
             if (utenteLoggato.Id != 1)
             {
+                Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
+
                 if (s != null)
                 {
                     DAOAccount.GetInstance().RemoveCarrello(utenteLoggato, s);
+
                     return Redirect($"/Carrello/Carrello");
                 }
                 else
@@ -69,16 +71,16 @@ namespace SandalProject.Controllers
             {
                 return Redirect($"/Utente/Logout/");
             }
-
         }
 
         public IActionResult SvuotaCarrello()
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
-            carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
 
             if (utenteLoggato.Id != 1)
             {
+                carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
+
                 DAOAccount.GetInstance().ResetCarrello(utenteLoggato);
 
                 carrello.Clear();
@@ -95,10 +97,10 @@ namespace SandalProject.Controllers
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
 
-            carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
-
             if (utenteLoggato.Id != 1)
             {
+                carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
+
                 if(carrello.Count > 0)
                 {
                     return View();
@@ -112,7 +114,6 @@ namespace SandalProject.Controllers
             {
                 return Redirect("/Utente/Logout/");
             }
-
         }
     }
 }

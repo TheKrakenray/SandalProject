@@ -6,9 +6,11 @@
 }
 
 .container {
-    width: 80%;
-    margin: auto;
+    max-width: 1300px;
+    width: 100%;
+    margin: 50px auto;
     overflow: hidden;
+    padding: 20px;
 }
 
 .top-section h1 {
