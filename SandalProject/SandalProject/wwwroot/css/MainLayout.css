@@ -736,4 +736,13 @@ body.dark-mode .newsletter button {
     .hidden {
         display: none;
     }
+    .search-input {
+        display: block;
+        width: 100%; 
+        margin-left: 0;
+    }
+    #search {
+        display: none;
+    }
+
 }
