@@ -2,7 +2,6 @@
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #fff;
 }
 
 .container {
@@ -25,7 +24,6 @@
 .top-section hr {
     border: 0;
     height: 1px;
-    background: #ccc;
     margin: 10px 0;
 }
 
@@ -36,10 +34,9 @@
 }
 
 .cart-items, .cart-summary {
-    background: #fff;
     padding: 20px;
     border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(150, 150, 150, 0.5);
 }
 
 .cart-items {
@@ -48,7 +45,6 @@
 
 .cart-summary {
     width: 30%;
-    background: #fff;
     padding: 20px;
     border-radius: 5px;
     position: sticky;
@@ -128,10 +124,9 @@
     flex-direction: column;
     align-items: flex-start;
     margin-bottom: 20px;
-    background: #f9f9f9;
     padding: 10px;
     border-radius: 5px;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 10px rgba(150, 150, 150, 0.2);
 }
 
     .promo-code label {
@@ -167,7 +162,6 @@ hr {
 
 .order-summary {
     margin-top: 20px;
-    background: #f9f9f9;
     padding: 10px;
     border-radius: 5px;
 }
