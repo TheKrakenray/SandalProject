@@ -17,19 +17,22 @@ main{
 
 .header {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
     padding: 10px 20px;
     background-color: #ffffff;
     border-bottom: 1px solid #000000;
-    flex-wrap:wrap;
 }
 
 .logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 32%;
     font-size: 34px;
     font-weight: bold;
     text-align: center;
     font-family: 'Poppins', sans-serif;
-    margin-left: 200px;
     text-decoration: none;
     color: #000;
 }
@@ -54,6 +57,7 @@ main{
 }
 
 .menu {
+    width: 33%;
     position: relative;
     display: flex;
     color: black;
@@ -66,7 +70,9 @@ main{
 }
 
 .icons {
+    width: 33%;
     display: flex;
+    justify-content: end;
     gap: 15px;
     align-items: center;
     color: #000;
