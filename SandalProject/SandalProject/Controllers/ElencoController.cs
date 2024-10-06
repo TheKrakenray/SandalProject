@@ -6,38 +6,46 @@ namespace SandalProject.Controllers
 {
     public class ElencoController : Controller
     {
-        List<Sandali> Elenco = DAOSandali.GetInstance().ReadAll().Cast<Sandali>().ToList();
+        List<Sandali> elencoSandali = DAOSandali.GetInstance().ReadAll().Cast<Sandali>().ToList();
 
-        public IActionResult Primavera()
+        public IActionResult Categoria(string stagione)
         {
-            List<Sandali> primavera =   Elenco
-                                        .Where(a => a.Categoria.ToLower() == "primavera" || a.Categoria.ToLower() == "spring")
-                                        .ToList();
-            return View(primavera);
-        }
+            if(stagione.ToLower() == "primavera")
+            {
+                List<Sandali> primavera = elencoSandali
+                                            .Where(a => a.Categoria.Trim('\'').ToLower() == "primavera" || a.Categoria.ToLower() == "spring")
+                                            .ToList();
+                return View(primavera);
+            }
 
-        public IActionResult Estate()
-        {
-            List<Sandali> estate =  Elenco
-                                    .Where(a => a.Categoria.ToLower() == "summer" || a.Categoria.ToLower() == "estate")
-                                    .ToList();
-            return View(estate);
-        }
+            else if(stagione.ToLower() == "estate")
+            {
+                List<Sandali> estate = elencoSandali
+                                            .Where(a => a.Categoria.Trim('\'').ToLower() == "estate" || a.Categoria.ToLower() == "summer")
+                                            .ToList();
+                return View(estate);
+            }
 
-        public IActionResult Autunno()
-        {
-            List<Sandali> autunno = Elenco
-                                    .Where(a => a.Categoria.ToLower() == "autunno" || a.Categoria.ToLower() == "fall" || a.Categoria.ToLower() == "autumn")
-                                    .ToList();
-            return View(autunno);
-        }
+            else if(stagione.ToLower() == "autunno")
+            {
+                List<Sandali> autunno = elencoSandali
+                                            .Where(a => a.Categoria.Trim('\'').ToLower() == "autunno" || a.Categoria.ToLower() == "autumn" || a.Categoria.ToLower() == "fall")
+                                            .ToList();
+                return View(autunno);
+            }
 
-        public IActionResult Inverno()
-        {
-            List<Sandali> inverno = Elenco
-                                    .Where(a => a.Categoria.ToLower() == "winter" || a.Categoria.ToLower() == "inverno")
-                                    .ToList();
-            return View(inverno);
+            else if(stagione.ToLower() == "inverno")
+            {
+                List<Sandali> inverno = elencoSandali
+                                            .Where(a => a.Categoria.Trim('\'').ToLower() == "inverno" || a.Categoria.ToLower() == "winter")
+                                            .ToList();
+                return View(inverno);
+            }
+
+            else
+            {
+                return Redirect("/Home/Index");
+            }
         }
 
         public IActionResult Risultati(string ricerca, Dictionary<string,string>?filtri, List<Sandali>?searchResults)
@@ -47,13 +55,14 @@ namespace SandalProject.Controllers
 
             if (filtri == null)
             {
-                foreach(var e in Elenco)
+                foreach(var e in elencoSandali)
                     if (ricerca.ToLower().Contains(e.Marca.ToLower())) 
                     {
                        risultati.Add(e);
                     }
+
                 if(risultati == null)
-                    foreach(var e in Elenco)
+                    foreach(var e in elencoSandali)
                     {
                         if (ricerca.ToLower().Contains(e.Nome.ToLower()))
                         {

@@ -144,16 +144,16 @@ document.getElementById("menu-item-Bambino").addEventListener("click",() => {
 
 
 document.getElementById("menu-item-Primavera").addEventListener("click", () => {
-    window.location.href = "/Elenco/Primavera/";
+    window.location.href = "/Elenco/Categoria?stagione=primavera";
 });
 document.getElementById("menu-item-Estate").addEventListener("click", () => {
-    window.location.href = "/Elenco/Estate/";
+    window.location.href = "/Elenco/Categoria?stagione=estate";
 });
 document.getElementById("menu-item-Autunno").addEventListener("click", () => {
-    window.location.href = "/Elenco/Autunno/";
+    window.location.href = "/Elenco/Categoria?stagione=autunno";
 });
 document.getElementById("menu-item-Inverno").addEventListener("click", () => {
-    window.location.href = "/Elenco/Inverno/";
+    window.location.href = "/Elenco/Categoria?stagione=inverno";
 });
 
 

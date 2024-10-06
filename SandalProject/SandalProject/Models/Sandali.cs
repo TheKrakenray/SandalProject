@@ -198,7 +198,7 @@ namespace SandalProject.Models
                 {
                     string stagione = "inverno estate primavera autunno winter summer spring autumn fall";
 
-                    if (!stagione.Contains(value.ToLowerInvariant()))
+                    if (!stagione.Contains(value.Trim('\'').ToLower()))
                     {
                         _categoria = "#";
                     }
@@ -222,22 +222,13 @@ namespace SandalProject.Models
                 string generi = "uomo donna bambino kid woman man";
                 if(value != null)
                 {
-                    //Console.WriteLine("Value Genere: " + value.Trim('\'').ToLower());
                     if (generi.Contains(value.Trim('\'').ToLower()))
-                    //    _genere = "#";
-                    //if (value.ToLower() != "'donna'" || value.ToLower() != "'uomo'" || value.ToLower() != "bambino")
                     {
-                        //Console.WriteLine("Entro");
-                        //Console.WriteLine(value);
                         _genere = value;
-                        //Console.WriteLine("Genere POST: " + _genere);
-                        //_genere.Replace("'", "''");
                     }
                     else
                     {
-                        //Console.WriteLine("Pre " + value);
                         _genere = "#";
-                        //Console.WriteLine("Post " + _genere);
                     }
                 }
                 else

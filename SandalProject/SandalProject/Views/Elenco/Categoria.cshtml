@@ -1,0 +1,114 @@
+﻿@using SandalProject.Models;
+@model List<Sandali>
+@{
+    Layout = "MainLayout";
+}
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bozza Pagina E-commerce</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="~/css/Stagioni.css">
+</head>
+<body>
+    <div class="contenitore">
+        <div class="content">
+            <div class="filters">
+                <div class="dropdown">
+                    <button class="dropbtn">Prezzo</button>
+                    <div class="dropdown-content">
+                        <label><input type="checkbox" value="Opzione 1"> Opzione 1</label>
+                        <label><input type="checkbox" value="Opzione 2"> Opzione 2</label>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Modello</button>
+                    <div class="dropdown-content">
+                        <label><input type="checkbox" value="Opzione 1"> Opzione 1</label>
+                        <label><input type="checkbox" value="Opzione 2"> Opzione 2</label>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Stagione</button>
+                    <div class="dropdown-content">
+                        <label><input type="checkbox" value="Opzione 1"> Opzione 1</label>
+                        <label><input type="checkbox" value="Opzione 2"> Opzione 2</label>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Colore</button>
+                    <div class="dropdown-content">
+                        <label><input type="checkbox" value="Opzione 1"> Opzione 1</label>
+                        <label><input type="checkbox" value="Opzione 2"> Opzione 2</label>
+                    </div>
+                </div>
+                <div class="dropdown">
+                    <button class="dropbtn">Taglia</button>
+                    <div class="dropdown-content">
+                        <label><input type="checkbox" value="Opzione 1"> Opzione 1</label>
+                        <label><input type="checkbox" value="Opzione 2"> Opzione 2</label>
+                    </div>
+                </div>
+                <button class="button">Applica Filtri</button>
+            </div>
+            <div class="season-label">@Model.First().Categoria.Trim('\'').ToUpper()</div>
+            <div class="container">
+                <div class="container">
+                    @{
+                        if (Model.Count > 0)
+                        {
+                            @foreach (Sandali s in Model)
+                            {
+                                <div class="item">
+                                    <div class="slide">
+                                        @if (s.Immagine1 != null)
+                                        {
+                                            <a href="/Dettagli/Dettagli/@s.Id">
+                                                <img src="/Dettagli/GetImage?id=@s.Id&posizioneLista=0" alt="Image 1">
+                                            </a>
+                                        }
+                                        else if (s.Immagine2 != null)
+                                        {
+                                            <a href="/Dettagli/Dettagli/@s.Id">
+                                                <img src="/Dettagli/GetImage?id=@s.Id&posizioneLista=1" alt="Prodotto 1">
+                                            </a>
+                                        }
+                                        else if (s.Immagine3 != null)
+                                        {
+                                            <a href="/Dettagli/Dettagli/@s.Id">
+                                                <img src="/Dettagli/GetImage?id=@s.Id&posizioneLista=2" alt="Prodotto 1">
+                                            </a>
+                                        }
+                                        else if (s.Immagine4 != null)
+                                        {
+                                            <a href="/Dettagli/Dettagli/@s.Id">
+                                                <img src="/Dettagli/GetImage?id=@s.Id&posizioneLista=3" alt="Prodotto 1">
+                                            </a>
+                                        }
+                                    </div>
+                                    <div class="buttons">
+                                        <a href="/Carrello/InserisciCarrello?id=@s.Id" class="button"><i class="fas fa-shopping-bag"></i></a>
+                                        <a href="/WList/InserisciWList?id=@s.Id" class="button"><i class="fas fa-heart"></i></a>
+                                        <a href="/Dettagli/Dettagli/@s.Id" class="button"><i class="fas fa-info-circle"></i></a>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            <div class="slide">
+                                <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+        <script src="~/js/Elenco/Risultati.js"></script>
+</body>
+</html>
