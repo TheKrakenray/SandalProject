@@ -55,7 +55,6 @@ namespace SandalProject.Controllers
             if (utenteLoggato.Id != 1)
             {
                 Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
-
                 if (s != null)
                 {
                     DAOAccount.GetInstance().RemoveCarrello(utenteLoggato, s);

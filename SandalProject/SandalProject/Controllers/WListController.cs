@@ -54,7 +54,7 @@ namespace SandalProject.Controllers
             {
                 Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
 
-                if (DAOAccount.GetInstance().FindSandaloWList(utenteLoggato, id))
+                if (s != null)
                 {
                     DAOAccount.GetInstance().RemoveWList(utenteLoggato, s);
 
