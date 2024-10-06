@@ -117,9 +117,14 @@ document.addEventListener('DOMContentLoaded', function () {
  //------------------------------MENU BUTTONS------------------------------------//
 //------------------------------------------------------------------------------//
 
-document.getElementById("search").addEventListener("click", () => {
-    window.location.href = "/Elenco/Risultati/";
+document.getElementById("search-input").addEventListener("keypress", function (k) {
+    if (k.key === "Enter") {
+    var textInput = document.getElementById("search-input").value;
+    window.location.href = "/Elenco/Risultati?ricerca="+textInput;
+    }
+    console.log(k.key);
 });
+
 document.getElementById("wlist").addEventListener("click", () => {
         window.location.href = "/WList/WList/";
 });
