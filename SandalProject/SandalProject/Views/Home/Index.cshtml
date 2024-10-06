@@ -55,15 +55,15 @@
                                             <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=3" alt="Prodotto 1">
                                         </a>
                                     }
+                                    else
+                                    {
+                                        <a href="/Dettagli/Dettagli/@Model[i].Id">
+                                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        </a>
+                                    }
                                 </div>
                                 i++;
                             }
-                        }
-                        else
-                        {
-                            <div class="slide">
-                                <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
-                            </div>
                         }
                     }
                 </div>
@@ -151,7 +151,9 @@
                                     }
                                     else
                                     {
-                                        <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        <a href="/Dettagli/Dettagli/@donna[y].Id">
+                                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        </a>
                                     }
                                     <div class="ct-descrizione">
                                         <p>@descrizioni[y].Substring(0, charMax)...</p>
@@ -235,7 +237,9 @@
                                     }
                                     else
                                     {
-                                        <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        <a href="/Dettagli/Dettagli/@uomo[y].Id">
+                                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        </a>
                                     }
                                     <div class="ct-descrizione">
                                         <p>@descrizioni[y].Substring(0, charMax)...</p>
@@ -318,7 +322,9 @@
                                     }
                                     else
                                     {
-                                        <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        <a href="/Dettagli/Dettagli/@bambino[y].Id">
+                                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        </a>
                                     }
                                     <div class="ct-descrizione">
                                         <p>@descrizioni[y].Substring(0, charMax)...</p>
