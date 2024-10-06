@@ -261,7 +261,7 @@ namespace SandalProject.Models
         {
             try
             {
-                return db.Update($"Delete from Carrello where IdAccount = {utente.Id} AND IdSandali = {s.Id} ");
+                return db.Update($"Delete Top (1) from Carrello where IdAccount = {utente.Id} AND IdSandali = {s.Id} ");
             }
             catch
             {
