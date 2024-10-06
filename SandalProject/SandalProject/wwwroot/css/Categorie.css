@@ -1,2 +1,289 @@
-﻿body {
+﻿/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
+body {
+    font-family: Arial, sans-serif;
+    width: 100vw;
+    overflow-x: hidden;
+}
+
+hr {
+    margin: 0 auto;
+    width: 80%;
+}
+/*------------------------------------------------------------------------------------------------------------------------------------------------------------------------------*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+/* Sidebar container */
+.contenitore
+{
+    padding: 15px;
+    border: 30px solid red;
+    display: flex;
+    gap: 18%;
+}
+
+
+/* Sidebar form layout */
+.sidebar-filter {
+    display: grid;
+    grid-template-columns: 100px 100px 100px;
+    gap: 20px; /* Add space between sections */
+    min-width: 100px;
+    height: fit-content;
+}
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+@media only screen and (max-width:800px) {
+    .sidebar-filter {
+        display: grid;
+        grid-template-columns: 100px 100px 100px;
+        gap: 30px;
+        align-items: center;
+        justify-content: center;
+        align-items: center;
+    }
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+    .generesp {
+        text-align: right;
+        display: inline-block
+    }
+
+    .contenitore {
+        border: black 0px solid;
+        border-bottom: black 1px solid;
+        width: 100%;
+        display: inline-block;
+        margin: 0px auto;
+    }
+
+    main {
+        display: flex;
+        flex-direction: column;
+        gap:0px;
+    }
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+    .catalogo{
+        margin-left
+    }
+
+    .fullcatalogo {
+        margin: 0px 10%;
+    }
+}
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+.catalogo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.immagine {
+    background-color: #ff0000;
+    width: 350px;
+    height: 350px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 30px;
+}
+
+.fullcatalogo {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-right: 30px;
+}
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+.elemento {
+    padding: 30px
+}
+
+.pulsanti {
+    display: flex;
+    justify-content: space-between;
+}
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+    .pulsanti > button {
+        border-radius: 100px;
+        width: 20%;
+        border: #000 1px solid
+    }
+
+.catalogo .fas, .catalogo .fa-hear, .catalogo .fa-shopping-bag, .catalogo .fa-solid, .catalogo .fa-circle-info {
+    color: #000;
+}
+
+/* General label style */
+label {
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Minimal checkbox style */
+.genere {
+    margin-right: 8px;
+    accent-color: #ff0000; /* Black checkboxes */
+    font-size: 13px;
+    margin-bottom: 5px;
+}
+
+.generesp {
+    margin-top: 5px;
+}
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+
+.marca {
+    margin-bottom: 5px;
+}
+/* Dropdown (select) style */
+select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    appearance: none;
+}
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+/* Minimal range slider */
+.range-slider {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 5px;
+    position: relative;
+    height: 10px;
+    text-align: center;
+    margin-top: 20px;
+    font-size: 10px;
+}
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+    /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+    .range-slider input {
+        margin-top: 50px;
+        width: 100%;
+        -webkit-appearance: none;
+        appearance: none;
+        height: 15px;
+        background: #ddd; /* Light gray background */
+        border-radius: 5px;
+        outline: none;
+        cursor: pointer;
+        pointer-events: none;
+        position: absolute;
+        overflow: hidden;
+    }
+
+        .range-slider input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #000; /* Black thumb */
+            cursor: pointer;
+            pointer-events: all;
+            position: relative;
+            z-index: 1;
+            outline: 0;
+        }
+
+        /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+        /*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+        .range-slider input::-moz-range-thumb {
+            pointer-events: all;
+            position: relative;
+            z-index: 10;
+            width: 9px;
+        }
+
+
+/* Button styles */
+button, input[type="submit"], input[type="reset"] {
+    width: 100%;
+    padding: 10px;
+    background-color: #000; /* Black button */
+    color: #fff;
+    border: none;
+    border-radius: 3px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    min-width: 100px;
+    margin-top: 40px;
+}
+
+    button:hover, input[type="submit"]:hover {
+        background-color: #333; /* Darker gray hover */
+    }
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+/* Minimal divider line */
+hr {
+    background-color: #000000;
+}
+
+/* Center alignment for submit/reset buttons */
+.submit {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    justify-content: space-between;
+}
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+
+.contenitore-blocchi {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    gap: 10px;
+}
+
+.blocco {
+    background-color: rebeccapurple;
+    height: 50px;
+    width: 50px;
+}
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/
+/*IN DISUSO NON USARE!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! NON USARLO STRUNZ*/

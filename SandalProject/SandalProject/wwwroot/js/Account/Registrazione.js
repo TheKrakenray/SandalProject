@@ -23,3 +23,30 @@
         return false;
     }
 }
+
+document.getElementById('registration-form').addEventListener('submit', function (event) {
+    const password = document.getElementById('password').value;
+    const confirmPassword = document.getElementById('confirm-password').value;
+    const errorMessage = document.getElementById('error-message');
+
+    if (password !== confirmPassword) {
+        event.preventDefault();
+        errorMessage.style.display = 'block';
+    } else {
+        errorMessage.style.display = 'none';
+    }
+});
+
+function togglePassword(id) {
+    const passwordField = document.getElementById(id);
+    const icon = passwordField.nextElementSibling.querySelector('i');
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        icon.classList.remove('fa-eye');
+        icon.classList.add('fa-eye-slash');
+    } else {
+        passwordField.type = "password";
+        icon.classList.remove('fa-eye-slash');
+        icon.classList.add('fa-eye');
+    }
+}

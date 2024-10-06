@@ -1,4 +1,17 @@
+using Microsoft.AspNetCore.Http.Features;
+using SandalProject.Utility;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+
 var builder = WebApplication.CreateBuilder(args);
+
+// Aggiungi i servizi al contenitore.
+builder.Services.Configure<FormOptions>(options =>
+{
+    options.MultipartBodyLengthLimit = 2147483648; // 2 GB
+});
 
 // Add services to the container.
 builder.Services.AddRazorPages();
@@ -19,6 +32,8 @@ app.UseStaticFiles();
 app.UseRouting();
 
 app.UseAuthorization();
+
+Database database = Database.GetInstance();
 
 app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 

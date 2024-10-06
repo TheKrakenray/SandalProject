@@ -163,6 +163,7 @@ namespace SandalProject.Models
 
             return updated;
         }
+
         public bool ChangeImgDb(int id, byte[] Img)
         {
             bool updated = false;
@@ -309,6 +310,36 @@ namespace SandalProject.Models
             return san;
         }
 
+        public bool FindSandaloWList(Account utente, int id)
+        {
+            List<Sandali> san = new();
+            List<Dictionary<string, string>> righe = new();
+
+            try
+            {
+                righe = db.Read($"Select * from Wishlist where IdAccount = {utente.Id} AND IdSandali = {id} ;");
+            }
+            catch
+            {
+                Console.WriteLine("Errore nel find in tabella WList id " + id);
+                return false;
+            }
+
+            foreach (var r in righe)
+            {
+                Sandali s = new();
+                s.FromDictionary(r);
+                san.Add(s);
+            }
+
+            if (san.Count > 0)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
         public bool ResetWList(Account utente)
         {
             try
@@ -340,9 +371,9 @@ namespace SandalProject.Models
             try
             {
                 return db.Update($"Insert into Wishlist " +
-                                $"(IdAccount, IdSandali) " +
+                                $"(IdAccount, IdSandali, skuSandali) " +
                                 $"Values " +
-                                $"({utente.Id}, {s.Id});");
+                                $"({utente.Id}, {s.Id}, '{s.Sku.Substring(0,s.Sku.Length - 4)}');");
             }
             catch
             {

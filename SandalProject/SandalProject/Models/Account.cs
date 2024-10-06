@@ -7,15 +7,6 @@ namespace SandalProject.Models
     {
         public Account() { }
 
-        //public Account(int id, string username, string email, string psw, string ruolo, int pFedelta): base(id)
-        //{
-        //    Username = username;
-        //    Email = email;
-        //    Psw = psw;
-        //    Ruolo = ruolo;
-        //    PFedelta = pFedelta;
-        //}
-
         public Account(int id, string username, string email, string psw, string ruolo, int pFedelta, byte[] propic) : base(id)
         {
             Username = username;

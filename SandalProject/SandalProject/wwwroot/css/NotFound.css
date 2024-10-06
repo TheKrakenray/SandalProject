@@ -1,0 +1,36 @@
+﻿.content {
+    display: flex;
+    flex-direction: column;
+    max-width:800px;
+    gap: 10px;
+    margin: 30px auto;
+    padding: 10px;
+    box-shadow: 0 4px 12px rgb(57, 57, 57);
+}
+
+.content h1{
+    margin:auto;
+
+}
+    .content img {
+        margin: auto;
+        width: 200px;
+        height: 200px;
+        padding: 10px;
+        background-color: rgb(100, 100, 128,0.4);
+        box-shadow: 0 10px 10px rgb(100, 100, 128,0.3);
+        border-radius: 30%;
+    }
+
+@media screen and (max-width: 800px) {
+    .content{
+        padding:100px 0;
+        gap:20px;
+    }
+    .content img {
+        margin: auto;
+        width: 140px;
+        height: 140px;
+
+    }
+}

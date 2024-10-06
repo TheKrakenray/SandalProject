@@ -1,2 +1,297 @@
-﻿body {
+﻿
+
+.product-container h1 {
+    margin: 0;
+}
+
+.product-container .link {
+    color: #fff;
+    text-decoration: none;
+}
+
+/*.link-icon {
+    color: #000;
+    text-decoration: none;
+}
+.link-icon:visited {
+    color: #000;
+    text-decoration: none;
+}
+*/
+.product-container {
+    display: flex;
+    justify-content: center;
+    align-items: start;
+    gap: 2vw;
+    padding: 2vw;
+    font-size: 1vw;
+}
+
+.image-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1vw;
+    width: 100%;
+    max-width: 40vw;
+}
+
+
+.image-grid img {
+    position: relative;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 1vw;
+}
+
+.product-details {
+    border: 1px solid #eaeaea;
+    padding: 1vw;
+    border-radius: 1vw;
+    max-width: fit-content;
+    width: 30%;
+}
+
+.product-container .fas {
+    color: red;
+}
+
+.titolo{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 0 20px 0;
+}
+
+.nome{
+    font-size: 30px;
+}
+
+.link-icon{
+    color:inherit;
+}
+
+#heart-icon{
+    margin: 0px;
+    font-size: 25px;
+}
+
+.sottotitolo {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.colori {
+    display: flex;
+    width: 100%;
+    max-width: 27vw;
+    height: auto;
+    overflow-y: hidden;
+    overflow-x: hidden;
+    touch-action: none;
+    user-select: none;
+    padding: 0.5vw;
+}
+
+.colore {
+    width: 30px;
+    height: 30px;
+    margin-inline: 15px;
+    background-color: var(--coloreSandalo);
+    border-radius: 50%;
+    border: solid 1px black !important; 
+}
+
+.colore.selected {
+    border: solid 1px black;
+    margin-top: 0.2vw;
+}
+
+.colore.selected[data-color="black"] {
+    border: solid 1px cyan;
+}
+
+.colore:hover {
+    background-color: var(--coloreSandalo) !important;
+    border-color: #000;
+    box-shadow: 0px 0px 5px var(--coloreSandalo);
+}
+
+.colore.selected:hover {
+    background-color: var(--coloreSandalo) !important;
+    box-shadow: 0px 0px 0px var(--coloreSandalo);
+}
+
+.product-details .fa-heart {
+    margin-left: 85%;
+    font-size: 1.7vw;
+}
+
+.size-selection {
+    margin-bottom: 1vw;
+}
+
+.sizes span {
+    display: inline-block;
+    margin: 10px;
+    width:50px;
+    height:50px;
+    border: 1px solid #eaeaea;
+    border-radius: 15px;
+    cursor: pointer;
+    text-align:center;
+    align-content:center;
+    font-size: 20px;
+}
+
+.sizes span.selected {
+    background-color: black;
+    color: white;
+}
+
+.sizes span:hover {
+    background-color: #f5f5f5;
+}
+
+.sizes span.selected:hover {
+    background-color: black;
+    color: white;
+}
+
+.product-container button {
+    display: block;
+    margin: 20px auto;
+    width: 60%;
+    padding: 0.4vw;
+    border: none;
+    background-color: #000;
+    color: white;
+    cursor: pointer;
+    font-size: 20px;
+    border-radius: 0.5vw;
+}
+
+.product-container button:hover {
+    background-color: #444;
+}
+
+.product-container hr {
+    margin: 20px auto;
+}
+
+.description, .details, .specifications {
+    margin-bottom: 1vw;
+}
+
+.description h3, .details h3, .specifications h3{
+    font-size: 22px;
+    margin-bottom: 15px;
+}
+
+.description p, .details ul, .specifications ul {
+    font-size: 16px;
+}
+
+.product-container ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.product-container li {
+    margin-bottom: 0.5vw;
+}
+
+.specifications ul{
+    list-style-type:circle;
+    margin-left:20px;
+}
+
+@media screen and (max-width: 1100px) {
+    .product-container {
+        display: block;
+        font-size: 3vw;
+    }
+
+    .image-grid {
+        z-index: -1;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 5px;
+        width: 100%;
+        max-width: unset;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+        .image-grid img {
+            z-index: -1;
+        }
+
+
+    .product-details {
+        z-index: 10;
+        width: 90%;
+        max-width: unset;
+        margin: auto;
+        padding:20px
+    }
+
+    .titolo{
+        display:flex;
+
+        text-align:center;
+    }
+
+    .titolo h2{
+    }
+
+    .product-details .fa-heart {
+        margin-top:5%;
+        margin-left:35%;
+        font-size: 5vw;
+    }
+
+    .product-container .fas{
+        color:red;
+    }
+
+    .titolo h2 {
+        font-size: 4vw;
+        justify-content: center;
+    }
+
+    .colori {
+        height: auto;
+        padding: 1rem;
+    }
+
+    .colore {
+        padding: 2vw;
+    }
+    
+    .sizes span {
+        width:5vw;
+        height:5vw;
+        font-size: 2vw;
+    }
+
+    .product-container button {
+        padding: 1vw;
+        font-size: 1.5rem;
+    }
+
+    .description, .details, .specifications {
+        margin-bottom: 2vw;
+    }
+
+        .description p, .details ul, .specifications ul {
+            font-size: 1.8vw;
+        }
+
+
+    .product-container li {
+        margin-bottom: 0.8vw;
+    }
 }

@@ -5,69 +5,90 @@ namespace SandalProject.Controllers
 {
     public class WListController : Controller
     {
-        public static List<Sandali> wList = new();
-
         public IActionResult WList()
         {
-            Account utenteLoggato = new(); //UtenteController.UtenteLoggato
-            if (utenteLoggato != null)
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if (utenteLoggato.Id != 1)
+            {
+                List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
+
                 return View(wList);
+            }
             else
-                return Redirect("/Utente/Login");
+            {
+                return Redirect("/Utente/Logout/");
+            }
         }
 
         public IActionResult InserisciWList(int id)
         {
-            Sandali s = new();
-            s = (Sandali)DAOSandali.GetInstance().Find(id);
-            if (s != null)
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if (utenteLoggato.Id != 1) 
             {
-                wList.Add(s);
-                Account utenteLoggato = new(); //UtenteController.UtenteLoggato
-                if (utenteLoggato != null)
+                Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
+
+                if (DAOAccount.GetInstance().FindSandaloWList(utenteLoggato, id))
+                {
+                    return Redirect($"/Dettagli/Dettagli/{id}"); // Sandalo già presente in wishlist!
+                }
+                else
+                {
                     DAOAccount.GetInstance().AddWList(utenteLoggato, s);
-                return Redirect($"Dettagli/Dettagli/{id}");
+
+                    return Redirect($"/Dettagli/Dettagli/{id}");
+                }
             }
             else
             {
-                return Redirect($"Home/Index/");
+                return Redirect($"/Utente/Logout/");
             }
         }
 
         public IActionResult EliminaWList(int id)
         {
-            Sandali s = new();
-            s = (Sandali)DAOSandali.GetInstance().Find(id);
-            if (s != null)
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if (utenteLoggato.Id != 1)
             {
-                wList.Remove(s);
-                Account utenteLoggato = new(); //UtenteController.UtenteLoggato
-                if (utenteLoggato != null)
+                Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
+
+                if (s != null)
+                {
                     DAOAccount.GetInstance().RemoveWList(utenteLoggato, s);
-                return Redirect($"WList/WList/");
+
+                    return Redirect($"/WList/WList/");
+                }
+                else
+                {
+                    return Redirect($"/WList/WList/");
+                }
             }
             else
             {
-                return Redirect($"WList/WList/");
+                return Redirect($"/Utente/Logout/");
             }
-        }
-
-        public IActionResult RiempiWList()
-        {
-            Account utenteLoggato = new(); //UtenteController.UtenteLoggato
-            if (utenteLoggato != null)
-                wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
-            return Redirect("Utente/Login/");
         }
 
         public IActionResult SvuotaWList()
         {
-            Account utenteLoggato = new(); //UtenteController.UtenteLoggato
-            if (utenteLoggato != null)
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if (utenteLoggato.Id != 1)
+            {
+                List<Sandali> wList = DAOAccount.GetInstance().GetWList(utenteLoggato);
+
                 DAOAccount.GetInstance().ResetWList(utenteLoggato);
 
-            wList.Clear();
-            return Redirect("Utente/Account/");
+                wList.Clear();
+
+                return Redirect($"/WList/WList/");
+            }
+            else
+            {
+                return Redirect("/Utente/Logout/");
+            }
         }
     }
 }

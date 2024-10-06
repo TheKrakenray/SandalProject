@@ -1,19 +1,50 @@
-﻿<!DOCTYPE html>
+﻿@{
+    Layout = "MainLayout";
+}
+
+<!DOCTYPE html>
 <html>
 <head>
-    <meta charset="utf-8" />
-    <title></title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrazione</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap">
+    <link rel="stylesheet" href="~/css/Registrazione.css">
 </head>
 <body>
-    <div class="registration-container">
-        <h2><strong>Registrazione</strong></h2>
-        <form action="/Utente/FormRegistrazione" onsubmit="return controllo_registrazione()" method="post">
-            <input type="text" name="username" id="user" placeholder="Nome utente" required>
-            <input type="email" name="email" id="email" placeholder="Email" required>
-            <input type="password" name="psw" id="passw" placeholder="Password" required>
-            <input type="password" name="validapassw" id="validapassw" placeholder="Conferma Password" required>
-            <button type="submit">Registrati</button>
-        </form>
+    <div class="container">
+        <div class="registrazione-page">
+            <div class="registrazione-header">
+                <h2>Iscriviti ora</h2>
+            </div>
+            <div class="registrazione-content">
+                <form id="registration-form" action="/Utente/FormRegistrazione" onsubmit="return controllo_registrazione()" method="post">
+                    <input type="text" name="username" placeholder="Username" required>
+                    <input type="email" name="email" placeholder="E-mail" required>
+                    <div class="password-container">
+                        <input type="password" name="psw" id="password" placeholder="Password" required>
+                        <span class="toggle-password" onclick="togglePassword('password')"><i class="far fa-eye"></i></span>
+                    </div>
+                    <div class="password-container">
+                        <input type="password" id="confirm-password" placeholder="Conferma Password" required>
+                        <span class="toggle-password" onclick="togglePassword('confirm-password')"><i class="far fa-eye"></i></span>
+                    </div>
+                    <p class="password-note"><strong>La password deve contenere:</strong><br> <span class="small-text">almeno 8 caratteri - una lettera maiuscola - un numero - una lettera minuscola</span></p>
+                    <label class="privacy-label">
+                        <input type="checkbox" required>
+                        <span class="legalInfo">Prendo atto di aver letto e compreso la <a href="#">Politica sulla privacy</a> e acconsento all'elaborazione dei miei dati personali per scopi di marketing e profilazione.</span>
+                    </label>
+                    <label class="terms-label">
+                        <input type="checkbox" required>
+                        <span class="legalInfo">Prendo atto di aver letto e compreso i <a href="#">Termini e Condizioni</a> utilizzando questo sito web, accetti di rispettare e di essere vincolato da questi termini e condizioni. Se non accetti questi termini, ti preghiamo di non utilizzare il sito.</span>
+                    </label>
+                    <button type="submit">Iscriviti ora</button>
+                    <p id="error-message" style="color: red; display: none;">Le password non corrispondono.</p>
+                </form>
+            </div>
+        </div>
     </div>
+    <script src="~/js/Account/Registrazione.js"></script>
 </body>
 </html>

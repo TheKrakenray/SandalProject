@@ -5,64 +5,114 @@ namespace SandalProject.Controllers
 {
     public class CarrelloController : Controller
     {
-        public static List<Sandali> carrello = new();
+        public static List<Sandali> carrello = new(); 
+
         public IActionResult Carrello()
         {
-            return View(carrello);
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if (utenteLoggato.Id != 1)
+            {
+                carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
+
+                return View(carrello);
+            }
+            else
+            {
+                return Redirect("/Utente/Logout/");
+            }
         }
 
         public IActionResult InserisciCarrello(int id)
         {
-            Sandali s = new();
-            s = (Sandali)DAOSandali.GetInstance().Find(id);
-            if(s != null)
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if(utenteLoggato.Id != 1)
             {
-                carrello.Add(s);
-                Account utenteLoggato = new(); //UtenteController.UtenteLoggato
-                if(utenteLoggato!= null)
-                    DAOAccount.GetInstance().AddCarrello(utenteLoggato,s);
-                return Redirect($"Dettagli/Dettagli/{id}");
+                Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
+
+                if(s != null)
+                {
+                    DAOAccount.GetInstance().AddCarrello(utenteLoggato, s);
+
+                    return Redirect($"/Carrello/Carrello");
+                }
+                else
+                {
+                    return Redirect($"/Info/NotFound");
+                }
             }
             else
             {
-                return Redirect($"Home/Index/");
-            }
-        }
-        
-        public IActionResult EliminaCarrello(int id)
-        {
-            Sandali s = new();
-            s = (Sandali)DAOSandali.GetInstance().Find(id);
-            if (s != null)
-            {
-                carrello.Remove(s);
-                Account utenteLoggato = new(); //UtenteController.UtenteLoggato
-                if(utenteLoggato!=null)
-                    DAOAccount.GetInstance().RemoveCarrello(utenteLoggato,s) ;
-                return Redirect($"Carrello/Carrello/");
-            }
-            else
-            {
-                return Redirect($"Carrello/Carrello/");
+                return Redirect($"/Utente/Logout/");
             }
         }
 
-        public IActionResult RiempiCarrello()
+        public IActionResult EliminaCarrello(int id)
         {
-            Account utenteLoggato = new(); //UtenteController.UtenteLoggato
-            if(utenteLoggato != null)
-                carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
-            return Redirect("Utente/Login");
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if (utenteLoggato.Id != 1)
+            {
+                Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
+                if (s != null)
+                {
+                    DAOAccount.GetInstance().RemoveCarrello(utenteLoggato, s);
+
+                    return Redirect($"/Carrello/Carrello");
+                }
+                else
+                {
+                    return Redirect($"/Info/NotFound");
+                }
+            }
+            else
+            {
+                return Redirect($"/Utente/Logout/");
+            }
         }
 
         public IActionResult SvuotaCarrello()
         {
-            Account utenteLoggato = new(); //UtenteController.UtenteLoggato
-            if(utenteLoggato != null)
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if (utenteLoggato.Id != 1)
+            {
+                carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
+
                 DAOAccount.GetInstance().ResetCarrello(utenteLoggato);
 
-            carrello.Clear();
-            return Redirect("Utente/Account/");
+                carrello.Clear();
+
+                return Redirect($"/Carrello/Carrello/");
+            }
+            else
+            {
+                return Redirect("/Utente/Logout/");
+            }
+        }
+
+        public IActionResult Paymentone()
+        {
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if (utenteLoggato.Id != 1)
+            {
+                carrello = DAOAccount.GetInstance().GetCarrello(utenteLoggato);
+
+                if(carrello.Count > 0)
+                {
+                    return View();
+                }
+                else
+                {
+                    return Redirect($"/Carrello/Carrello/");
+                }
+            }
+            else
+            {
+                return Redirect("/Utente/Logout/");
+            }
         }
     }
 }

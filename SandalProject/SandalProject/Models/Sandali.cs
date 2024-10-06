@@ -5,23 +5,102 @@ namespace SandalProject.Models
     public class Sandali : Entity
     {
         public Sandali() { }
-        public Sandali(int id, string nome, string marca, string descrizione, int prezzo, string sKU, string categoria, string genere, double sconto, int quantita, int taglia, string colore, List<byte[]> immagini): base(id)
+        public Sandali(int id, string nome, string marca, string descrizione, double? prezzo, string sku, string categoria, string genere, double? sconto, int? quantita, int? taglia, byte[] immagine1, byte[] immagine2, byte[] immagine3, byte[] immagine4, string colore) : base(id)
         {
             Nome = nome;
             Marca = marca;
             Descrizione = descrizione;
             Prezzo = prezzo;
-            SKU = sKU;
             Categoria = categoria;
             Genere = genere;
             Sconto = sconto;
             Quantita = quantita;
             Taglia = taglia;
+            Immagine1 = immagine1;
+            Immagine2 = immagine2;
+            Immagine3 = immagine3;
+            Immagine4 = immagine4;
             Colore = colore;
-            Immagini = immagini;
+            Sku = sku;
         }
 
         #region Properties
+        private byte[] _immagine1;
+        private byte[] _immagine2;
+        private byte[] _immagine3;
+        private byte[] _immagine4;
+        private string? _sku;
+        private string _colore;
+
+        public byte[] Immagine1 { get => _immagine1; set => _immagine1 = value; }
+        public byte[] Immagine2 { get => _immagine2; set => _immagine2 = value; }
+        public byte[] Immagine3 { get => _immagine3; set => _immagine3 = value; }
+        public byte[] Immagine4 { get => _immagine4; set => _immagine4 = value; }
+
+        public string? Colore
+        {
+            get => _colore;
+            set
+            {
+                if (value != null)
+                {
+                    Regex colorRGX = new Regex(@"^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3}|[a-fA-F0-9]{8}|[a-fA-F0-9]{4})$");
+                    //regex per i colori (con trasparenza) esadecimali es #ffffffff (bianco senza trasparenza) o #000 (nero)
+                    if (colorRGX.Match(value).Success)
+                        _colore = value;
+                    else
+                        _colore = "#ffffff";
+                }
+                else
+                    _colore = "0";
+            }
+        }
+
+        public string? Sku
+        {
+            get => _sku;
+            set
+            {
+                _sku = value;
+                if (_sku.Length < 10)
+                {
+
+                    if (Immagine1 != null)
+                    {
+                        _sku += "1";
+                    }
+                    else
+                    {
+                        _sku += "0";
+                    }
+                    if (Immagine2 != null)
+                    {
+                        _sku += "1";
+                    }
+                    else
+                    {
+                        _sku += "0";
+                    }
+                    if (Immagine3 != null)
+                    {
+                        _sku += "1";
+                    }
+                    else
+                    {
+                        _sku += "0";
+                    }
+                    if (Immagine4 != null)
+                    {
+                        _sku += "1";
+                    }
+                    else
+                    {
+                        _sku += "0";
+                    }
+                }
+            }
+        }
+
         private string? _nome;
         public string? Nome  
         {
@@ -32,7 +111,7 @@ namespace SandalProject.Models
                 {
                     if (value.Length == 0 || value.Length > 99)
                     {
-                        _nome = "default";
+                        _nome = "#";
                     }
                     else
                     {
@@ -41,7 +120,7 @@ namespace SandalProject.Models
                     }
                 }
                 else
-                    _nome = "null";
+                    _nome = "0";
             }
         }
 
@@ -55,7 +134,7 @@ namespace SandalProject.Models
                 {
                     if (value.Length == 0 || value.Length > 99)
                     {
-                        _marca = "default";
+                        _marca = "#";
                     }
                     else
                     {
@@ -64,7 +143,7 @@ namespace SandalProject.Models
                     }
                 }
                 else
-                    _marca = "null";
+                    _marca = "0";
             }
         }
         
@@ -77,7 +156,7 @@ namespace SandalProject.Models
                 if(value != null)
                 {
                     if (value.Length == 0 || value.Length > 3999)
-                        _descrizione = "default";
+                        _descrizione = "#";
                     else
                     {
                         _descrizione = value;
@@ -85,60 +164,43 @@ namespace SandalProject.Models
                     }
                 }
                 else
-                    _descrizione = "null";
+                    _descrizione = "0";
             }
         }
 
-        private int? _prezzo;
-        public int? Prezzo 
+        private double? _prezzo;
+        public double? Prezzo 
         {
             get => _prezzo;
             set
             {
-                if(value != null)
+                if (value != null)
                 {
                     if (value < 1)
                         _prezzo = 1;
                     else
                         _prezzo = value;
                 }
-                _prezzo = 1;
-               
-            } 
-        }
-
-        private string? _sku;
-        public string? SKU 
-        {
-            get => _sku;
-            set
-            {
-                if(value != null)
+                else
                 {
-                    Regex skuRGX = new Regex(@"^([A-Z0-9]{8})$");
-                    //regex per gli SKU es: A12ZQ23X  può contenere 35^8 valori quindi penso basti
-                    if (skuRGX.Match(value).Success)
-                        _sku = value;
-                    else
-                        throw new ArgumentException("Invalid SKU format");
+                    _prezzo = 2;
                 }
-                else _sku = "null";
-            }
+            } 
         }
          
         private string? _categoria;
         public string? Categoria 
         {
             get => _categoria;
-
             set
             {
                 if (value != null)
                 {
                     string stagione = "inverno estate primavera autunno winter summer spring autumn fall";
-                    if (!stagione.Contains(_categoria))
+
+                    if (!stagione.Contains(value.Trim('\'').ToLower()))
                     {
-                        _categoria = "inverno";
+                        _categoria = "#";
                     }
                     else
                     {
@@ -147,7 +209,7 @@ namespace SandalProject.Models
                     }
                 }
                 else
-                    _categoria = "null";
+                    _categoria = "0";
             } 
         }
 
@@ -160,17 +222,17 @@ namespace SandalProject.Models
                 string generi = "uomo donna bambino kid woman man";
                 if(value != null)
                 {
-                    if (!generi.Contains(_genere))
-                        _genere = "uomo";
-                    else
+                    if (generi.Contains(value.Trim('\'').ToLower()))
                     {
                         _genere = value;
-                        _genere.Replace("'", "''");
+                    }
+                    else
+                    {
+                        _genere = "#";
                     }
                 }
                 else
-                    _genere = "null";
-
+                    _genere = "0";
             }
         }
 
@@ -243,28 +305,6 @@ namespace SandalProject.Models
                     _taglia = 1;
             } 
         }
-
-        private string? _colore;
-        public string? Colore
-        {
-            get => _colore;
-            set
-            {
-                if (value != null)
-                {
-                    Regex colorRGX = new Regex(@"^#([a-fA-F0-9]{6}|[a-fA-F0-9]{3}|[a-fA-F0-9]{8}|[a-fA-F0-9]{4})$");
-                    //regex per i colori (con trasparenza) esadecimali es #ffffffff (bianco senza trasparenza) o #000 (nero)
-                    if (colorRGX.Match(value).Success)
-                        _colore = value;
-                    else
-                        _colore = "#ffffff";
-                }
-                else
-                    _colore = "#ffffff";
-            }
-        }
-
-        public List<byte[]> Immagini { get; set; }
         #endregion
     }
 }

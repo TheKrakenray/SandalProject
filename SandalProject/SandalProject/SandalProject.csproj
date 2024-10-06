@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -7,12 +7,24 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="wwwroot\img\Logos\" />
-    <Folder Include="wwwroot\img\Banners\" />
+    <Content Remove="wwwroot\js\Account\Admin.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\css\Stagioni.css" />
+    <_ContentIncludedByDefault Remove="wwwroot\js\Account\Admin.js" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\img\Extra\" />
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="wwwroot\js\Account\Admin.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="EPPlus" Version="7.3.2" />
     <PackageReference Include="System.Data.SqlClient" Version="4.8.6" />
   </ItemGroup>
 
