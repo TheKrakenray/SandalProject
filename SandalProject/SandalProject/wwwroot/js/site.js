@@ -190,3 +190,13 @@ document.getElementById('accept-cookies').addEventListener('click', function () 
 if (localStorage.getItem('cookiesAccepted') === 'true') {
     document.getElementById('cookie-popup').classList.add('hidden');
 }
+
+document.getElementById('search').addEventListener('click', function () {
+    var searchInput = document.getElementById('search-input');
+    if (searchInput.style.display === 'none' || searchInput.style.display === '') {
+        searchInput.style.display = 'block';
+        searchInput.focus();
+    } else {
+        searchInput.style.display = 'none';
+    }
+});
