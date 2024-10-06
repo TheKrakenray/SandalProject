@@ -58,36 +58,53 @@
             </div>
             <div class="season-label">Risultati</div>
             <div class="container">
-                <div class="item">
-                    <div class="box">
-                        <img src="image1.jpg" alt="Immagine 1">
-                    </div>
-                    <div class="buttons">
-                        <a href="#" class="button"><i class="fas fa-shopping-bag"></i></a>
-                        <a href="#" class="button"><i class="fas fa-heart"></i></a>
-                        <a href="#" class="button"><i class="fas fa-info-circle"></i></a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="box">
-                        <img src="image2.jpg" alt="Immagine 2">
-                    </div>
-                    <div class="buttons">
-                        <a href="#" class="button"><i class="fas fa-shopping-bag"></i></a>
-                        <a href="#" class="button"><i class="fas fa-heart"></i></a>
-                        <a href="#" class="button"><i class="fas fa-info-circle"></i></a>
-                    </div>
-                </div>
-                <div class="item">
-                    <div class="box">
-                        <img src="image3.jpg" alt="Immagine 3">
-                    </div>
-                    <div class="buttons">
-                        <a href="#" class="button"><i class="fas fa-shopping-bag"></i></a>
-                        <a href="#" class="button"><i class="fas fa-heart"></i></a>
-                        <a href="#" class="button"><i class="fas fa-info-circle"></i></a>
-                    </div>
-                </div>
+                @{
+                    if (Model.Count > 0)
+                    {
+                        @foreach (Sandali s in Model)
+                        {
+                            <div class="item">
+                                <div class="slide">
+                                    @if (s.Immagine1 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@s.Id">
+                                            <img src="/Dettagli/GetImage?id=@s.Id&posizioneLista=0" alt="Image 1">
+                                        </a>
+                                    }
+                                    else if (s.Immagine2 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@s.Id">
+                                            <img src="/Dettagli/GetImage?id=@s.Id&posizioneLista=1" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (s.Immagine3 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@s.Id">
+                                            <img src="/Dettagli/GetImage?id=@s.Id&posizioneLista=2" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                    else if (s.Immagine4 != null)
+                                    {
+                                        <a href="/Dettagli/Dettagli/@s.Id">
+                                            <img src="/Dettagli/GetImage?id=@s.Id&posizioneLista=3" alt="Prodotto 1">
+                                        </a>
+                                    }
+                                </div>
+                                <div class="buttons">
+                                    <a href="/Carrello/InserisciCarrello?id=@s.Id" class="button"><i class="fas fa-shopping-bag"></i></a>
+                                    <a href="/WList/InserisciWList?id=@s.Id" class="button"><i class="fas fa-heart"></i></a>
+                                    <a href="/Dettagli/Dettagli/@s.Id" class="button"><i class="fas fa-info-circle"></i></a>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="slide">
+                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                        </div>
+                    }
+                }
             </div>
         </div>
     </div>
