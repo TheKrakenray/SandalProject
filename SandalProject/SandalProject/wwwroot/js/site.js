@@ -137,28 +137,28 @@ document.getElementById("user").addEventListener("click", () => {
 
 
 document.getElementById("menu-item-Uomo").addEventListener("click",() => {
-    window.location.href = "/Elenco/Risultati/";
+    window.location.href = "/Elenco/Genere?ricerca=uomo";
 });
 document.getElementById("menu-item-Donna").addEventListener("click",() => {
-    window.location.href = "/Elenco/Risultati/";
+    window.location.href = "/Elenco/Genere?ricerca=donna";
 });
 document.getElementById("menu-item-Bambino").addEventListener("click",() => {
-    window.location.href = "/Elenco/Risultati/";
+    window.location.href = "/Elenco/Genere?ricerca=bambino";
 });
 
 
 
 document.getElementById("menu-item-Primavera").addEventListener("click", () => {
-    window.location.href = "/Elenco/Categoria?stagione=primavera";
+    window.location.href = "/Elenco/Categoria?ricerca=primavera";
 });
 document.getElementById("menu-item-Estate").addEventListener("click", () => {
-    window.location.href = "/Elenco/Categoria?stagione=estate";
+    window.location.href = "/Elenco/Categoria?ricerca=estate";
 });
 document.getElementById("menu-item-Autunno").addEventListener("click", () => {
-    window.location.href = "/Elenco/Categoria?stagione=autunno";
+    window.location.href = "/Elenco/Categoria?ricerca=autunno";
 });
 document.getElementById("menu-item-Inverno").addEventListener("click", () => {
-    window.location.href = "/Elenco/Categoria?stagione=inverno";
+    window.location.href = "/Elenco/Categoria?ricerca=inverno";
 });
 
 

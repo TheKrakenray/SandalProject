@@ -8,9 +8,9 @@ namespace SandalProject.Controllers
     {
         List<Sandali> elencoSandali = DAOSandali.GetInstance().ReadAll().Cast<Sandali>().ToList();
 
-        public IActionResult Categoria(string stagione)
+        public IActionResult Categoria(string ricerca)
         {
-            if(stagione.ToLower() == "primavera")
+            if(ricerca.ToLower() == "primavera")
             {
                 List<Sandali> primavera = elencoSandali
                                             .Where(a => a.Categoria.Trim('\'').ToLower() == "primavera" || a.Categoria.ToLower() == "spring")
@@ -18,7 +18,7 @@ namespace SandalProject.Controllers
                 return View(primavera);
             }
 
-            else if(stagione.ToLower() == "estate")
+            else if(ricerca.ToLower() == "estate")
             {
                 List<Sandali> estate = elencoSandali
                                             .Where(a => a.Categoria.Trim('\'').ToLower() == "estate" || a.Categoria.ToLower() == "summer")
@@ -26,7 +26,7 @@ namespace SandalProject.Controllers
                 return View(estate);
             }
 
-            else if(stagione.ToLower() == "autunno")
+            else if(ricerca.ToLower() == "autunno")
             {
                 List<Sandali> autunno = elencoSandali
                                             .Where(a => a.Categoria.Trim('\'').ToLower() == "autunno" || a.Categoria.ToLower() == "autumn" || a.Categoria.ToLower() == "fall")
@@ -34,7 +34,7 @@ namespace SandalProject.Controllers
                 return View(autunno);
             }
 
-            else if(stagione.ToLower() == "inverno")
+            else if(ricerca.ToLower() == "inverno")
             {
                 List<Sandali> inverno = elencoSandali
                                             .Where(a => a.Categoria.Trim('\'').ToLower() == "inverno" || a.Categoria.ToLower() == "winter")
@@ -48,7 +48,39 @@ namespace SandalProject.Controllers
             }
         }
 
-        public IActionResult Risultati(string ricerca/*, Dictionary<string,string>?filtri, List<Sandali>?searchResults*/)
+        public IActionResult Genere(string ricerca)
+        {
+            if(ricerca.ToLower() == "uomo")
+            {
+                List<Sandali> uomo = elencoSandali
+                                            .Where(a => a.Genere.Trim('\'').ToLower() == "uomo" || a.Genere.ToLower() == "man")
+                                            .ToList();
+                return View(uomo);
+            }
+
+            else if(ricerca.ToLower() == "donna")
+            {
+                List<Sandali> donna = elencoSandali
+                                            .Where(a => a.Genere.Trim('\'').ToLower() == "donna" || a.Genere.ToLower() == "woman")
+                                            .ToList();
+                return View(donna);
+            }
+
+            else if(ricerca.ToLower() == "bambino")
+            {
+                List<Sandali> bambino = elencoSandali
+                                            .Where(a => a.Genere.Trim('\'').ToLower() == "bambino" || a.Genere.ToLower() == "kid")
+                                            .ToList();
+                return View(bambino);
+            }
+
+            else
+            {
+                return Redirect("/Home/Index");
+            }
+        }
+
+        public IActionResult Risultati(string ricerca, Dictionary<string,string>?filtri, List<Sandali>?searchResults)
         {
 
             List<Sandali> risultati = new();

@@ -7,6 +7,7 @@
 .content { /*NON TOCCARE NIENTE DA QUI*/
     font-family: 'Poppins', sans-serif;
     text-align: center;
+    max-width: 1400px;
     width: 100%;
     margin: 0 auto;
 }
