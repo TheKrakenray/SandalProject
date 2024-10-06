@@ -89,6 +89,12 @@
                                             <img src="/Dettagli/GetImage?id=@s.Id&posizioneLista=3" alt="Prodotto 1">
                                         </a>
                                     }
+                                    else
+                                    {
+                                        <a href="/Dettagli/Dettagli/@s.Id">
+                                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                        </a>
+                                    }
                                 </div>
                                 <div class="buttons">
                                     <a href="/Carrello/InserisciCarrello?id=@s.Id" class="button"><i class="fas fa-shopping-bag"></i></a>
@@ -98,12 +104,7 @@
                             </div>
                         }
                     }
-                    else
-                    {
-                        <div class="slide">
-                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
-                        </div>
-                    }
+
                 }
             </div>
         </div>

@@ -89,17 +89,17 @@ namespace SandalProject.Controllers
             //{
                 foreach(var e in elencoSandali)
                 {
-                    Console.WriteLine(ricerca.Trim('\'').ToLower() + " " + e.Marca.Trim('\'').ToLower());
+
                     if (ricerca.Trim('\'').ToLower().Contains(e.Marca.Trim('\'').ToLower())) 
                     {
                         risultati.Add(e);
                     }
                 }
-            Console.WriteLine("------------");
+
                 if(risultati.Count == 0)
                     foreach(var e in elencoSandali)
                     {
-                        Console.WriteLine(ricerca.Trim('\'').ToLower() + " " + e.Nome.Trim('\'').ToLower());
+
                         if (ricerca.Trim('\'').ToLower().Contains(e.Nome.Trim('\'').ToLower()))
                         {
                             risultati.Add(e);
