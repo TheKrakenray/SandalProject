@@ -36,13 +36,27 @@
             </ul>
         </nav>
         <main class="content">
-            <form method="post" enctype="multipart/form-data" action="/Utente/CaricaFileSandali">
-                <label for="file">Carica file Excel:</label>
-                <label for="file" class="buttonstyle">Scegli il File</label>
-                <input type="file" name="filexlsx" id="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display: none;" onchange="updateFileName()" />
-                <span id="file-name">Nessun file scelto</span>
-                <button class="buttonstyle" type="submit">Carica</button>
-            </form>
+            <div class="divExcel">
+                <form method="post" enctype="multipart/form-data" action="/Utente/CaricaFileSandali">
+                    <label for="file">Carica file Excel:</label>
+                    <label for="file" class="buttonstyle">Scegli il File</label>
+                    <input type="file" name="filexlsx" id="file" accept=".xlsx,application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" style="display: none;" onchange="updateFileName()" />
+                    <span id="file-name">Nessun file scelto</span>
+                    <button class="buttonstyle" type="submit">Carica</button>
+                </form>
+
+                @* Rimuovere in caso rompa tutto (dowload Button) *@
+                <button class="buttonstyle" id="downloadExcelBtn">Download Template Excel</button>
+                <script>
+                    document.addEventListener('DOMContentLoaded', function () {
+                        document.getElementById('downloadExcelBtn').addEventListener('click', function () {
+                            window.location.href = '/Utente/DownloadExcel';
+                        });
+                    });
+                </script>
+            </div>
+
+
             <div id="password-change" class="user-section">
                 <h3>Modifica Password</h3>
                 <form class="password-form" id="password-form">

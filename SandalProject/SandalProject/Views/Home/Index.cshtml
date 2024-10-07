@@ -16,56 +16,18 @@
 </head>
 <body>
     <div class="container">
-        <div class="text">
-            <h2 class="title">SOLO SANDALI</h2>
-        </div>
 
         <div class="banner">
+            <div class="text">
+                <h2 class="title">SOLO SANDALI</h2>
+            </div>
+
             <button class="prev" onclick="moveSlide(-1)">&#10094;</button>
             <div class="slider overflow">
                 <div class="slides">
-                    @{
-                        if (Model.Count > 0)
-                        {
-                            int i = 0;
-                            while (i < 3)
-                            {
-                                <div class="slide">
-                                    @if (Model[i].Immagine1 != null)
-                                    {
-                                        <a href="/Dettagli/Dettagli/@Model[i].Id">
-                                            <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=0" alt="Image 1">
-                                        </a>
-                                    }
-                                    else if (Model[i].Immagine2 != null)
-                                    {
-                                        <a href="/Dettagli/Dettagli/@Model[i].Id">
-                                            <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=1" alt="Prodotto 1">
-                                        </a>
-                                    }
-                                    else if (Model[i].Immagine3 != null)
-                                    {
-                                        <a href="/Dettagli/Dettagli/@Model[i].Id">
-                                            <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=2" alt="Prodotto 1">
-                                        </a>
-                                    }
-                                    else if (Model[i].Immagine4 != null)
-                                    {
-                                        <a href="/Dettagli/Dettagli/@Model[i].Id">
-                                            <img src="/Dettagli/GetImage?id=@Model[i].Id&posizioneLista=3" alt="Prodotto 1">
-                                        </a>
-                                    }
-                                    else
-                                    {
-                                        <a href="/Dettagli/Dettagli/@Model[i].Id">
-                                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
-                                        </a>
-                                    }
-                                </div>
-                                i++;
-                            }
-                        }
-                    }
+                    <img src="~/img/Banners/1.png" class="slide" alt="Prodotto 1">
+                    <img src="~/img/Banners/2.png" class="slide" alt="Prodotto 2">
+                    <img src="~/img/Banners/3.png" class="slide" alt="Prodotto 3">
                 </div>
             </div>
             <button class="next" onclick="moveSlide(1)">&#10095;</button>
@@ -79,6 +41,95 @@
                 <li onclick="window.location.href='/Elenco/Categoria?ricerca=inverno'">Inverno</li>
             </ul>
         </div>
+
+        <div class="containerSdm">
+            <div class="sandaloDelMese">
+                <h2 id="titleSDM">Sandalo del mese</h2>
+                <div class="sdmImg">
+                    @{
+                        if(Model.Count != 0)
+                        {
+                            @if (Model.ElementAt(11).Immagine1 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                                    <img src="/Dettagli/GetImage?id=@Model.ElementAt(11).Id&posizioneLista=0" alt="Prodotto 1">
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                                    <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                </a>
+                            }
+
+                            @if (@Model.ElementAt(11).Immagine2 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                                    <img src="/Dettagli/GetImage?id=@Model.ElementAt(11).Id&posizioneLista=1" alt="Prodotto 1">
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                                    <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                </a>
+                            }
+
+                            @if (@Model.ElementAt(11).Immagine3 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                                    <img src="/Dettagli/GetImage?id=@Model.ElementAt(11).Id&posizioneLista=2" alt="Prodotto 1">
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                                    <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                </a>
+                            }
+
+                            @if (@Model.ElementAt(11).Immagine4 != null)
+                            {
+                                <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                                    <img src="/Dettagli/GetImage?id=@Model.ElementAt(11).Id&posizioneLista=3" alt="Prodotto 1">
+                                </a>
+                            }
+                            else
+                            {
+                                <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                                    <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                                </a>
+                            }
+                        }
+                       
+                    }
+                   
+                </div>
+                <div class="ct-descrizione">
+                    @{
+                        List<string> descrizioniSdm = new();
+                        if(Model.Count != 0)
+                        {
+                            string[] descSdm = Model.ElementAt(11).Descrizione.Split("|");
+
+                            string[] colonna1Sdm = descSdm[0].Split(";;");
+
+                            foreach (string c in colonna1Sdm)
+                            {
+                                string testo = colonna1Sdm[1];
+
+                                descrizioniSdm.Add(testo);
+                            }
+                            <p style="color: #fff; width: 50%; text-align: center;">@descrizioniSdm[0].Substring(0, 150)...</p>
+                            <div class="link-btn"><a class="link" href="/Carrello/InserisciCarrello?id=@Model.ElementAt(11).Id">Aggiungi +</a></div>
+                        }
+                    }
+                   
+                </div>
+
+            </div>
+        </div>
+        <hr />
 
         <section class="featured">
 
@@ -111,12 +162,10 @@
 
                             string[] colonna1 = desc[0].Split(";;");
 
-                            foreach (string c in colonna1)
-                            {
                                 string testo = colonna1[1];
 
                                 descrizioni.Add(testo);
-                            }
+
                         }
 
                         int charMax = 150;
@@ -198,12 +247,9 @@
 
                             string[] colonna1 = desc[0].Split(";;");
 
-                            foreach (string c in colonna1)
-                            {
                                 string testo = colonna1[1];
 
                                 descrizioni.Add(testo);
-                            }
                         }
 
                         int charMax = 150;
@@ -283,12 +329,9 @@
 
                             string[] colonna1 = desc[0].Split(";;");
 
-                            foreach (string c in colonna1)
-                            {
                                 string testo = colonna1[1];
 
                                 descrizioni.Add(testo);
-                            }
                         }
 
                         int charMax = 150;

@@ -36,21 +36,21 @@
             <label for="paypal">PayPal</label>
         </div>
         <div id="paypal-fields" class="payment-fields">
-            <button onclick="window.location.href='https://www.paypal.com/signin'">Vai a PayPal</button>
+                <button onclick="window.open('https://www.paypal.com/signin', '_blank');">Vai a PayPal</button>
         </div>
         <div class="payment-option">
             <input type="radio" name="payment-method" id="klarna" onclick="showPaymentFields('klarna-fields')">
             <label for="klarna">Klarna</label>
         </div>
         <div id="klarna-fields" class="payment-fields">
-            <button onclick="window.location.href='https://www.klarna.com/login'">Vai a Klarna</button>
+                <button onclick="window.open('https://www.klarna.com/login', '_blank')">Vai a Klarna</button>
         </div>
         <div class="payment-option">
             <input type="radio" name="payment-method" id="scalapay" onclick="showPaymentFields('scalapay-fields')">
             <label for="scalapay">ScalaPay</label>
         </div>
         <div id="scalapay-fields" class="payment-fields">
-            <button onclick="window.location.href='https://portal.scalapay.com/login?amp_device_id=g8ZxVZlzfxVZkm10o6vHH8'">Vai a ScalaPay</button>
+                <button onclick="window.open('https://portal.scalapay.com/login?amp_device_id=g8ZxVZlzfxVZkm10o6vHH8', '_blank')">Vai a ScalaPay</button>
         </div>
         <button onclick="validateForm()">Conferma Acquisto</button>
     </div>

@@ -61,3 +61,9 @@ function changePassword() {
     }
 }
 
+function ShowCodice() {
+    let codice = document.getElementById("codiceSconto");
+    let punti = document.getElementById("user-points");
+    codice.removeAttribute("hidden");
+    punti.innerHTML = "300";
+}
