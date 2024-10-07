@@ -107,10 +107,26 @@ header .header .dark-mode {
     display: block;
 }
 
+#profile-picture-btn {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 25px;
+    padding: 10px;
+    border: none;
+    width: 55%;
+    font-family: 'Poppins', sans-serif;
+    margin: 10px 0 20px 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+}
+
 .container {
     display: flex;
     height: calc(100vh - 60px);
-    color:black;
+    color: black;
 }
 
 .sidebar {
@@ -160,7 +176,6 @@ header .header .dark-mode {
     margin: 20px auto;
     width: 90%;
     max-width: 600px;
-    border: 1px solid red;
 }
 
 .user-section h3 {

@@ -43,9 +43,9 @@
             <div id="anagrafica" class="user-section">
                 <h3>Informazioni Personali</h3>
                 <form class="user-form" action="/Utente/UploadImageToDatabase/@(((Account)Model).Id)" method="post" enctype="multipart/form-data">
-                    <label for="profile-picture">Immagine di Profilo: </label>
+                    <label for="file">Immagine di Profilo: </label>
                     <input type="file" name="file" id="profile-picture" accept="image/png">
-                    <input type="submit" />
+                    <input type="submit" id="profile-picture-btn" />
                 </form>
                 <form class="user-form" id="user-form">
                     <label>Nome: <input type="text" id="nome" value="" disabled></label>
