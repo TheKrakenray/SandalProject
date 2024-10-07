@@ -41,15 +41,90 @@
             </ul>
         </div>
 
+        <div class="containerSdm">
+            <div class="sandaloDelMese">
+                <h2 id="titleSDM">Sandalo del mese</h2>
+                <div class="sdmImg">
+                    @if (Model.ElementAt(11).Immagine1 != null)
+                    {
+                        <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                            <img src="/Dettagli/GetImage?id=@Model.ElementAt(11).Id&posizioneLista=0" alt="Prodotto 1">
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                        </a>
+                    }
+
+                    @if (@Model.ElementAt(11).Immagine2 != null)
+                    {
+                        <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                            <img src="/Dettagli/GetImage?id=@Model.ElementAt(11).Id&posizioneLista=1" alt="Prodotto 1">
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                        </a>
+                    }
+
+                    @if (@Model.ElementAt(11).Immagine3 != null)
+                    {
+                        <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                            <img src="/Dettagli/GetImage?id=@Model.ElementAt(11).Id&posizioneLista=2" alt="Prodotto 1">
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                        </a>
+                    }
+
+                    @if (@Model.ElementAt(11).Immagine4 != null)
+                    {
+                        <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                            <img src="/Dettagli/GetImage?id=@Model.ElementAt(11).Id&posizioneLista=3" alt="Prodotto 1">
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/Dettagli/Dettagli/@Model.ElementAt(11).Id">
+                            <img src="~/img/Extra/Transparent_Square.png" alt="Prodotto 1">
+                        </a>
+                    }
+                </div>
+                <div class="ct-descrizione">
+                    @{
+                        List<string> descrizioniSdm = new();
+
+                        string[] descSdm = Model.ElementAt(11).Descrizione.Split("|");
+
+                        string[] colonna1Sdm = descSdm[0].Split(";;");
+
+                        foreach (string c in colonna1Sdm)
+                        {
+                            string testo = colonna1Sdm[1];
+
+                            descrizioniSdm.Add(testo);
+                        }
+
+                    }
+                    <p style="color: #fff; width: 50%; text-align: center;">@descrizioniSdm[0].Substring(0, 150)...</p>
+                    <div class="link-btn"><a class="link" href="/Carrello/InserisciCarrello?id=@Model.ElementAt(11).Id">Aggiungi +</a></div>
+                </div>
+
+            </div>
+        </div>
+        <hr />
+
         <section class="featured">
 
             <div class="categoria">
                 <h3>In evidenza</h3>
-
-                <div class="sandaloDelMese">
-                    <img src="/Dettagli/GetImage?id=@Model.ElementAt(11).Id&posizioneLista=0" alt="sandaloDelMese" />
-                </div>
-
                 <h3 class="categoria-titolo"> Donna </h3>
             </div>
 

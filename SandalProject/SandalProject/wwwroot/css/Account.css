@@ -5,7 +5,7 @@
 
 }
 
-body {
+body{
     font-family: 'Poppins', sans-serif;
     margin: 0;
     padding: 0;
@@ -21,8 +21,10 @@ header {
     background-color: #000;
     color: #fff;
 }
-    header .header .dark-mode {
-    }
+
+header .header .dark-mode {
+}
+
 .capocchia {
     display: flex;
     justify-content: space-between;
@@ -72,16 +74,16 @@ header {
     z-index: 1;
 }
 
-    .dropdown-content a {
-        color: #000;
-        padding: 12px 16px;
-        text-decoration: none;
-        display: block;
-    }
+.dropdown-content a {
+    color: #000;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
 
-        .dropdown-content a:hover {
-            background-color: #f1f1f1;
-        }
+.dropdown-content a:hover {
+    background-color: #f1f1f1;
+}
 
 .dropdown:hover .dropdown-content {
     display: block;
@@ -103,27 +105,27 @@ header {
     box-sizing: border-box;
 }
 
-    .sidebar ul {
-        list-style: none;
-        padding: 0;
-    }
+.sidebar ul {
+    list-style: none;
+    padding: 0;
+}
 
-        .sidebar ul li {
-            margin-bottom: 10px;
-        }
+.sidebar ul li {
+    margin-bottom: 10px;
+}
 
-            .sidebar ul li button {
-                background-color: #000;
-                color: #fff;
-                font-weight: bold;
-                cursor: pointer;
-                border-radius: 25px;
-                padding: 10px 20px;
-                border: none;
-                width: 100%;
-                text-align: left;
-                font-family: 'Poppins', sans-serif;
-            }
+.sidebar ul li button {
+    background-color: #000;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 25px;
+    padding: 10px 20px;
+    border: none;
+    width: 100%;
+    text-align: left;
+    font-family: 'Poppins', sans-serif;
+}
 
 .content {
     flex: 1;
@@ -140,28 +142,29 @@ header {
     margin: 20px auto;
     width: 90%;
     max-width: 600px;
+    border: 1px solid red;
 }
 
-    .user-section h3 {
-        font-size: 1.2em;
-        font-weight: bold;
-        margin-bottom: 10px;
-    }
+.user-section h3 {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
 
-    .user-section form label {
-        display: block;
-        margin-bottom: 10px;
-    }
+.user-section form label {
+    display: block;
+    margin-bottom: 10px;
+}
 
-    .user-section form input {
-        width: 100%;
-        padding: 10px;
-        margin-bottom: 10px;
-        box-sizing: border-box;
-        border: 1px solid #000;
-        border-radius: 5px;
-        font-family: 'Poppins', sans-serif;
-    }
+.user-section form input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #000;
+    border-radius: 5px;
+    font-family: 'Poppins', sans-serif;
+}
 
 .order-details {
     background-color: #f9f9f9;
@@ -174,17 +177,17 @@ header {
     padding-left: 20px;
 }
 
-    .user-section ul li {
-        padding: 5px 0;
-    }
+.user-section ul li {
+    padding: 5px 0;
+}
 
 .order-details ul {
     padding-left: 20px;
 }
 
-    .order-details ul li {
-        padding: 5px 0;
-    }
+.order-details ul li {
+    padding: 5px 0;
+}
 
 .dropbtn1 {
     display: none;
@@ -207,7 +210,7 @@ button[onclick^="showOrderDetails"] {
     border: none;
     width: 55%;
     font-family: 'Poppins', sans-serif;
-    margin-top: 10px;
+    margin: 10px 0 20px 0;
     display: flex;
     justify-content: center;
     text-align: center;
@@ -277,8 +280,6 @@ button[onclick^="showOrderDetails"] {
     justify-content: center;
     text-align: center;
 }
-
-
 
 @media (max-width: 700px) {
     .container {

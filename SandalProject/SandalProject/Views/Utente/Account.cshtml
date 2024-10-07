@@ -42,23 +42,22 @@
         <main class="content">
             <div id="anagrafica" class="user-section">
                 <h3>Informazioni Personali</h3>
+                <form class="user-form" action="/Utente/UploadImageToDatabase/@(((Account)Model).Id)" method="post" enctype="multipart/form-data">
+                    <label for="profile-picture">Immagine di Profilo: </label>
+                    <input type="file" name="file" id="profile-picture" accept="image/png">
+                    <input type="submit" />
+                </form>
                 <form class="user-form" id="user-form">
-                    <label>Immagine di Profilo: <input type="file" id="profile-picture" accept="image/*" disabled></label>
                     <label>Nome: <input type="text" id="nome" value="" disabled></label>
                     <label>Cognome: <input type="text" id="cognome" value="" disabled></label>
-                    <label>Email: <input type="email" id="email" value="" disabled
-                            pattern="[a-z0-9._%+-]+@("@")[a-z0-9.-]+\.[a-z]{2,}$" title="Inserisci un'email valida"></label>
+                    <label>Email: <input type="email" id="email" value="" disabled pattern="[a-z0-9._%+-]+@("@")[a-z0-9.-]+\.[a-z]{2,}$" title="Inserisci un'email valida"></label>
                     <label>Via: <input type="text" id="via" value="" disabled></label>
                     <label>Città: <input type="text" id="citta" value="" disabled></label>
-                    <label>CAP: <input type="text" id="cap" value="" disabled pattern="\d{5}"
-                            title="Inserisci un CAP valido (5 cifre)"></label>
-                    <label>Numero di Cellulare: <input type="text" id="telefono" value="" disabled
-                            pattern="\d{10}" title="Inserisci un numero di cellulare valido (10 cifre)"></label>
-                    <label>Data di Nascita: <input type="date" id="data-nascita" value=""
-                            disabled></label>
+                    <label>CAP: <input type="text" id="cap" value="" disabled pattern="\d{5}" title="Inserisci un CAP valido (5 cifre)"></label>
+                    <label>Numero di Cellulare: <input type="text" id="telefono" value="" disabled pattern="\d{10}" title="Inserisci un numero di cellulare valido (10 cifre)"></label>
+                    <label>Data di Nascita: <input type="date" id="data-nascita" value="" disabled></label>
                     <button type="button" id="edit-button" onclick="enableEditing()">Modifica Profilo</button>
-                    <button type="button" id="save-button" style="display:none;" onclick="saveChanges()">Salva
-                        Modifiche</button>
+                    <button type="button" id="save-button" style="display:none;" onclick="saveChanges()">Salva Modifiche</button>
                 </form>
             </div>
             <div id="password-change" class="user-section">

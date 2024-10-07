@@ -122,7 +122,6 @@ namespace SandalProject.Controllers
         [HttpPost]
         public IActionResult UploadImageToDatabase(IFormFile file, int id)
         {
-            Console.WriteLine("Dentro metodo ImgUpload");
             if (file != null && file.Length > 0)
             {
                 // Verifica che sia un PNG
@@ -132,7 +131,6 @@ namespace SandalProject.Controllers
                     {
                         file.CopyTo(memoryStream);
                         var imageBytes = memoryStream.ToArray();
-                        Console.WriteLine(id);
                         DAOAccount.GetInstance().ChangeImgDb(id, imageBytes);
 
                         ViewBag.Message = "Immagine caricata e salvata nel database!";

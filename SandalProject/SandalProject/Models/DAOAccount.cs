@@ -168,7 +168,6 @@ namespace SandalProject.Models
         {
             bool updated = false;
             string propicHex = "0x" + BitConverter.ToString(Img).Replace("-", "");
-
             try
             {
                 updated = db.Update($"UPDATE Account SET " +
