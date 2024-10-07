@@ -83,6 +83,16 @@ main{
         cursor: pointer;
     }
 
+    .icons img {
+        height: 25px;
+        width: 25px;
+        border-radius:50%;
+        border:2px solid black;
+    }
+    body.dark-mode .icons img{
+        border-color:white;
+    } 
+
 .overlay {
     position: fixed;
     top: 0;
@@ -595,6 +605,11 @@ body.dark-mode .newsletter button {
         align-items: center;
         justify-content:center;
     }
+        .icons img {
+            height: 6vw;
+            width: 6vw;
+            border:2px solid;
+        }
     .logo {
         font-size: 34px;
         font-weight: bold;
