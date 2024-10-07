@@ -315,10 +315,38 @@ namespace SandalProject.Controllers
             {
                 var worksheet = package.Workbook.Worksheets.Add("Sheet1");
 
-                worksheet.Cells[1, 1].Value = "Header1";
-                worksheet.Cells[1, 2].Value = "Header2";
-                worksheet.Cells[2, 1].Value = "Data1";
-                worksheet.Cells[2, 2].Value = "Data2";
+                worksheet.Cells[1, 1].Value = "Nome";
+                worksheet.Cells[1, 2].Value = "Marca";
+                worksheet.Cells[1, 3].Value = "Descrizione";
+                worksheet.Cells[1, 4].Value = "Dettagli";
+                worksheet.Cells[1, 5].Value = "Caratteristiche";
+                worksheet.Cells[1, 6].Value = "Prezzo";
+                worksheet.Cells[1, 7].Value = "Categoria";
+                worksheet.Cells[1, 8].Value = "Genere";
+                worksheet.Cells[1, 9].Value = "Sconto";
+                worksheet.Cells[1, 10].Value = "Quantita";
+                worksheet.Cells[1, 11].Value = "Taglia";
+                worksheet.Cells[1, 12].Value = "Colore";
+                worksheet.Cells[1, 13].Value = "immagine1";
+                worksheet.Cells[1, 14].Value = "immagine2";
+                worksheet.Cells[1, 15].Value = "immagine3";
+                worksheet.Cells[1, 16].Value = "immagine4";
+                worksheet.Cells[2, 1].Value = "Scrivere qui il nome del sandalo";
+                worksheet.Cells[2, 2].Value = "Scrivere qui la marca del sandalo";
+                worksheet.Cells[2, 3].Value = "Scrivere qui la descrizione. IMPORTANTE: Separare titolo e descrizione col doppio ;;";
+                worksheet.Cells[2, 4].Value = "Scrivere qui i dettagli. IMPORTANTE: Separare titolo e dettagli col doppio ;;";
+                worksheet.Cells[2, 5].Value = "Scrivere qui le caratteristiche. IMPORTANTE: Separare titolo e caratteristiche col doppio ;;";
+                worksheet.Cells[2, 6].Value = "Scrivere qui il prezzo del sandalo";
+                worksheet.Cells[2, 7].Value = "Scrivere qui la categoria del sandalo";
+                worksheet.Cells[2, 8].Value = "Scrivere qui il genere del sandalo";
+                worksheet.Cells[2, 9].Value = "Scrivere qui lo sconto del sandalo";
+                worksheet.Cells[2, 10].Value = "Scrivere qui la quantità del sandalo";
+                worksheet.Cells[2, 11].Value = "Scrivere qui la taglia del sandalo";
+                worksheet.Cells[2, 12].Value = "Scrivere qui il colore del sandalo";
+                worksheet.Cells[2, 13].Value = "Inserire immagine1 alla cella";
+                worksheet.Cells[2, 14].Value = "Inserire immagine2 alla cella";
+                worksheet.Cells[2, 15].Value = "Inserire immagine3 alla cella";
+                worksheet.Cells[2, 16].Value = "Inserire immagine4 alla cella";
 
                 var stream = new MemoryStream();
                 package.SaveAs(stream);

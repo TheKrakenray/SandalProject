@@ -223,6 +223,17 @@ label[for="file"].buttonstyle {
         border-radius: 5px;
         font-family: 'Poppins', sans-serif;
     }
+
+.divExcel{
+    max-width:1000px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: 50px
+}
+
 .password {
     display: flex;
     flex-direction: column;
