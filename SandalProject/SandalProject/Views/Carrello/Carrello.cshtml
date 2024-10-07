@@ -64,14 +64,15 @@
                 <div class="promo-code">
                     <label for="promo-code">Hai un codice promozionale?</label>
                     <input type="text" id="promo-code" name="promo-code">
-                    <button>Applica</button>
+                    <button onclick="ApplicaSconto()">Applica</button>
                 </div>
                 <hr>
                 <div class="order-summary">
                     <h3>Riepilogo ordine</h3>
-                    <p>Subtotale <span>€@totalePrezzo</span></p>
+                    <p>Subtotale <span >€@totalePrezzo</span></p>
                     <p>Spedizione <span>Gratis</span></p>
-                    <p>TOTALE (IVA inclusa) <span>€@totalePrezzo</span></p>
+                    <p id="sconto" style="display:none;">Sconto: <span>-10%</span></p>
+                    <p>TOTALE (IVA inclusa) <span id ="prezzo">€@totalePrezzo</span></p>
                     <a href="/Carrello/Paymentone"><button>Procedi all'acquisto</button></a>
                 </div>
             </div>
