@@ -1,5 +1,6 @@
 ﻿@using SandalProject.Models;
 @using SandalProject.Controllers;
+
 @model List<Sandali>;
 @{
     Layout = "MainLayout";
@@ -63,8 +64,15 @@
 
 @*                     I link vanno sui link AAAAAAAAAA!!!!!!!!!!!!!
  *@
-                    <a href="/WList/InserisciWList?id=@(Model.First().Id)" class="link-icon"><p class="far fa-heart" id="heart-icon" onclick="toggleHeart()"></p></a> 
-                    <!--Controllare se l'utente loggato ha wishlistato il sandalo-->
+                @if(UtenteController.utenteLoggato.Id != 1  && DAOAccount.GetInstance().FindSandaloWList(UtenteController.utenteLoggato,Model.First().Id))
+                {
+                    <a href="/WList/EliminaWListDettagli?id=@(Model.First().Id)" class="link-icon"><p class="fas fa-heart" id="heart-icon" onclick="toggleHeart()"></p></a>
+                }
+                else
+                {
+                    <a href="/WList/InserisciWList?id=@(Model.First().Id)" class="link-icon"><p class="far fa-heart" id="heart-icon" onclick="toggleHeart()"></p></a>
+                }
+                <!--Controllare se l'utente loggato ha wishlistato il sandalo-->
                 </div>
 
                 <div class="color-selection">

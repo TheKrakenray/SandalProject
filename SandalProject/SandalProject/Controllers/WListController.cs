@@ -71,6 +71,32 @@ namespace SandalProject.Controllers
             }
         }
 
+        public IActionResult EliminaWListDettagli(int id)
+        {
+            Account utenteLoggato = UtenteController.utenteLoggato;
+
+            if (utenteLoggato.Id != 1)
+            {
+                Sandali s = (Sandali)DAOSandali.GetInstance().Find(id);
+
+                if (s != null)
+                {
+                    DAOAccount.GetInstance().RemoveWList(utenteLoggato, s);
+
+                    return Redirect($"/Dettagli/Dettagli/{id}");
+                }
+                else
+                {
+                    return Redirect($"/WList/WList/");
+                }
+            }
+            else
+            {
+                return Redirect($"/Utente/Logout/");
+            }
+        }
+
+
         public IActionResult SvuotaWList()
         {
             Account utenteLoggato = UtenteController.utenteLoggato;
