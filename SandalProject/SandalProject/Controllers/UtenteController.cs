@@ -10,7 +10,6 @@ using OfficeOpenXml;
 using OfficeOpenXml.Drawing;
 using System.Drawing;
 using System.Text.RegularExpressions;
-
 namespace SandalProject.Controllers
 {
     public class UtenteController : Controller
@@ -18,10 +17,12 @@ namespace SandalProject.Controllers
         private ILogger<UtenteController> il;
         public static Account utenteLoggato = (Account)DAOAccount.GetInstance().Find(1);
         private static int chiamata = 0;
-
+        
         public UtenteController(ILogger<UtenteController> l)
         {
             il = l;
+            //Rimuovere questo DowloadExcel
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
 
         public IActionResult Login()
@@ -30,11 +31,11 @@ namespace SandalProject.Controllers
 
             il.LogInformation($"Tentativo di accesso numero {chiamata} alle ore {DateTime.Now.Hour}:{DateTime.Now.Minute}");
 
-            if(utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "user")
+            if (utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "user")
             {
                 return Redirect("/Utente/Account/" + utenteLoggato.Id);
             }
-            else if(utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "admin")
+            else if (utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "admin")
             {
                 return Redirect($"/Utente/Admin/{utenteLoggato.Id}");
             }
@@ -52,7 +53,7 @@ namespace SandalProject.Controllers
 
                 utenteLoggato = (Account)DAOAccount.GetInstance().Find(parametri["mail"]);
 
-                if(utenteLoggato.Ruolo == "admin")
+                if (utenteLoggato.Ruolo == "admin")
                 {
                     return Redirect($"/Utente/Admin/{utenteLoggato.Id}");
                 }
@@ -192,7 +193,7 @@ namespace SandalProject.Controllers
 
         public IActionResult Admin(int id)
         {
-            if(utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "admin" )
+            if (utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "admin")
             {
                 return View(utenteLoggato);
             }
@@ -303,6 +304,57 @@ namespace SandalProject.Controllers
         public IActionResult RecuperaPassword()
         {
             return View();
+        }
+
+
+        //Rimuovere questo DowloadExcel
+        [HttpGet]
+        public IActionResult DownloadExcel()
+        {
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+
+                worksheet.Cells[1, 1].Value = "Nome";
+                worksheet.Cells[1, 2].Value = "Marca";
+                worksheet.Cells[1, 3].Value = "Descrizione";
+                worksheet.Cells[1, 4].Value = "Dettagli";
+                worksheet.Cells[1, 5].Value = "Caratteristiche";
+                worksheet.Cells[1, 6].Value = "Prezzo";
+                worksheet.Cells[1, 7].Value = "Categoria";
+                worksheet.Cells[1, 8].Value = "Genere";
+                worksheet.Cells[1, 9].Value = "Sconto";
+                worksheet.Cells[1, 10].Value = "Quantita";
+                worksheet.Cells[1, 11].Value = "Taglia";
+                worksheet.Cells[1, 12].Value = "Colore";
+                worksheet.Cells[1, 13].Value = "immagine1";
+                worksheet.Cells[1, 14].Value = "immagine2";
+                worksheet.Cells[1, 15].Value = "immagine3";
+                worksheet.Cells[1, 16].Value = "immagine4";
+                worksheet.Cells[2, 1].Value = "Scrivere qui il nome del sandalo";
+                worksheet.Cells[2, 2].Value = "Scrivere qui la marca del sandalo";
+                worksheet.Cells[2, 3].Value = "Scrivere qui la descrizione. IMPORTANTE: Separare titolo e descrizione col doppio ;;";
+                worksheet.Cells[2, 4].Value = "Scrivere qui i dettagli. IMPORTANTE: Separare titolo e dettagli col doppio ;;";
+                worksheet.Cells[2, 5].Value = "Scrivere qui le caratteristiche. IMPORTANTE: Separare titolo e caratteristiche col doppio ;;";
+                worksheet.Cells[2, 6].Value = "Scrivere qui il prezzo del sandalo";
+                worksheet.Cells[2, 7].Value = "Scrivere qui la categoria del sandalo";
+                worksheet.Cells[2, 8].Value = "Scrivere qui il genere del sandalo";
+                worksheet.Cells[2, 9].Value = "Scrivere qui lo sconto del sandalo";
+                worksheet.Cells[2, 10].Value = "Scrivere qui la quantità del sandalo";
+                worksheet.Cells[2, 11].Value = "Scrivere qui la taglia del sandalo";
+                worksheet.Cells[2, 12].Value = "Scrivere qui il colore del sandalo";
+                worksheet.Cells[2, 13].Value = "Inserire immagine1 alla cella";
+                worksheet.Cells[2, 14].Value = "Inserire immagine2 alla cella";
+                worksheet.Cells[2, 15].Value = "Inserire immagine3 alla cella";
+                worksheet.Cells[2, 16].Value = "Inserire immagine4 alla cella";
+
+                var stream = new MemoryStream();
+                package.SaveAs(stream);
+                var fileName = "MyExcelFile.xlsx";
+
+                stream.Position = 0;
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            }
         }
     }
 }
