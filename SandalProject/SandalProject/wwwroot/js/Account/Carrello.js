@@ -13,3 +13,13 @@
 //            quantity.value--;
 //    })
 //});
+
+function ApplicaSconto() {
+    var codice = document.getElementById("promo-code").value;
+    var prezzo = document.getElementById("prezzo");
+    var sconto = document.getElementById("sconto");
+    if (codice == "HXDZ-Z043-DEFQ-LMK5") {
+        prezzo.innerHTML = parseInt(prezzo.innerHTML.replace("€", "")) - (parseInt(prezzo.innerHTML.replace("€", "")) / 10) + "€";
+        sconto.removeAttribute("style");
+    }
+}

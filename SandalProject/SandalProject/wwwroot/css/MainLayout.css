@@ -177,6 +177,7 @@ main{
     position: relative;
     transition: background-color 0.3s;
     border: 2px solid rgb(0, 0, 0);
+    gap:8px;
 }
 
 body.dark-mode {
@@ -271,10 +272,10 @@ footer.dark-mode .social-media {
 
 .dark-mode-label .ball {
     position: absolute;
-    top: 9%;
-    right:47%;
-    width: 21px;
-    height: 21px;
+    top: 0%;
+    right:51%;
+    width: 23px;
+    height: 24px;
     background-color: #000000;
     border-radius: 50%;
     transition: transform 0.3s, background-color 0.3s;
@@ -282,7 +283,7 @@ footer.dark-mode .social-media {
 
 #dark-mode-checkbox:checked + .dark-mode-label .ball,
 #dark-mode-checkbox-footer:checked + .dark-mode-label .ball {
-    transform: translateX(21px);
+    transform: translateX(25px);
     background-color: #ffffff;
 }
 
