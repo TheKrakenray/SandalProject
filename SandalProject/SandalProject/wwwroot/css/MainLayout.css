@@ -157,7 +157,7 @@ main{
 
 .dark-mode-toggle {
     position: relative;
-    width: 50px;
+    width: fit-content;
     height: 25px;
 }
 
@@ -271,8 +271,8 @@ footer.dark-mode .social-media {
 
 .dark-mode-label .ball {
     position: absolute;
-    top: 2px;
-    left: 2px;
+    top: 9%;
+    right:47%;
     width: 21px;
     height: 21px;
     background-color: #000000;
@@ -590,8 +590,9 @@ body.dark-mode .newsletter button {
     }
     .icons {
         display: flex;
-        gap: 30px;
+        gap: 20px;
         align-items: center;
+        justify-content:center;
     }
     .logo {
         font-size: 34px;
@@ -738,8 +739,7 @@ body.dark-mode .newsletter button {
     }
     .search-input {
         display: block;
-        width: 100%; 
-        margin-left: 0;
+        width: 30vw; 
     }
     #search {
         display: none;
