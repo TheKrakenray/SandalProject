@@ -139,6 +139,11 @@ button.prev:hover, button.next:hover {
     margin: 0 auto;
 }
 
+.seasons li:hover {
+    color: blue;
+    transform: scale(1.1);
+}
+
 .carousel-navigation {
     margin-top: 20px;
 }
@@ -160,6 +165,7 @@ button.prev:hover, button.next:hover {
     margin: 0 20px;
     cursor: pointer;
     font-size: 18px;
+    transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .containerSdm{
