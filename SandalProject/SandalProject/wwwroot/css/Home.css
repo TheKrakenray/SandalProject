@@ -140,8 +140,8 @@ button.prev:hover, button.next:hover {
 }
 
 .seasons li:hover {
-    color: blue;
     transform: scale(1.1);
+    text-decoration: underline;
 }
 
 .carousel-navigation {
@@ -165,7 +165,7 @@ button.prev:hover, button.next:hover {
     margin: 0 20px;
     cursor: pointer;
     font-size: 18px;
-    transition: color 0.3s ease, transform 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .containerSdm{
