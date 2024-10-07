@@ -10,7 +10,6 @@ using OfficeOpenXml;
 using OfficeOpenXml.Drawing;
 using System.Drawing;
 using System.Text.RegularExpressions;
-
 namespace SandalProject.Controllers
 {
     public class UtenteController : Controller
@@ -18,10 +17,12 @@ namespace SandalProject.Controllers
         private ILogger<UtenteController> il;
         public static Account utenteLoggato = (Account)DAOAccount.GetInstance().Find(1);
         private static int chiamata = 0;
-
+        
         public UtenteController(ILogger<UtenteController> l)
         {
             il = l;
+            //Rimuovere questo DowloadExcel
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
         }
 
         public IActionResult Login()
@@ -30,11 +31,11 @@ namespace SandalProject.Controllers
 
             il.LogInformation($"Tentativo di accesso numero {chiamata} alle ore {DateTime.Now.Hour}:{DateTime.Now.Minute}");
 
-            if(utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "user")
+            if (utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "user")
             {
                 return Redirect("/Utente/Account/" + utenteLoggato.Id);
             }
-            else if(utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "admin")
+            else if (utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "admin")
             {
                 return Redirect($"/Utente/Admin/{utenteLoggato.Id}");
             }
@@ -52,7 +53,7 @@ namespace SandalProject.Controllers
 
                 utenteLoggato = (Account)DAOAccount.GetInstance().Find(parametri["mail"]);
 
-                if(utenteLoggato.Ruolo == "admin")
+                if (utenteLoggato.Ruolo == "admin")
                 {
                     return Redirect($"/Utente/Admin/{utenteLoggato.Id}");
                 }
@@ -192,7 +193,7 @@ namespace SandalProject.Controllers
 
         public IActionResult Admin(int id)
         {
-            if(utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "admin" )
+            if (utenteLoggato.Id != 1 && utenteLoggato.Ruolo == "admin")
             {
                 return View(utenteLoggato);
             }
@@ -303,6 +304,29 @@ namespace SandalProject.Controllers
         public IActionResult RecuperaPassword()
         {
             return View();
+        }
+
+
+        //Rimuovere questo DowloadExcel
+        [HttpGet]
+        public IActionResult DownloadExcel()
+        {
+            using (var package = new ExcelPackage())
+            {
+                var worksheet = package.Workbook.Worksheets.Add("Sheet1");
+
+                worksheet.Cells[1, 1].Value = "Header1";
+                worksheet.Cells[1, 2].Value = "Header2";
+                worksheet.Cells[2, 1].Value = "Data1";
+                worksheet.Cells[2, 2].Value = "Data2";
+
+                var stream = new MemoryStream();
+                package.SaveAs(stream);
+                var fileName = "MyExcelFile.xlsx";
+
+                stream.Position = 0;
+                return File(stream, "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet", fileName);
+            }
         }
     }
 }

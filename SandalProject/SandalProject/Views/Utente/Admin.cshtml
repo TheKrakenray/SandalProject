@@ -43,6 +43,20 @@
                 <span id="file-name">Nessun file scelto</span>
                 <button class="buttonstyle" type="submit">Carica</button>
             </form>
+
+
+            @* Rimuovere in caso rompa tutto (dowload Button) *@
+            <button id="downloadExcelBtn">Download Excel</button>
+            <script>
+                document.addEventListener('DOMContentLoaded', function () {
+                    document.getElementById('downloadExcelBtn').addEventListener('click', function () {
+                        window.location.href = '/Utente/DownloadExcel';
+                    });
+                });
+            </script>
+
+
+
             <div id="password-change" class="user-section">
                 <h3>Modifica Password</h3>
                 <form class="password-form" id="password-form">
