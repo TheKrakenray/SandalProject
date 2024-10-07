@@ -89,6 +89,9 @@ main{
         border-radius:50%;
         border:2px solid black;
     }
+    .icons img:hover{
+        cursor:pointer;
+    }
     body.dark-mode .icons img{
         border-color:white;
     } 
