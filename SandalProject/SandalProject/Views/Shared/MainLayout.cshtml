@@ -18,7 +18,14 @@
         <div class="icons">
             <i id="search" class="fas fa-search"></i>
             <input type="text" id="search-input" class="search-input" placeholder="Cerca...">
-            <i id="user" class="fas fa-user"></i>
+
+            @if(UtenteController.utenteLoggato.Id!=1)
+            {
+                <img id="user" class="profilePic" src="/Utente/GetImage/@(UtenteController.utenteLoggato.Id)" alt="userImg" />
+            }
+            else{
+                <i id="user" class="fas fa-user"></i>
+            }
             <i id="cart" class="fas fa-shopping-bag"></i>
             <i id="wlist" class="fas fa-heart"></i>
             <div class="dark-mode-toggle">
